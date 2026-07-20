@@ -53,7 +53,7 @@ export default function Contact() {
 
             <p className="text-gray-500 mt-4">
 
-              manishitgju@gmail.com
+              gjusmartconnect@gmail.com
 
             </p>
 
@@ -123,7 +123,7 @@ export default function Contact() {
 
             <p className="text-gray-500 mt-4">
 
-              www.gjusmartconnect.in
+              www.gjusmartconnect.online
 
             </p>
 
