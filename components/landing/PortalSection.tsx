@@ -1,5 +1,4 @@
 import {
-  ShieldCheck,
   GraduationCap,
   Users,
   LibraryBig,
@@ -25,22 +24,7 @@ export default function PortalSection() {
 
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
-
-          <PortalCard
-            title="Admin"
-            description="Manage Departments, Teachers, Students and Subjects."
-            icon={<ShieldCheck size={42} />}
-            href="/login?role=admin"
-            buttonColor="bg-red-600 hover:bg-red-700"
-            buttonText="Login"
-            features={[
-              "Dashboard",
-              "Manage Teachers",
-              "Manage Students",
-              "Reports",
-            ]}
-          />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
 
           <PortalCard
             title="Teacher"
