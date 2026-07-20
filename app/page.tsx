@@ -5,7 +5,7 @@ import Stats from "@/components/landing/Stats";
 import Features from "@/components/landing/Features";
 import About from "@/components/landing/About";
 import Contact from "@/components/landing/Contact";
-import Footer from "@/components/landing/Footer";
+import Footer from "@/components/common/Footer";
 
 
 export default function HomePage() {
@@ -26,11 +26,11 @@ export default function HomePage() {
         <Features />
       </section>
 
-      <section id="statistics">
+      <section id="statistics" className="hidden lg:block">
         <Stats />
       </section>
 
-      <section id="about">
+      <section id="about" className="hidden lg:block">
         <About />
       </section>
 
