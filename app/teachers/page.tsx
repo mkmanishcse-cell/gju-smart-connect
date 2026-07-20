@@ -318,39 +318,6 @@ export default function TeacherDashboard() {
 
 </div>
 
-{/* ================= QUICK OVERVIEW ================= */}
-
-<div className="mt-8 sm:mt-10 grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-4">
-
-  <OverviewCard
-    title="Joined Subjects"
-    value="06"
-    color="text-blue-600"
-    icon={<BookMarked size={32} />}
-  />
-
-  <OverviewCard
-    title="Attendance"
-    value="94%"
-    color="text-green-600"
-    icon={<ClipboardCheck size={32} />}
-  />
-
-  <OverviewCard
-    title="Assignments"
-    value="18"
-    color="text-orange-500"
-    icon={<FileText size={32} />}
-  />
-
-  <OverviewCard
-    title="Announcements"
-    value="07"
-    color="text-purple-600"
-    icon={<Bell size={32} />}
-  />
-
-</div>
 
 {/* ================= RECENT ACTIVITY ================= */}
 
