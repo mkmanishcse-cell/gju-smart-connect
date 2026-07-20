@@ -34,7 +34,7 @@ export default function Contact() {
 
         </div>
 
-        <div className="grid lg:grid-cols-4 gap-8 mt-16">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
 
           {/* Email */}
 
@@ -51,7 +51,7 @@ export default function Contact() {
 
             </h3>
 
-            <p className="text-gray-500 mt-4">
+            <p className="text-gray-500 mt-4 break-words">
 
               gjusmartconnect@gmail.com
 
@@ -74,7 +74,7 @@ export default function Contact() {
 
             </h3>
 
-            <p className="text-gray-500 mt-4">
+            <p className="text-gray-500 mt-4 break-words">
 
               +91 8757472016
 
@@ -97,7 +97,7 @@ export default function Contact() {
 
             </h3>
 
-            <p className="text-gray-500 mt-4">
+            <p className="text-gray-500 mt-4 break-words">
 
               Guru Jambheshwar University,
               Hisar, Haryana
@@ -121,7 +121,7 @@ export default function Contact() {
 
             </h3>
 
-            <p className="text-gray-500 mt-4">
+            <p className="text-gray-500 mt-4 break-words">
 
               www.gjusmartconnect.online
 
