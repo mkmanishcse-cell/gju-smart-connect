@@ -277,285 +277,338 @@ export default function UploadMarksPage() {
     return <LoadingScreen />;
   }
 
-  return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100">
-      <div className="mx-auto max-w-7xl px-8 py-8">
-        {/* ================= HEADER ================= */}
+ return (
+  <main className="flex min-h-screen flex-col bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100">
+    <div className="mx-auto w-full max-w-7xl flex-1 px-3 py-4 sm:px-5 sm:py-6 lg:px-8 lg:py-8">
+      {/* ================= HEADER ================= */}
 
-        <div className="mb-10 flex items-center justify-between">
+      <div className="mb-5 flex flex-col gap-4 sm:mb-8 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex items-center gap-3 sm:gap-4">
+          <Link
+            href={`/teachers/marks/${subjectId}`}
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white text-indigo-600 shadow-sm transition hover:border-indigo-300 hover:bg-indigo-50 hover:text-indigo-700 sm:h-12 sm:w-12 sm:rounded-2xl"
+          >
+            <ArrowLeft size={18} className="sm:hidden" />
+            <ArrowLeft size={20} className="hidden sm:block" />
+          </Link>
+
           <div>
-            <h1 className="text-4xl font-bold text-slate-800">
+            <h1 className="bg-gradient-to-r from-blue-700 via-indigo-600 to-cyan-600 bg-clip-text text-xl font-extrabold text-transparent sm:text-2xl lg:text-3xl">
               Upload Marks
             </h1>
-
-            <p className="mt-2 text-slate-500">
+            <p className="mt-1 text-xs font-medium text-slate-500 sm:text-sm">
               {subjectName} ({subjectCode})
             </p>
           </div>
-
-          <Link
-            href={`/teachers/marks/${subjectId}`}
-            className="flex items-center gap-2 rounded-2xl bg-blue-600 px-6 py-3 font-semibold text-white shadow-lg hover:bg-blue-700"
-          >
-            <ArrowLeft size={20} />
-            Back to Marks
-          </Link>
-        </div>
-
-        {/* ================= HERO ================= */}
-
-        <div className="overflow-hidden rounded-3xl bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-700 p-8 text-white shadow-2xl">
-          <div className="flex items-center justify-between">
-            <div>
-              <div className="flex items-center gap-3">
-                <FileSpreadsheet size={30} />
-                <span className="text-lg font-semibold">Excel Upload</span>
-              </div>
-
-              <h2 className="mt-6 text-5xl font-extrabold">
-                Marks Upload
-              </h2>
-
-              <p className="mt-4 max-w-2xl text-lg text-blue-100">
-                Upload all students' marks in one click.
-              </p>
-            </div>
-
-            <UploadCloud size={170} className="opacity-20" />
-          </div>
-        </div>
-
-        {/* ================= CARD ================= */}
-
-        <div className="mt-10 rounded-3xl bg-white p-8 shadow-xl">
-          <input
-            ref={inputRef}
-            hidden
-            type="file"
-            accept=".xlsx,.xls,.csv"
-            onChange={onFileChange}
-          />
-
-          <div
-            onDrop={onDrop}
-            onDragOver={(e) => {
-              e.preventDefault();
-              setDragging(true);
-            }}
-            onDragLeave={() => setDragging(false)}
-            className={`rounded-3xl border-2 border-dashed p-12 text-center transition ${
-              dragging ? "border-blue-600 bg-blue-50" : "border-slate-300"
-            }`}
-          >
-            <UploadCloud size={70} className="mx-auto text-blue-600" />
-
-            <h2 className="mt-6 text-3xl font-bold">
-              Drag & Drop Excel File
-            </h2>
-
-            <p className="mt-3 text-slate-500">or browse your computer</p>
-
-            <button
-              type="button"
-              onClick={chooseFile}
-              className="mt-8 rounded-2xl bg-blue-600 px-8 py-4 font-semibold text-white shadow-lg hover:bg-blue-700"
-            >
-              Choose Excel File
-            </button>
-
-            <div className="mt-8 flex justify-center gap-4">
-              <span className="rounded-full bg-green-100 px-4 py-2 text-green-700">
-                XLSX
-              </span>
-              <span className="rounded-full bg-orange-100 px-4 py-2 text-orange-700">
-                XLS
-              </span>
-              <span className="rounded-full bg-purple-100 px-4 py-2 text-purple-700">
-                CSV
-              </span>
-            </div>
-          </div>
-
-          {/* FILE CARD */}
-
-          {file && (
-            <div className="mt-8 rounded-2xl border border-green-200 bg-green-50 p-5">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <div className="rounded-xl bg-white p-4 shadow">
-                    <FileSpreadsheet size={42} className="text-green-600" />
-                  </div>
-
-                  <div>
-                    <h3 className="text-xl font-bold">{file.name}</h3>
-                    <p className="text-slate-500">
-                      {(file.size / 1024).toFixed(2)} KB
-                    </p>
-                  </div>
-                </div>
-
-                <CheckCircle2 size={36} className="text-green-600" />
-              </div>
-            </div>
-          )}
-
-          {/* BUTTONS */}
-
-          <div className="mt-8 flex justify-center gap-5">
-            <Link
-              href="/sample-marks.xlsx"
-              download
-              className="flex items-center gap-2 rounded-xl border px-6 py-3 font-semibold hover:bg-slate-50"
-            >
-              <Download size={18} />
-              Download Sample
-            </Link>
-
-            <button
-              type="button"
-              onClick={uploadMarks}
-              disabled={!file || uploading}
-              className={`rounded-xl px-8 py-3 font-semibold text-white transition ${
-                file && !uploading
-                  ? "bg-blue-600 hover:bg-blue-700"
-                  : "cursor-not-allowed bg-slate-400"
-              }`}
-            >
-              <UploadCloud size={20} className="inline mr-2" />
-              {uploading ? "Uploading..." : "Upload Marks"}
-            </button>
-          </div>
-
-          {/* ================= PREVIEW ================= */}
-
-          {rows.length > 0 && (
-            <div className="mt-10">
-              <div className="mb-5 flex items-center justify-between">
-                <h2 className="text-2xl font-bold">Excel Preview</h2>
-
-                <div className="rounded-full bg-blue-100 px-4 py-2 font-semibold text-blue-700">
-                  {rows.length} Rows
-                </div>
-              </div>
-
-              <div className="overflow-auto rounded-2xl border">
-                <table className="min-w-full">
-                  <thead className="bg-slate-100">
-                    <tr>
-                      <th className="p-3 text-left">Roll No</th>
-                      <th className="p-3 text-center">Minor1</th>
-                      <th className="p-3 text-center">Minor2</th>
-                      <th className="p-3 text-center">Minor3</th>
-                      <th className="p-3 text-center">Assignment</th>
-                      <th className="p-3 text-center">Attendance</th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    {rows.slice(0, 5).map((row, index) => (
-                      <tr key={index} className="border-t">
-                        <td className="p-3">{row["Roll No"]}</td>
-                        <td className="p-3 text-center">{row.Minor1 ?? 0}</td>
-                        <td className="p-3 text-center">{row.Minor2 ?? 0}</td>
-                        <td className="p-3 text-center">{row.Minor3 ?? 0}</td>
-                        <td className="p-3 text-center">
-                          {row.Assignment ?? 0}
-                        </td>
-                        <td className="p-3 text-center">
-                          {row.Attendance ?? 0}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-
-              {rows.length > 5 && (
-                <p className="mt-3 text-sm text-slate-500">
-                  Showing first 5 rows out of {rows.length}
-                </p>
-              )}
-            </div>
-          )}
-
-          {/* ================= PROGRESS ================= */}
-
-          <div className="mt-10">
-            <div className="mb-3 flex justify-between">
-              <span className="font-semibold">Upload Progress</span>
-              <span className="font-bold text-blue-600">{progress}%</span>
-            </div>
-
-            <div className="h-4 overflow-hidden rounded-full bg-slate-200">
-              <div
-                style={{ width: `${progress}%` }}
-                className="h-full rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 transition-all duration-500"
-              />
-            </div>
-          </div>
-
-          {/* ================= SUMMARY ================= */}
-
-          {(successCount > 0 || failedRows.length > 0) && (
-            <div className="mt-10 rounded-2xl border bg-slate-50 p-6">
-              <h2 className="text-xl font-bold">Upload Summary</h2>
-
-              <div className="mt-5 flex gap-10">
-                <div>
-                  <p className="font-semibold text-green-600">Uploaded</p>
-                  <h3 className="text-4xl font-bold">{successCount}</h3>
-                </div>
-
-                <div>
-                  <p className="font-semibold text-red-600">Failed</p>
-                  <h3 className="text-4xl font-bold">{failedRows.length}</h3>
-                </div>
-              </div>
-
-              {failedRows.length > 0 && (
-                <div className="mt-6 rounded-xl bg-red-50 p-4">
-                  <h3 className="font-bold text-red-700">Failed Rows</h3>
-
-                  <div className="mt-3 max-h-56 overflow-auto">
-                    {failedRows.map((item, index) => (
-                      <p key={index} className="text-sm text-red-600">
-                        • {item}
-                      </p>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              <div className="mt-6 flex gap-4">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setRows([]);
-                    setFile(null);
-                    setProgress(0);
-                    setSuccessCount(0);
-                    setFailedRows([]);
-                  }}
-                  className="rounded-xl bg-slate-700 px-6 py-3 font-semibold text-white hover:bg-slate-800"
-                >
-                  Reset
-                </button>
-
-                {successCount > 0 && (
-                  <Link
-                    href={`/teachers/marks/${subjectId}`}
-                    className="rounded-xl bg-green-600 px-6 py-3 font-semibold text-white hover:bg-green-700"
-                  >
-                    View Marks Register
-                  </Link>
-                )}
-              </div>
-            </div>
-          )}
         </div>
       </div>
 
-      <Footer />
-    </main>
-  );
+      {/* ================= HERO ================= */}
+
+      <div className="overflow-hidden rounded-2xl bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-700 p-[18px] text-white shadow-xl sm:rounded-3xl sm:p-9">
+        <div className="flex items-center justify-between">
+          <div>
+            <div className="flex items-center gap-2 sm:gap-3">
+              <FileSpreadsheet size={21} className="sm:hidden" />
+              <FileSpreadsheet size={32} className="hidden sm:block" />
+              <span className="text-sm font-semibold sm:text-lg">
+                Excel Upload
+              </span>
+            </div>
+
+            <h2 className="mt-3 text-2xl font-extrabold sm:mt-6 sm:text-[52px]">
+              Marks Upload
+            </h2>
+
+            <p className="mt-2 max-w-2xl text-xs text-blue-100 sm:mt-4 sm:text-lg">
+              Upload all students' marks in one click.
+            </p>
+          </div>
+
+          <UploadCloud size={63} className="opacity-20 sm:hidden" />
+          <UploadCloud size={179} className="hidden opacity-20 sm:block" />
+        </div>
+      </div>
+
+      {/* ================= CARD ================= */}
+
+      <div className="mt-5 rounded-2xl bg-white p-[17px] shadow-xl sm:mt-8 sm:rounded-3xl sm:p-[34px]">
+        <input
+          ref={inputRef}
+          hidden
+          type="file"
+          accept=".xlsx,.xls,.csv"
+          onChange={onFileChange}
+        />
+
+        <div
+          onDrop={onDrop}
+          onDragOver={(e) => {
+            e.preventDefault();
+            setDragging(true);
+          }}
+          onDragLeave={() => setDragging(false)}
+          className={`rounded-2xl border-2 border-dashed p-[21px] text-center transition sm:rounded-3xl sm:p-[50px] ${
+            dragging ? "border-blue-600 bg-blue-50" : "border-slate-300"
+          }`}
+        >
+          <UploadCloud size={42} className="mx-auto text-blue-600 sm:hidden" />
+          <UploadCloud
+            size={74}
+            className="mx-auto hidden text-blue-600 sm:block"
+          />
+
+          <h2 className="mt-3 text-lg font-bold sm:mt-6 sm:text-[32px]">
+            Drag & Drop Excel File
+          </h2>
+
+          <p className="mt-2 text-xs text-slate-500 sm:mt-3 sm:text-base">
+            or browse your computer
+          </p>
+
+          <button
+            type="button"
+            onClick={chooseFile}
+            className="mt-4 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow hover:bg-blue-700 sm:mt-8 sm:rounded-2xl sm:px-[34px] sm:py-[17px] sm:text-base sm:shadow-lg"
+          >
+            Choose Excel File
+          </button>
+
+          <div className="mt-4 flex justify-center gap-2 sm:mt-8 sm:gap-4">
+            <span className="rounded-full bg-green-100 px-3 py-1 text-xs text-green-700 sm:px-4 sm:py-2 sm:text-base">
+              XLSX
+            </span>
+            <span className="rounded-full bg-orange-100 px-3 py-1 text-xs text-orange-700 sm:px-4 sm:py-2 sm:text-base">
+              XLS
+            </span>
+            <span className="rounded-full bg-purple-100 px-3 py-1 text-xs text-purple-700 sm:px-4 sm:py-2 sm:text-base">
+              CSV
+            </span>
+          </div>
+        </div>
+
+        {/* FILE CARD */}
+
+        {file && (
+          <div className="mt-4 rounded-xl border border-green-200 bg-green-50 p-3 sm:mt-8 sm:rounded-2xl sm:p-[21px]">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 sm:gap-4">
+                <div className="rounded-lg bg-white p-2 shadow sm:rounded-xl sm:p-[17px]">
+                  <FileSpreadsheet
+                    size={24}
+                    className="text-green-600 sm:hidden"
+                  />
+                  <FileSpreadsheet
+                    size={44}
+                    className="hidden text-green-600 sm:block"
+                  />
+                </div>
+
+                <div>
+                  <h3 className="text-sm font-bold sm:text-xl">
+                    {file.name}
+                  </h3>
+                  <p className="text-xs text-slate-500 sm:text-base">
+                    {(file.size / 1024).toFixed(2)} KB
+                  </p>
+                </div>
+              </div>
+
+              <CheckCircle2
+                size={22}
+                className="text-green-600 sm:hidden"
+              />
+              <CheckCircle2
+                size={38}
+                className="hidden text-green-600 sm:block"
+              />
+            </div>
+          </div>
+        )}
+
+        {/* BUTTONS */}
+
+        <div className="mt-4 flex justify-center gap-2 sm:mt-8 sm:gap-5">
+          <Link
+            href="/sample-marks.xlsx"
+            download
+            className="flex items-center gap-1.5 rounded-lg border px-3 py-2 text-xs font-semibold hover:bg-slate-50 sm:rounded-xl sm:px-6 sm:py-3 sm:text-base"
+          >
+            <Download size={14} className="sm:hidden" />
+            <Download size={18} className="hidden sm:block" />
+            Sample
+          </Link>
+
+          <button
+            type="button"
+            onClick={uploadMarks}
+            disabled={!file || uploading}
+            className={`flex items-center gap-1.5 rounded-lg px-4 py-2 text-xs font-semibold text-white transition sm:rounded-xl sm:px-8 sm:py-3 sm:text-base ${
+              file && !uploading
+                ? "bg-blue-600 hover:bg-blue-700"
+                : "cursor-not-allowed bg-slate-400"
+            }`}
+          >
+            <UploadCloud size={14} className="sm:hidden" />
+            <UploadCloud size={18} className="hidden sm:block" />
+            {uploading ? "Uploading..." : "Upload Marks"}
+          </button>
+        </div>
+
+        {/* ================= PREVIEW ================= */}
+
+        {rows.length > 0 && (
+          <div className="mt-6 sm:mt-10">
+            <div className="mb-3 flex items-center justify-between sm:mb-5">
+              <h2 className="text-base font-bold sm:text-2xl">
+                Excel Preview
+              </h2>
+
+              <div className="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700 sm:px-4 sm:py-2 sm:text-base">
+                {rows.length} Rows
+              </div>
+            </div>
+
+            <div className="overflow-auto rounded-xl border sm:rounded-2xl">
+              <table className="min-w-full text-xs sm:text-[15px]">
+                <thead className="bg-slate-100">
+                  <tr>
+                    <th className="p-2 text-left sm:p-[13px]">Roll No</th>
+                    <th className="p-2 text-center sm:p-[13px]">Minor1</th>
+                    <th className="p-2 text-center sm:p-[13px]">Minor2</th>
+                    <th className="p-2 text-center sm:p-[13px]">Minor3</th>
+                    <th className="p-2 text-center sm:p-[13px]">Assign.</th>
+                    <th className="p-2 text-center sm:p-[13px]">Attend.</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {rows.slice(0, 5).map((row, index) => (
+                    <tr key={index} className="border-t">
+                      <td className="p-2 sm:p-[13px]">{row["Roll No"]}</td>
+                      <td className="p-2 text-center sm:p-[13px]">
+                        {row.Minor1 ?? 0}
+                      </td>
+                      <td className="p-2 text-center sm:p-[13px]">
+                        {row.Minor2 ?? 0}
+                      </td>
+                      <td className="p-2 text-center sm:p-[13px]">
+                        {row.Minor3 ?? 0}
+                      </td>
+                      <td className="p-2 text-center sm:p-[13px]">
+                        {row.Assignment ?? 0}
+                      </td>
+                      <td className="p-2 text-center sm:p-[13px]">
+                        {row.Attendance ?? 0}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {rows.length > 5 && (
+              <p className="mt-2 text-xs text-slate-500 sm:mt-3 sm:text-sm">
+                Showing first 5 rows out of {rows.length}
+              </p>
+            )}
+          </div>
+        )}
+
+        {/* ================= PROGRESS ================= */}
+
+        <div className="mt-6 sm:mt-10">
+          <div className="mb-2 flex justify-between sm:mb-3">
+            <span className="text-xs font-semibold sm:text-base">
+              Upload Progress
+            </span>
+            <span className="text-xs font-bold text-blue-600 sm:text-base">
+              {progress}%
+            </span>
+          </div>
+
+          <div className="h-2.5 overflow-hidden rounded-full bg-slate-200 sm:h-[17px]">
+            <div
+              style={{ width: `${progress}%` }}
+              className="h-full rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 transition-all duration-500"
+            />
+          </div>
+        </div>
+
+        {/* ================= SUMMARY ================= */}
+
+        {(successCount > 0 || failedRows.length > 0) && (
+          <div className="mt-6 rounded-xl border bg-slate-50 p-4 sm:mt-10 sm:rounded-2xl sm:p-[25px]">
+            <h2 className="text-base font-bold sm:text-xl">
+              Upload Summary
+            </h2>
+
+            <div className="mt-3 flex gap-6 sm:mt-5 sm:gap-10">
+              <div>
+                <p className="text-xs font-semibold text-green-600 sm:text-base">
+                  Uploaded
+                </p>
+                <h3 className="text-2xl font-bold sm:text-[42px]">
+                  {successCount}
+                </h3>
+              </div>
+
+              <div>
+                <p className="text-xs font-semibold text-red-600 sm:text-base">
+                  Failed
+                </p>
+                <h3 className="text-2xl font-bold sm:text-[42px]">
+                  {failedRows.length}
+                </h3>
+              </div>
+            </div>
+
+            {failedRows.length > 0 && (
+              <div className="mt-4 rounded-lg bg-red-50 p-3 sm:mt-6 sm:rounded-xl sm:p-[17px]">
+                <h3 className="text-sm font-bold text-red-700 sm:text-base">
+                  Failed Rows
+                </h3>
+
+                <div className="mt-2 max-h-56 overflow-auto sm:mt-3">
+                  {failedRows.map((item, index) => (
+                    <p key={index} className="text-xs text-red-600 sm:text-sm">
+                      • {item}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <div className="mt-4 flex gap-2 sm:mt-6 sm:gap-4">
+              <button
+                type="button"
+                onClick={() => {
+                  setRows([]);
+                  setFile(null);
+                  setProgress(0);
+                  setSuccessCount(0);
+                  setFailedRows([]);
+                }}
+                className="flex-1 rounded-lg bg-slate-700 px-4 py-2 text-xs font-semibold text-white hover:bg-slate-800 sm:flex-none sm:rounded-xl sm:px-6 sm:py-3 sm:text-base"
+              >
+                Reset
+              </button>
+
+              {successCount > 0 && (
+                <Link
+                  href={`/teachers/marks/${subjectId}`}
+                  className="flex-1 rounded-lg bg-green-600 px-4 py-2 text-center text-xs font-semibold text-white hover:bg-green-700 sm:flex-none sm:rounded-xl sm:px-6 sm:py-3 sm:text-base"
+                >
+                  View Marks Register
+                </Link>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+
+    <Footer />
+  </main>
+);
 }

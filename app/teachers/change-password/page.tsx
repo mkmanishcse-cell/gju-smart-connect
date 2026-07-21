@@ -131,57 +131,44 @@ export default function TeacherChangePasswordPage() {
   }
 
   return(
-
-    <main className="min-h-screen flex flex-col bg-slate-100">
-
-      <div className="flex-1 max-w-3xl mx-auto w-full p-6">
+<main className="min-h-screen bg-slate-100">
+  <div className="mx-auto w-full max-w-lg px-4 py-4 sm:px-6">
 
         {/* Header */}
 
-        <div className="mb-6 flex items-center gap-4">
+      <div className="mb-4 rounded-3xl bg-gradient-to-r from-cyan-400 to-sky-500 px-5 py-4 shadow-xl">
+  <div className="flex items-center gap-4">
+    <Link
+      href="/teachers"
+      className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-300 text-slate-800 shadow-md transition hover:bg-cyan-200"
+    >
+      <ArrowLeft size={18} />
+    </Link>
 
-          <Link
-
-            href="/teachers"
-
-            className="flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-3 font-semibold shadow hover:bg-slate-50"
-
-          >
-
-            <ArrowLeft size={18}/>
-
-            Back
-
-          </Link>
-
-          <div>
-
-            <h1 className="text-3xl font-bold">
-
-              Change Password
-
-            </h1>
-
-            <p className="text-slate-500">
-
-              Update your account password
-
-            </p>
-
-          </div>
-
-        </div>
+    <div>
+      <h1 className="text-2xl font-bold text-white">
+        Change Password
+      </h1>
+      <p className="text-sm text-cyan-100">
+        Update your account password
+      </p>
+    </div>
+  </div>
+</div>
 
         {/* Card */}
+<div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl mb-2">
+  
+</div>
+        <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl">
 
-        <div className="rounded-3xl bg-white shadow">
-
-          <div className="border-b px-6 py-5">
+          <div className="border-b bg-slate-50 px-6 py-4">
 
             <div className="flex items-center gap-3">
 
-              <LockKeyhole size={24}/>
-
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-100">
+    <LockKeyhole className="text-blue-600" size={24} />
+</div>
               <h2 className="text-2xl font-bold">
 
                 Password Details
@@ -192,11 +179,11 @@ export default function TeacherChangePasswordPage() {
 
           </div>
 
-          <div className="space-y-6 p-6">
+         <div className="space-y-4 p-5">
 
             <div>
 
-              <label className="mb-2 block font-medium">
+              <label className="mb-1 block text-sm font-semibold text-slate-700">
 
                 Current Password
 
@@ -210,15 +197,13 @@ export default function TeacherChangePasswordPage() {
 
                 onChange={(e)=>setOldPassword(e.target.value)}
 
-                className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:border-blue-600"
-
-              />
+               className="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-2 text-sm outline-none transition focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-100"    />
 
             </div>
 
             <div>
 
-              <label className="mb-2 block font-medium">
+              <label className="mb-1 block font-medium">
 
                 New Password
 
@@ -232,15 +217,13 @@ export default function TeacherChangePasswordPage() {
 
                 onChange={(e)=>setNewPassword(e.target.value)}
 
-                className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:border-blue-600"
-
-              />
+               className="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-2 text-sm outline-none transition focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-100"   />
 
             </div>
 
             <div>
 
-              <label className="mb-2 block font-medium">
+              <label className="mb-1 block font-medium">
 
                 Confirm Password
 
@@ -254,13 +237,11 @@ export default function TeacherChangePasswordPage() {
 
                 onChange={(e)=>setConfirmPassword(e.target.value)}
 
-                className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:border-blue-600"
-
-              />
+              className="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-2 text-sm outline-none transition focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-100"  />
 
             </div>
 
-            <div className="flex justify-end">
+            <div className="mt-2 flex justify-end">
 
               <button
 
@@ -268,10 +249,7 @@ export default function TeacherChangePasswordPage() {
 
                 disabled={loading}
 
-                className="rounded-xl bg-blue-600 px-8 py-3 font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
-
-              >
-
+              className="rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 px-5 py-2 text-sm font-semibold text-white shadow-md transition hover:shadow-lg disabled:opacity-50">
                 {loading
 
                   ? "Updating..."
@@ -288,7 +266,9 @@ export default function TeacherChangePasswordPage() {
 
       </div>
 
-      <Footer/>
+      <div className="mt-40 mb-0">
+  <Footer />
+</div>
 
     </main>
 
