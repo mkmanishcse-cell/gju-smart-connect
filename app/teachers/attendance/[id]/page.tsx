@@ -323,7 +323,7 @@ Back
 
 <div className="border-b bg-gradient-to-r from-blue-50 via-sky-50 to-indigo-50 px-6 py-5">
 
-<h2 className="text-2xl font-bold text-slate-800">
+<h2 className="text-xl font-bold text-slate-800 sm:text-2xl">
 
 Subject Information
 
@@ -331,7 +331,7 @@ Subject Information
 
 </div>
 
-<div className="grid gap-6 p-6 md:grid-cols-3">
+<div className="grid gap-4 p-4 md:grid-cols-3 md:p-6">
 
 <div>
 
@@ -392,7 +392,7 @@ className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-2 focus:border
 
 <div className="flex flex-col gap-4 border-b bg-slate-50 px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
 
-<h2 className="text-2xl font-bold text-slate-800">
+<h2 className="text-lg font-bold text-slate-800 sm:text-2xl">
 
 Student Attendance
 
@@ -412,15 +412,13 @@ Student Attendance
 
     router.push(`/teachers/attendance/register/${subjectId}`);
   }}
-  className="rounded-xl border border-slate-300 bg-white px-6 py-3 font-semibold text-slate-700 shadow-sm transition hover:bg-slate-100"
->
+  className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-medium text-slate-700 shadow-sm transition hover:bg-slate-100 sm:rounded-xl sm:px-6 sm:py-3 sm:text-base sm:font-semibold">
   📋 View Register
 </button>
 
 <Link
 href={`/teachers/attendance/${subjectId}/upload`}
-className="flex items-center justify-center gap-2 rounded-xl bg-cyan-600 px-5 py-3 font-semibold text-white shadow-sm transition hover:bg-cyan-700"
->
+className="flex items-center justify-center gap-1 rounded-lg bg-cyan-600 px-3 py-2 text-xs font-medium text-white shadow-sm transition hover:bg-cyan-700 sm:gap-2 sm:rounded-xl sm:px-5 sm:py-3 sm:text-base sm:font-semibold">
 <Upload size={18} />
 Upload Attendance
 </Link>
@@ -435,7 +433,7 @@ Upload Attendance
 
 <tr>
 
-<th className="px-6 py-4 text-left">
+<th className="px-2 py-2 text-left text-xs font-semibold sm:px-6 sm:py-4 sm:text-sm">
 
 Roll No
 
@@ -466,13 +464,13 @@ key={student.student_id}
 className="border-t hover:bg-slate-50"
 >
 
-<td className="px-6 py-4 font-medium">
+<td className="px-2 py-2 text-xs font-medium sm:px-6 sm:py-4 sm:text-sm">
 
 {student.roll_no}
 
 </td>
 
-<td className="px-6 py-4">
+<td className="px-2 py-2 text-xs sm:px-6 sm:py-4 sm:text-sm">
 
 {student.student_name}
 
@@ -480,11 +478,11 @@ className="border-t hover:bg-slate-50"
 
 <td className="px-6 py-4">
 
-<div className="flex justify-center gap-3">
+<div className="flex justify-center gap-1 sm:gap-3">
 
 <button
 onClick={()=>updateStatus(student.student_id,"P")}
-className={`rounded-xl px-5 py-2 font-semibold transition ${
+className={`rounded-lg px-2 py-1 text-[11px] font-medium sm:rounded-xl sm:px-5 sm:py-2 sm:text-sm sm:font-semibold font-semibold transition ${
 student.status==="P"
 ?"bg-green-600 text-white"
 :"bg-slate-200 text-slate-700 hover:bg-green-100"
@@ -497,7 +495,7 @@ Present
 
 <button
 onClick={()=>updateStatus(student.student_id,"A")}
-className={`rounded-xl px-5 py-2 font-semibold transition ${
+className={`rounded-lg px-2 py-1 text-[11px] font-medium sm:rounded-xl sm:px-5 sm:py-2 sm:text-sm sm:font-semibold font-semibold transition ${
 student.status==="A"
 ?"bg-red-600 text-white"
 :"bg-slate-200 text-slate-700 hover:bg-red-100"
@@ -523,7 +521,7 @@ Absent
 </div>
 
 </div>
-<div className="flex justify-end items-center gap-4 mt-6">
+<div className="mt-6 flex flex-wrap justify-end gap-2">
 
  <button
   type="button"
@@ -545,8 +543,7 @@ Absent
   <button
     onClick={saveAttendance}
     disabled={saving}
-    className="rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700 disabled:opacity-50"
-  >
+    className="rounded-lg bg-blue-600 px-3 py-2 text-xs font-medium text-white transition hover:bg-blue-700 disabled:opacity-50 sm:rounded-xl sm:px-6 sm:py-3 sm:text-base sm:font-semibold">
     {saving ? "Saving..." : "💾 Save Attendance"}
   </button>
 

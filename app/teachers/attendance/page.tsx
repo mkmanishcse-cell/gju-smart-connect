@@ -2,7 +2,7 @@
 
 import SubjectCard from "@/components/teacher/SubjectCard";
 import { useEffect, useState } from "react";
-
+import Footer from "@/components/common/Footer";
 import Link from "next/link";
 
 import { supabase } from "@/lib/supabase";
@@ -169,46 +169,36 @@ subject.subject_code.toLowerCase().includes(keyword)
 
     <main className="min-h-screen bg-slate-100">
 
-      <div className="max-w-7xl mx-auto p-8">
+      <div className="mx-auto w-full max-w-7xl px-3 py-3 sm:px-5 sm:py-5 lg:px-8 lg:py-8">
 
         {/* Header */}
 
-        <div className="flex justify-between items-center flex-wrap gap-6">
+        <div className="flex items-start justify-between gap-2 sm:flex-row sm:items-center">
+         <div className="flex-1">
+  <h1 className="text-xl font-bold text-slate-800 sm:text-3xl lg:text-4xl">
+    Attendance
+  </h1>
 
-          <div>
+  <p className="mt-1 text-xs text-gray-500 sm:text-base">
+    Choose a subject to mark attendance.
+  </p>
+</div>
 
-            <h1 className="text-4xl font-bold text-slate-800">
-
-              Attendance
-
-            </h1>
-
-            <p className="text-gray-500 mt-2">
-
-              Choose a subject to mark attendance.
-
-            </p>
-
-          </div>
-
-          <Link
-            href="/teachers"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl flex items-center gap-2 shadow-lg"
-          >
-
-            <ArrowLeft size={20} />
-
-            Dashboard
-
-          </Link>
+         <Link
+  href="/teachers"
+  className="flex shrink-0 items-center justify-center gap-1 rounded-lg bg-blue-600 px-3 py-2 text-xs font-medium text-white shadow-lg transition hover:bg-blue-700 sm:w-auto sm:gap-2 sm:rounded-xl sm:px-6 sm:py-3 sm:text-sm"
+>
+  <ArrowLeft size={16} className="sm:w-5 sm:h-5" />
+  <span>Dashboard</span>
+</Link>
 
         </div>
 
         {/* Statistics */}
 
-        <div className="grid md:grid-cols-3 gap-6 mt-8">
+        <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3 lg:gap-6">
 
-          <div className="bg-blue-600 rounded-2xl p-6 text-white shadow-lg">
+          <div className="bg-blue-600 rounded-2xl p-4 sm:p-5 lg:p-6 text-white shadow-lg">
 
             <p className="text-blue-100">
 
@@ -216,7 +206,7 @@ subject.subject_code.toLowerCase().includes(keyword)
 
             </p>
 
-            <h2 className="text-4xl font-bold mt-3">
+            <h2 className="text-3xl sm:text-4xl font-bold mt-3">
 
               {subjects.length}
 
@@ -224,7 +214,7 @@ subject.subject_code.toLowerCase().includes(keyword)
 
           </div>
 
-          <div className="bg-green-600 rounded-2xl p-6 text-white shadow-lg">
+          <div className="bg-green-600 rounded-2xl p-4 sm:p-5 lg:p-6 text-white shadow-lg">
 
             <p className="text-green-100">
 
@@ -232,7 +222,7 @@ subject.subject_code.toLowerCase().includes(keyword)
 
             </p>
 
-            <h2 className="text-4xl font-bold mt-3">
+            <h2 className="text-3xl sm:text-4xl font-bold mt-3">
 
               {subjects.filter(s => s.subject_type === "Theory").length}
 
@@ -240,7 +230,7 @@ subject.subject_code.toLowerCase().includes(keyword)
 
           </div>
 
-          <div className="bg-orange-500 rounded-2xl p-6 text-white shadow-lg">
+          <div className="bg-orange-500 rounded-2xl p-4 sm:p-5 lg:p-6 text-white shadow-lg">
 
             <p className="text-orange-100">
 
@@ -248,7 +238,7 @@ subject.subject_code.toLowerCase().includes(keyword)
 
             </p>
 
-            <h2 className="text-4xl font-bold mt-3">
+            <h2 className="text-3xl sm:text-4xl font-bold mt-3">
 
               {subjects.filter(s => s.subject_type === "Practical").length}
 
@@ -260,7 +250,7 @@ subject.subject_code.toLowerCase().includes(keyword)
 
         {/* Search */}
 
-        <div className="bg-white rounded-2xl shadow-lg p-6 mt-8">
+        <div className="mt-5 rounded-2xl bg-white p-3 shadow-lg sm:p-5 lg:p-6">
 
           <div className="relative">
 
@@ -273,7 +263,7 @@ subject.subject_code.toLowerCase().includes(keyword)
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search Subject..."
-              className="w-full border rounded-xl py-3 pl-12 pr-4 outline-none focus:border-blue-600"
+              className="w-full border rounded-xl py-2.5 pl-11 sm:py-3 sm:pl-12 pr-4 outline-none focus:border-blue-600"
             />
 
           </div>
@@ -282,17 +272,17 @@ subject.subject_code.toLowerCase().includes(keyword)
 
         {/* Subject Cards */}
 
-        <div className="grid xl:grid-cols-3 lg:grid-cols-2 gap-6 mt-8">
+        <div className="mt-5 grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3">
                       {filteredSubjects.length === 0 ? (
 
-            <div className="col-span-full bg-white rounded-3xl shadow-lg p-12 text-center">
+            <div className="col-span-full bg-white rounded-3xl shadow-lg p-6 sm:p-8 lg:p-12 text-center">
 
               <ClipboardCheck
-                size={60}
+                size={48}
                 className="mx-auto text-slate-400"
               />
 
-              <h2 className="text-3xl font-bold mt-5 text-slate-800">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold mt-5 text-slate-800">
 
                 No Subjects Found
 
@@ -327,70 +317,10 @@ subject.subject_code.toLowerCase().includes(keyword)
         </div>
 
         {/* Footer */}
-        <footer className="mt-12 bg-white rounded-3xl shadow-lg p-8">
-
-  <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-
-    <div>
-
-      <h2 className="text-2xl font-bold text-slate-800">
-
-        GJU Smart Connect
-
-      </h2>
-
-      <p className="text-gray-500 mt-2">
-
-        Teacher Attendance Management
-
-      </p>
-
-    </div>
-
-    <div className="text-center">
-
-      <p className="text-gray-500">
-
-        Available Subjects
-
-      </p>
-
-      <h2 className="text-4xl font-bold text-blue-600 mt-2">
-
-        {subjects.length}
-
-      </h2>
-
-    </div>
-
-    <div className="text-right">
-
-      <p className="text-gray-500">
-
-        © 2026 All Rights Reserved
-
-      </p>
-
-      <p className="text-sm text-slate-500 mt-2">
-
-        Developed By
-
-        <span className="font-semibold text-blue-600">
-
-          {" "}Manish Kushwaha
-
-        </span>
-
-      </p>
-
-    </div>
-
-  </div>
-
-</footer>
+       
 
       </div>
-
+<Footer />
     </main>
 
   );

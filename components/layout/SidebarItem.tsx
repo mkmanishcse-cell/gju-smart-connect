@@ -10,74 +10,38 @@ export default function SidebarItem({
   active,
   onClick,
 }: SidebarItemProps) {
-
   const Icon = menu.icon;
 
   return (
-
     <Link
       href={menu.href}
       onClick={onClick}
+      aria-current={active ? "page" : undefined}
       className={`
-        group
-        relative
-
-        flex
-        items-center
-        justify-between
-
+        group relative
+        flex items-center justify-between
         rounded-xl
-
-        px-4
-        py-3
-
-        transition-all
-        duration-200
-
-        ${
-          active
-            ? "bg-blue-600 shadow-lg"
-            : "hover:bg-slate-800"
-        }
+        px-3 py-2.5 sm:px-4 sm:py-3
+        transition-all duration-200
+        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400
+        ${active ? "bg-blue-600 shadow-lg" : "hover:bg-slate-800"}
       `}
     >
-
       {/* Left */}
+      <div className="flex min-w-0 items-center gap-3 sm:gap-4">
+        <Icon size={20} className="shrink-0 text-white transition sm:h-[21px] sm:w-[21px]" />
 
-      <div
-        className="
-          flex
-          items-center
-          gap-4
-        "
-      >
-
-        <Icon
-          size={21}
-          className="text-white transition"
-        />
-
-        <span
-          className="
-            text-sm
-            font-medium
-            text-white
-          "
-        >
+        <span className="truncate text-sm font-medium text-white">
           {menu.name}
         </span>
-
       </div>
 
       {/* Arrow */}
-
       <ChevronRight
         size={18}
+        aria-hidden="true"
         className={`
-          text-white
-          transition-all
-          duration-200
-
+          shrink-0 text-white transition-all duration-200
           ${
             active
               ? "opacity-100"
@@ -85,9 +49,6 @@ export default function SidebarItem({
           }
         `}
       />
-
     </Link>
-
   );
-
 }

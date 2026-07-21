@@ -36,7 +36,7 @@ export default function Hero() {
             Teachers and Administration through one secure system.
           </p>
 
-          <div className="mt-12 flex justify-center flex-wrap gap-4">
+          <div className="hidden md:flex mt-12 justify-center flex-wrap gap-4">
 
             <div className="bg-white rounded-full shadow-lg px-8 py-3">
               🎓 Student Portal

@@ -136,11 +136,10 @@ export default function JoinSubjectPage() {
 
   return (
     <main className="min-h-screen bg-slate-100">
-      <div className="max-w-7xl mx-auto p-8">
+      <div className="mx-auto w-full max-w-7xl px-3 py-3 sm:px-5 sm:py-5 lg:px-8 lg:py-8">
                 {/* Hero Section */}
 
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-700 via-indigo-600 to-cyan-500 shadow-2xl p-8 text-white">
-
+        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-700 via-indigo-600 to-cyan-500 shadow-xl p-4 sm:p-6 lg:p-8 text-white">
           <div className="absolute -right-10 -top-10 opacity-10">
 
             <BookMarked size={220} />
@@ -163,13 +162,13 @@ export default function JoinSubjectPage() {
 
               </div>
 
-              <h1 className="text-5xl font-extrabold mt-5">
+              <h1 className="text-2xl sm:text-3xl lg:text-5xl font-extrabold mt-5">
 
                 Join Subjects
 
               </h1>
 
-              <p className="mt-4 text-lg text-blue-100 max-w-2xl">
+              <p className="mt-2 max-w-2xl text-sm text-blue-100 sm:text-base lg:text-lg">
 
                 Select the subjects you want to teach and start managing attendance,
                 marks, assignments and announcements.
@@ -177,42 +176,29 @@ export default function JoinSubjectPage() {
               </p>
 
             </div>
+ <div className="flex w-full gap-2 sm:w-auto sm:flex-row">
+  <Link href="/teachers" className="flex-1 sm:flex-none">
+    <div className="w-full bg-white/20 backdrop-blur-md hover:bg-white/30 transition-all duration-300 px-3 py-2 sm:px-6 sm:py-3 rounded-xl sm:rounded-2xl flex items-center justify-center gap-2 sm:gap-3 cursor-pointer text-sm sm:text-base">
+      <ArrowLeft size={18} className="sm:w-5 sm:h-5" />
+      Dashboard
+    </div>
+  </Link>
 
-            <div className="flex gap-4">
-
-              <Link href="/teachers">
-
-                <div className="bg-white/20 backdrop-blur-md hover:bg-white/30 transition-all duration-300 px-6 py-3 rounded-2xl flex items-center gap-3 cursor-pointer">
-
-                  <ArrowLeft size={20} />
-
-                  Dashboard
-
-                </div>
-
-              </Link>
-
-              <Link href="/teachers/my-subjects">
-
-                <div className="bg-white text-blue-700 hover:bg-slate-100 transition-all duration-300 px-6 py-3 rounded-2xl flex items-center gap-3 shadow-lg cursor-pointer">
-
-                  <BookMarked size={20} />
-
-                  My Subjects
-
-                </div>
-
-              </Link>
-
-            </div>
+  <Link href="/teachers/my-subjects" className="flex-1 sm:flex-none">
+    <div className="w-full bg-white text-blue-700 hover:bg-slate-100 transition-all duration-300 px-3 py-2 sm:px-6 sm:py-3 rounded-xl sm:rounded-2xl flex items-center justify-center gap-2 sm:gap-3 shadow-lg cursor-pointer text-sm sm:text-base">
+      <BookMarked size={18} className="sm:w-5 sm:h-5" />
+      My Subjects
+    </div>
+  </Link>
+</div>
 
           </div>
 
           {/* Statistics */}
 
-          <div className="grid md:grid-cols-3 gap-6 mt-10">
+          <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3 lg:gap-6">
 
-            <div className="bg-white/15 backdrop-blur-md rounded-2xl p-6">
+            <div className="bg-white/15 backdrop-blur-md rounded-2xl p-4 sm:p-5 lg:p-6">
 
               <p className="text-sm opacity-80">
 
@@ -220,7 +206,7 @@ export default function JoinSubjectPage() {
 
               </p>
 
-              <h2 className="text-5xl font-bold mt-3">
+              <h2 className="text-2xl sm:text-3xl lg:text-3xl sm:text-4xl lg:text-5xl font-bold mt-3">
 
                 {subjects.length}
 
@@ -228,7 +214,7 @@ export default function JoinSubjectPage() {
 
             </div>
 
-            <div className="bg-white/15 backdrop-blur-md rounded-2xl p-6">
+            <div className="bg-white/15 backdrop-blur-md rounded-2xl p-4 sm:p-5 lg:p-6">
 
               <p className="text-sm opacity-80">
 
@@ -236,7 +222,7 @@ export default function JoinSubjectPage() {
 
               </p>
 
-              <h2 className="text-5xl font-bold mt-3">
+              <h2 className="text-2xl sm:text-3xl lg:text-3xl sm:text-4xl lg:text-5xl font-bold mt-3">
 
                 {joinedSubjects.length}
 
@@ -244,7 +230,7 @@ export default function JoinSubjectPage() {
 
             </div>
 
-            <div className="bg-white/15 backdrop-blur-md rounded-2xl p-6">
+            <div className="bg-white/15 backdrop-blur-md rounded-2xl p-4 sm:p-5 lg:p-6">
 
               <p className="text-sm opacity-80">
 
@@ -252,7 +238,7 @@ export default function JoinSubjectPage() {
 
               </p>
 
-              <h2 className="text-5xl font-bold mt-3">
+              <h2 className="text-2xl sm:text-3xl lg:text-3xl sm:text-4xl lg:text-5xl font-bold mt-3">
 
                 {subjects.length - joinedSubjects.length}
 
@@ -266,7 +252,7 @@ export default function JoinSubjectPage() {
 
         {/* Search */}
 
-        <div className="bg-white rounded-3xl shadow-xl p-6 mt-8">
+        <div className="mt-5 rounded-2xl bg-white p-3 shadow-lg sm:p-5 lg:p-6">
 
           <div className="relative">
 
@@ -280,7 +266,7 @@ export default function JoinSubjectPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search by Subject Name or Subject Code..."
-              className="w-full rounded-2xl border border-slate-300 py-4 pl-14 pr-4 outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-100 transition"
+              className="w-full rounded-2xl border border-slate-300 py-3 pl-11 sm:pl-14 pr-4 outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-100 transition"
             />
 
           </div>
@@ -289,12 +275,12 @@ export default function JoinSubjectPage() {
 
         {/* Subject Cards */}
 
-        <div className="grid xl:grid-cols-3 lg:grid-cols-2 gap-8 mt-10">
+        <div className="mt-5 grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3">
                     {filteredSubjects.length === 0 ? (
 
-            <div className="col-span-full bg-white rounded-3xl shadow-xl p-12 text-center">
+            <div className="col-span-full bg-white rounded-3xl shadow-xl p-6 sm:p-8 lg:p-12 text-center">
 
-              <h2 className="text-3xl font-bold text-slate-800">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800">
 
                 No Subjects Found
 
@@ -330,19 +316,19 @@ export default function JoinSubjectPage() {
         </div>
 
 
-        <footer className="mt-14 bg-white rounded-3xl shadow-xl p-8">
+        <footer className="mt-8 rounded-2xl bg-white p-4 shadow-lg sm:p-5 lg:p-6">
 
-          <div className="flex flex-col lg:flex-row justify-between items-center gap-8">
+          <div className="flex flex-col items-center justify-between gap-4 text-center lg:flex-row lg:text-left">
 
             <div>
 
-              <h2 className="text-3xl font-bold text-slate-800">
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-800">
 
                 GJU Smart Connect
 
               </h2>
 
-              <p className="text-gray-500 mt-2">
+              <p className="text-xs sm:text-sm text-gray-500 mt-1">
 
                 Teacher Subject Management Portal
 
@@ -350,17 +336,17 @@ export default function JoinSubjectPage() {
 
             </div>
 
-            <div className="flex gap-10 text-center">
+            <div className="grid w-full grid-cols-3 gap-3 text-center lg:flex lg:w-auto lg:gap-8">
 
               <div>
 
-                <h3 className="text-3xl font-bold text-blue-600">
+                <h3 className="text-xl sm:text-2xl font-bold text-blue-600">
 
                   {subjects.length}
 
                 </h3>
 
-                <p className="text-gray-500">
+                <p className="text-xs sm:text-sm text-gray-500">
 
                   Subjects
 
@@ -370,13 +356,13 @@ export default function JoinSubjectPage() {
 
               <div>
 
-                <h3 className="text-3xl font-bold text-green-600">
+                <h3 className="text-xl sm:text-2xl font-bold text-green-600">
 
                   {joinedSubjects.length}
 
                 </h3>
 
-                <p className="text-gray-500">
+                <p className="text-xs sm:text-sm text-gray-500">
 
                   Joined
 
@@ -386,13 +372,13 @@ export default function JoinSubjectPage() {
 
               <div>
 
-                <h3 className="text-3xl font-bold text-orange-500">
+                <h3 className="text-xl sm:text-2xl font-bold text-orange-500">
 
                   {subjects.length - joinedSubjects.length}
 
                 </h3>
 
-                <p className="text-gray-500">
+                <p className="text-xs sm:text-sm text-gray-500">
 
                   Available
 
@@ -402,15 +388,15 @@ export default function JoinSubjectPage() {
 
             </div>
 
-            <div className="text-right">
+            <div className="text-center lg:text-right">
 
-              <p className="text-gray-500">
+              <p className="text-xs sm:text-sm text-gray-500">
 
                 © 2026 All Rights Reserved
 
               </p>
 
-              <p className="mt-2">
+              <p className="mt-1 text-sm">
 
                 Developed By
 

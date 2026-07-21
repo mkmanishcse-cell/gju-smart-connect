@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
-
+import Footer from "@/components/common/Footer";
 import { supabase } from "@/lib/supabase";
 
 import {
@@ -213,11 +213,12 @@ export default function SubjectDashboard() {
 
     <main className="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100">
 
-      <div className="max-w-7xl mx-auto px-8 py-8">
+      <div className="mx-auto w-full max-w-7xl px-3 py-3 sm:px-5 sm:py-5 lg:px-8 lg:py-8"
+>
                 {/* Hero Banner */}
 
         <div
-          className={`relative overflow-hidden rounded-3xl shadow-2xl p-8 text-white ${
+          className={`relative overflow-hidden rounded-2xl shadow-xl p-4 sm:p-6 lg:p-8 text-white ${
             subject.subject_type === "Theory"
               ? "bg-gradient-to-r from-blue-700 via-indigo-600 to-cyan-500"
               : "bg-gradient-to-r from-orange-600 via-red-500 to-pink-500"
@@ -246,13 +247,13 @@ export default function SubjectDashboard() {
 
               </div>
 
-              <h1 className="text-5xl font-extrabold mt-5">
+              <h1 className="text-2xl sm:text-3xl lg:text-5xl font-extrabold mt-5">
 
                 {subject.subject_name}
 
               </h1>
 
-              <p className="mt-4 text-lg opacity-90">
+              <p className="mt-4 text-sm sm:text-base lg:text-lg opacity-90">
 
                 {subject.subject_code} •{" "}
                 {subject.departments?.department_name} •{" "}
@@ -283,9 +284,9 @@ export default function SubjectDashboard() {
 
           {/* Subject Details */}
 
-          <div className="grid md:grid-cols-4 gap-5 mt-10">
+          <div className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-5">
 
-            <div className="bg-white/15 backdrop-blur-md rounded-2xl p-5">
+            <div className="bg-white/15 backdrop-blur-md rounded-2xl p-3 sm:p-4 lg:p-5">
 
               <p className="text-sm opacity-80">
 
@@ -293,7 +294,7 @@ export default function SubjectDashboard() {
 
               </p>
 
-              <h3 className="text-2xl font-bold mt-2">
+              <h3 className="text-lg sm:text-xl lg:text-2xl font-bold mt-2">
 
                 {subject.subject_type}
 
@@ -309,7 +310,7 @@ export default function SubjectDashboard() {
 
               </p>
 
-              <h3 className="text-2xl font-bold mt-2">
+              <h3 className="text-lg sm:text-xl lg:text-2xl font-bold mt-2">
 
                 {subject.credits}
 
@@ -325,7 +326,7 @@ export default function SubjectDashboard() {
 
               </p>
 
-              <h3 className="text-2xl font-bold mt-2">
+              <h3 className="text-lg sm:text-xl lg:text-2xl font-bold mt-2">
 
                 {studentCount}
 
@@ -341,7 +342,7 @@ export default function SubjectDashboard() {
 
               </p>
 
-              <h3 className="text-2xl font-bold mt-2">
+              <h3 className="text-lg sm:text-xl lg:text-2xl font-bold mt-2">
 
                 {attendancePercent}%
 
@@ -355,11 +356,11 @@ export default function SubjectDashboard() {
                 {/* Feature Cards */}
 
         <div
-  className={`grid gap-8 mt-10 ${
-    subject.subject_type === "Theory"
-      ? "xl:grid-cols-4 md:grid-cols-2"
-      : "xl:grid-cols-2 md:grid-cols-2"
-  }`}
+  className={`mt-6 grid gap-4 ${
+  subject.subject_type === "Theory"
+    ? "grid-cols-1 sm:grid-cols-2 xl:grid-cols-4"
+    : "grid-cols-1 sm:grid-cols-2 xl:grid-cols-2"
+}`}
 >
 
           {/* Attendance */}
@@ -368,15 +369,15 @@ export default function SubjectDashboard() {
             onClick={() =>
               router.push(`/teachers/attendance/${subject.id}`)
             }
-            className="group cursor-pointer rounded-3xl bg-gradient-to-br from-blue-600 via-blue-500 to-cyan-400 text-white shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 p-5"
+            className="group cursor-pointer rounded-3xl bg-gradient-to-br from-blue-600 via-blue-500 to-cyan-400 text-white shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 p-4 sm:p-5 lg:p-7"
           >
 
             <ClipboardCheck
-              size={45}
+              size={36}
               className="group-hover:rotate-12 transition-transform duration-300"
             />
 
-            <h2 className="text-2xl font-bold mt-6">
+            <h2 className="text-xl lg:text-2xl font-bold mt-6">
 
               Attendance
 
@@ -398,15 +399,15 @@ export default function SubjectDashboard() {
               onClick={() =>
                 router.push(`/teachers/marks/${subject.id}`)
               }
-              className="group cursor-pointer rounded-3xl bg-gradient-to-br from-green-600 via-emerald-500 to-lime-400 text-white shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 p-7"
+              className="group cursor-pointer rounded-3xl bg-gradient-to-br from-green-600 via-emerald-500 to-lime-400 text-white shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 p-4 sm:p-5 lg:p-7"
             >
 
               <BarChart3
-                size={55}
+                size={42}
                 className="group-hover:rotate-12 transition-transform duration-300"
               />
 
-              <h2 className="text-2xl font-bold mt-6">
+              <h2 className="text-xl lg:text-2xl font-bold mt-6">
 
                 Marks
 
@@ -430,15 +431,15 @@ export default function SubjectDashboard() {
               onClick={() =>
                 router.push(`/teachers/assignments/${subject.id}`)
               }
-              className="group cursor-pointer rounded-3xl bg-gradient-to-br from-orange-500 via-amber-500 to-yellow-400 text-white shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 p-7"
+              className="group cursor-pointer rounded-3xl bg-gradient-to-br from-orange-500 via-amber-500 to-yellow-400 text-white shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 p-4 sm:p-5 lg:p-7"
             >
 
               <FileText
-                size={55}
+                size={42}
                 className="group-hover:rotate-12 transition-transform duration-300"
               />
 
-              <h2 className="text-2xl font-bold mt-6">
+              <h2 className="text-xl lg:text-2xl font-bold mt-6">
 
                 Assignments
 
@@ -460,15 +461,15 @@ export default function SubjectDashboard() {
             onClick={() =>
               router.push(`/teachers/announcements/${subject.id}`)
             }
-            className="group cursor-pointer rounded-3xl bg-gradient-to-br from-purple-600 via-fuchsia-500 to-pink-500 text-white shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 p-7"
+            className="group cursor-pointer rounded-3xl bg-gradient-to-br from-purple-600 via-fuchsia-500 to-pink-500 text-white shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 p-4 sm:p-5 lg:p-7"
           >
 
             <Bell
-              size={45}
+              size={42}
               className="group-hover:rotate-12 transition-transform duration-300"
             />
 
-            <h2 className="text-2xl font-bold mt-6">
+            <h2 className="text-xl lg:text-2xl font-bold mt-6">
 
               Announcements
 
@@ -486,16 +487,16 @@ export default function SubjectDashboard() {
                 {/* Quick Overview */}
 
         <div
-          className={`grid gap-6 mt-10 ${
-            subject.subject_type === "Theory"
-              ? "lg:grid-cols-4"
-              : "lg:grid-cols-3"
-          }`}
+          className={`mt-8 grid gap-4 ${
+  subject.subject_type === "Theory"
+    ? "grid-cols-2 lg:grid-cols-4"
+    : "grid-cols-2 lg:grid-cols-3"
+}`}
         >
 
           {/* Students */}
 
-          <div className="bg-white rounded-3xl shadow-xl p-6">
+          <div className="bg-white rounded-3xl shadow-xl p-4 sm:p-5 lg:p-6">
 
             <div className="flex justify-between items-center">
 
@@ -507,7 +508,7 @@ export default function SubjectDashboard() {
 
                 </p>
 
-                <h2 className="text-4xl font-bold text-blue-600 mt-3">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-600 mt-3">
 
                   {studentCount}
 
@@ -526,7 +527,7 @@ export default function SubjectDashboard() {
 
           {/* Attendance */}
 
-          <div className="bg-white rounded-3xl shadow-xl p-6">
+          <div className="bg-white rounded-3xl shadow-xl p-4 sm:p-5 lg:p-6">
 
             <div className="flex justify-between items-center">
 
@@ -538,7 +539,7 @@ export default function SubjectDashboard() {
 
                 </p>
 
-                <h2 className="text-4xl font-bold text-green-600 mt-3">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-green-600 mt-3">
 
                   {attendancePercent}%
 
@@ -559,7 +560,7 @@ export default function SubjectDashboard() {
 
           {subject.subject_type === "Theory" && (
 
-            <div className="bg-white rounded-3xl shadow-xl p-6">
+            <div className="bg-white rounded-3xl shadow-xl p-4 sm:p-5 lg:p-6">
 
               <div className="flex justify-between items-center">
 
@@ -571,7 +572,7 @@ export default function SubjectDashboard() {
 
                   </p>
 
-                  <h2 className="text-4xl font-bold text-orange-500 mt-3">
+                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-orange-500 mt-3">
 
                     {assignmentCount}
 
@@ -592,7 +593,7 @@ export default function SubjectDashboard() {
 
           {/* Announcements */}
 
-          <div className="bg-white rounded-3xl shadow-xl p-6">
+          <div className="bg-white rounded-3xl shadow-xl p-4 sm:p-5 lg:p-6">
 
             <div className="flex justify-between items-center">
 
@@ -604,7 +605,7 @@ export default function SubjectDashboard() {
 
                 </p>
 
-                <h2 className="text-4xl font-bold text-purple-600 mt-3">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-purple-600 mt-3">
 
                   {announcementCount}
 
@@ -624,11 +625,11 @@ export default function SubjectDashboard() {
         </div>
                 {/* Subject Information */}
 
-        <div className="grid lg:grid-cols-2 gap-6 mt-10">
+        <div className="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-2">
 
-          <div className="bg-white rounded-3xl shadow-xl p-7">
+          <div className="bg-white rounded-3xl shadow-xl p-4 sm:p-5 lg:p-7">
 
-            <h2 className="text-2xl font-bold text-slate-800">
+            <h2 className="text-xl lg:text-2xl font-bold text-slate-800">
 
               Subject Information
 
@@ -738,7 +739,7 @@ export default function SubjectDashboard() {
 
           {/* Teacher Tips */}
 
-          <div className="bg-gradient-to-br from-indigo-600 via-blue-600 to-cyan-500 rounded-3xl shadow-xl text-white p-7">
+          <div className="bg-gradient-to-br from-indigo-600 via-blue-600 to-cyan-500 rounded-3xl shadow-xl text-white p-4 sm:p-5 lg:p-7">
 
             <h2 className="text-2xl font-bold">
 
@@ -810,65 +811,9 @@ export default function SubjectDashboard() {
 
         </div>
                 {/* Footer */}
+</div>
 
-        <footer className="mt-12 border-t border-slate-200 pt-8">
-
-          <div className="flex flex-col md:flex-row justify-between items-center gap-5">
-
-            <div>
-
-              <h3 className="text-xl font-bold text-slate-800">
-
-                GJU Smart Connect
-
-              </h3>
-
-              <p className="text-gray-500 mt-1">
-
-                Teacher Subject Dashboard
-
-              </p>
-
-            </div>
-
-            <div>
-
-              <span
-                className={`px-5 py-2 rounded-full font-semibold ${
-                  subject.subject_type === "Theory"
-                    ? "bg-blue-100 text-blue-700"
-                    : "bg-orange-100 text-orange-700"
-                }`}
-              >
-
-                {subject.subject_type}
-
-              </span>
-
-            </div>
-
-            <div className="text-right">
-
-              <p className="font-semibold text-slate-800">
-
-                {subject.subject_name}
-
-              </p>
-
-              <p className="text-gray-500">
-
-                {subject.subject_code}
-
-              </p>
-
-            </div>
-
-          </div>
-
-        </footer>
-
-      </div>
-
+  <Footer />
     </main>
 
   );

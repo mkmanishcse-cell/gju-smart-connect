@@ -161,10 +161,10 @@ export default function MySubjectsPage() {
 
     <main className="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100">
 
-      <div className="max-w-7xl mx-auto px-8 py-8">
+     <div className="mx-auto w-full max-w-7xl px-3 py-3 sm:px-5 sm:py-5 lg:px-8 lg:py-8">
                 {/* Hero Section */}
 
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-700 via-indigo-600 to-cyan-500 shadow-2xl p-8 text-white">
+        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-700 via-indigo-600 to-cyan-500 shadow-xl p-4 sm:p-6 lg:p-8 text-white">
 
           <div className="absolute -right-10 -top-10 opacity-10">
 
@@ -188,13 +188,13 @@ export default function MySubjectsPage() {
 
               </div>
 
-              <h1 className="text-5xl font-extrabold mt-5">
+              <h1 className="mt-3 text-2xl font-extrabold sm:text-3xl lg:text-5xl">
 
                 My Subjects
 
               </h1>
 
-              <p className="mt-4 text-lg text-blue-100 max-w-2xl">
+              <p className="mt-2 max-w-2xl text-sm text-blue-100 sm:text-base lg:text-lg">
 
                 View, manage and open your assigned subjects.
 
@@ -202,31 +202,21 @@ export default function MySubjectsPage() {
 
             </div>
 
-            <div className="flex gap-4">
+            <div className="flex w-full gap-2 sm:w-auto sm:flex-row">
 
-              <Link href="/teachers">
+             <Link href="/teachers" className="flex-1 sm:flex-none">
+  <div className="w-full bg-white/20 backdrop-blur-md hover:bg-white/30 transition-all duration-300 px-3 py-2 sm:px-6 sm:py-3 rounded-xl sm:rounded-2xl flex items-center justify-center gap-2 sm:gap-3 cursor-pointer text-sm sm:text-base">
+    <ArrowLeft size={18} className="sm:w-5 sm:h-5" />
+    Dashboard
+  </div>
+</Link>
 
-                <div className="bg-white/20 backdrop-blur-md hover:bg-white/30 transition-all duration-300 px-6 py-3 rounded-2xl flex items-center gap-3 cursor-pointer">
-
-                  <ArrowLeft size={20} />
-
-                  Dashboard
-
-                </div>
-
-              </Link>
-
-              <Link href="/teachers/join-subject">
-
-                <div className="bg-white text-blue-700 hover:bg-slate-100 transition-all duration-300 px-6 py-3 rounded-2xl flex items-center gap-3 shadow-lg cursor-pointer">
-
-                  <BookMarked size={20} />
-
-                  Join Subject
-
-                </div>
-
-              </Link>
+<Link href="/teachers/join-subject" className="flex-1 sm:flex-none">
+  <div className="w-full bg-white text-blue-700 hover:bg-slate-100 transition-all duration-300 px-3 py-2 sm:px-6 sm:py-3 rounded-xl sm:rounded-2xl flex items-center justify-center gap-2 sm:gap-3 shadow-lg cursor-pointer text-sm sm:text-base">
+    <BookMarked size={18} className="sm:w-5 sm:h-5" />
+    Join Subject
+  </div>
+</Link>
 
             </div>
 
@@ -234,9 +224,9 @@ export default function MySubjectsPage() {
 
           {/* Statistics */}
 
-          <div className="grid md:grid-cols-3 gap-6 mt-10">
+          <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
 
-            <div className="bg-white/15 backdrop-blur-md rounded-2xl p-6">
+            <div className="rounded-2xl bg-white/15 p-4 backdrop-blur-md sm:p-5 lg:p-6">
 
               <p className="text-sm opacity-80">
 
@@ -244,7 +234,7 @@ export default function MySubjectsPage() {
 
               </p>
 
-              <h2 className="text-5xl font-bold mt-3">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-3">
 
                 {subjects.length}
 
@@ -252,7 +242,7 @@ export default function MySubjectsPage() {
 
             </div>
 
-            <div className="bg-white/15 backdrop-blur-md rounded-2xl p-6">
+            <div className="rounded-2xl bg-white/15 p-4 backdrop-blur-md sm:p-5 lg:p-6">
 
               <p className="text-sm opacity-80">
 
@@ -260,7 +250,7 @@ export default function MySubjectsPage() {
 
               </p>
 
-              <h2 className="text-5xl font-bold mt-3">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-3">
 
                 {
                   subjects.filter(
@@ -272,7 +262,7 @@ export default function MySubjectsPage() {
 
             </div>
 
-            <div className="bg-white/15 backdrop-blur-md rounded-2xl p-6">
+            <div className="rounded-2xl bg-white/15 p-4 backdrop-blur-md sm:p-5 lg:p-6">
 
               <p className="text-sm opacity-80">
 
@@ -280,7 +270,7 @@ export default function MySubjectsPage() {
 
               </p>
 
-              <h2 className="text-5xl font-bold mt-3">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-3">
 
                 {
                   subjects.filter(
@@ -298,7 +288,7 @@ export default function MySubjectsPage() {
 
         {/* Search */}
 
-        <div className="bg-white rounded-3xl shadow-xl p-6 mt-8">
+        <div className="mt-5 rounded-2xl bg-white p-3 shadow-lg sm:p-5 lg:p-6">
 
           <div className="relative">
 
@@ -312,7 +302,7 @@ export default function MySubjectsPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search by Subject Name or Subject Code..."
-              className="w-full rounded-2xl border border-slate-300 py-4 pl-14 pr-4 outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-100 transition"
+              className="w-full rounded-2xl border border-slate-300 py-3 pl-11 sm:pl-14 pr-4 outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-100 transition"
             />
 
           </div>
@@ -321,17 +311,17 @@ export default function MySubjectsPage() {
 
         {/* Subject Cards */}
 
-        <div className="grid xl:grid-cols-3 lg:grid-cols-2 gap-6 mt-8">
+        <div className="mt-5 grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3">
                     {filteredSubjects.length === 0 ? (
 
-            <div className="col-span-full bg-white rounded-3xl shadow-xl p-14 text-center">
+            <div className="col-span-full bg-white rounded-3xl shadow-xl p-6 sm:p-10 lg:p-14 text-center">
 
               <BookOpen
                 size={70}
                 className="mx-auto text-slate-400"
               />
 
-              <h2 className="text-3xl font-bold mt-6 text-slate-800">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold mt-6 text-slate-800">
 
                 No Subjects Found
 
@@ -369,9 +359,9 @@ export default function MySubjectsPage() {
 
         {/* Dashboard Summary */}
 
-        <div className="grid md:grid-cols-3 gap-6 mt-12">
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
 
-          <div className="rounded-3xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-7 shadow-xl">
+          <div className="rounded-3xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-5 lg:p-7 shadow-xl">
 
             <h3 className="text-lg font-semibold">
 
@@ -393,7 +383,7 @@ export default function MySubjectsPage() {
 
           </div>
 
-          <div className="rounded-3xl bg-gradient-to-r from-green-600 to-emerald-500 text-white p-7 shadow-xl">
+          <div className="rounded-3xl bg-gradient-to-r from-green-600 to-emerald-500 text-white p-5 lg:p-5 lg:p-7 shadow-xl">
 
             <h3 className="text-lg font-semibold">
 
@@ -419,7 +409,7 @@ export default function MySubjectsPage() {
 
           </div>
 
-          <div className="rounded-3xl bg-gradient-to-r from-orange-500 to-red-500 text-white p-7 shadow-xl">
+          <div className="rounded-3xl bg-gradient-to-r from-orange-500 to-red-500 text-white p-5 lg:p-7 shadow-xl">
 
             <h3 className="text-lg font-semibold">
 
@@ -448,7 +438,7 @@ export default function MySubjectsPage() {
         </div>
                 {/* Footer */}
 
-        <footer className="mt-14 rounded-3xl bg-white shadow-xl p-8">
+        <footer className="mt-8 rounded-2xl bg-white p-5 shadow-lg lg:p-8">
 
           <div className="flex flex-col lg:flex-row justify-between items-center gap-6">
 
@@ -468,7 +458,7 @@ export default function MySubjectsPage() {
 
             </div>
 
-            <div className="flex gap-8 text-center">
+            <div className="grid w-full grid-cols-3 gap-3 text-center lg:flex lg:w-auto lg:gap-8">
 
               <div>
 

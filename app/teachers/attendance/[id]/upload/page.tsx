@@ -390,56 +390,61 @@ export default function UploadAttendancePage() {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100">
-      <div className="mx-auto max-w-7xl px-8 py-8">
+     <div className="mx-auto max-w-7xl px-3 py-3 sm:px-5 sm:py-5 lg:px-8 lg:py-8">
+
         {/* ================= HEADER ================= */}
 
-        <div className="mb-10 flex items-center justify-between">
-          <div>
-            <h1 className="text-4xl font-bold text-slate-800">
-              Upload Attendance
-            </h1>
+       <div className="mb-6 flex items-start justify-between gap-2 sm:mb-10 sm:flex-row sm:items-center">   <div>
+            <div className="flex-1">
+  <h1 className="text-xl font-bold text-slate-800 sm:text-3xl lg:text-4xl">
+    Upload Attendance
+  </h1>
 
-            <p className="mt-2 text-slate-500">
-              {subject?.subject_name} ({subject?.subject_code})
-            </p>
-          </div>
+  <p className="mt-1 text-xs text-slate-500 sm:mt-2 sm:text-base">
+    {subject?.subject_name} ({subject?.subject_code})
+  </p>
+</div>
+</div>
 
           <Link
-            href={`/teachers/attendance/${subjectId}`}
-            className="flex items-center gap-2 rounded-2xl bg-blue-600 px-6 py-3 font-semibold text-white shadow-lg hover:bg-blue-700"
-          >
-            <ArrowLeft size={20} />
-            Back to Attendance
-          </Link>
+  href={`/teachers/attendance/${subjectId}`}
+  className="flex shrink-0 items-center justify-center gap-1 rounded-lg bg-blue-600 px-3 py-2 text-xs font-medium text-white shadow-lg transition hover:bg-blue-700 sm:w-auto sm:gap-2 sm:rounded-xl sm:px-6 sm:py-3 sm:text-base"
+>
+  <ArrowLeft size={16} className="sm:w-5 sm:h-5" />
+  Back
+</Link>
         </div>
 
         {/* ================= HERO ================= */}
 
-        <div className="overflow-hidden rounded-3xl bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-700 p-8 text-white shadow-2xl">
-          <div className="flex items-center justify-between">
+        <div className="overflow-hidden rounded-2xl bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-700 p-4 text-white shadow-xl sm:p-6 lg:p-8">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <div className="flex items-center gap-3">
                 <FileSpreadsheet size={30} />
                 <span className="text-lg font-semibold">Excel Upload</span>
               </div>
 
-              <h2 className="mt-6 text-5xl font-extrabold">
+              <h2 className="mt-4 text-2xl font-extrabold sm:text-3xl lg:mt-6 lg:text-5xl">
                 Attendance Upload
               </h2>
 
-              <p className="mt-4 max-w-2xl text-lg text-blue-100">
+              <p className="mt-2 max-w-2xl text-sm text-blue-100 sm:text-base lg:text-lg">
                 Upload attendance for multiple dates in one file — first
                 column Roll No, remaining columns as dates.
               </p>
             </div>
 
-            <UploadCloud size={170} className="opacity-20" />
+            <UploadCloud
+  size={120}
+  className="mx-auto opacity-20 lg:mx-0 lg:h-[170px] lg:w-[170px]"
+/>
           </div>
         </div>
 
         {/* ================= CARD ================= */}
 
-        <div className="mt-10 rounded-3xl bg-white p-8 shadow-xl">
+        <div className="mt-6 rounded-2xl bg-white p-4 shadow-lg sm:p-6 lg:mt-10 lg:p-8">
           <input
             ref={inputRef}
             hidden
@@ -455,13 +460,13 @@ export default function UploadAttendancePage() {
               setDragging(true);
             }}
             onDragLeave={() => setDragging(false)}
-            className={`rounded-3xl border-2 border-dashed p-12 text-center transition ${
+            className={`rounded-3xl border-2 border-dashed p-6 sm:p-8 lg:p-12 text-center transition ${
               dragging ? "border-blue-600 bg-blue-50" : "border-slate-300"
             }`}
           >
-            <UploadCloud size={70} className="mx-auto text-blue-600" />
+            <UploadCloud size={50} className="mx-auto text-blue-600" />
 
-            <h2 className="mt-6 text-3xl font-bold">
+            <h2 className="mt-6 text-xl sm:text-2xl lg:text-3xl font-bold">
               Drag & Drop Excel File
             </h2>
 
@@ -470,12 +475,11 @@ export default function UploadAttendancePage() {
             <button
               type="button"
               onClick={chooseFile}
-              className="mt-8 rounded-2xl bg-blue-600 px-8 py-4 font-semibold text-white shadow-lg hover:bg-blue-700"
-            >
+              className="mt-6 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-medium text-white shadow-lg hover:bg-blue-700 sm:px-8 sm:py-4 sm:text-base">
               Choose Excel File
             </button>
 
-            <div className="mt-8 flex justify-center gap-4">
+            <div className="mt-6 flex flex-wrap justify-center gap-2">
               <span className="rounded-full bg-green-100 px-4 py-2 text-green-700">
                 XLSX
               </span>
@@ -530,11 +534,11 @@ export default function UploadAttendancePage() {
 
           {/* BUTTONS */}
 
-          <div className="mt-8 flex justify-center gap-5">
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
             <Link
               href="/sample-attendance.xlsx"
               download
-              className="flex items-center gap-2 rounded-xl border px-6 py-3 font-semibold hover:bg-slate-50"
+              className="flex items-center gap-2 rounded-xl border px-4 py-2.5 text-sm sm:px-6 sm:py-3 sm:text-base font-semibold hover:bg-slate-50"
             >
               <Download size={18} />
               Download Sample
@@ -544,7 +548,7 @@ export default function UploadAttendancePage() {
               type="button"
               onClick={uploadAttendance}
               disabled={!file || uploading || parsedRows.length === 0}
-              className={`rounded-xl px-8 py-3 font-semibold text-white transition ${
+              className={`rounded-xl px-4 py-2.5 text-sm sm:px-6 sm:py-3 sm:text-base font-semibold text-white transition ${
                 file && !uploading && parsedRows.length > 0
                   ? "bg-blue-600 hover:bg-blue-700"
                   : "cursor-not-allowed bg-slate-400"
@@ -559,8 +563,8 @@ export default function UploadAttendancePage() {
 
           {parsedRows.length > 0 && (
             <div className="mt-10">
-              <div className="mb-5 flex items-center justify-between">
-                <h2 className="text-2xl font-bold">Excel Preview</h2>
+              <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <h2 className="text-xl font-bold sm:text-2xl">Excel Preview</h2>
 
                 <div className="rounded-full bg-blue-100 px-4 py-2 font-semibold text-blue-700">
                   {parsedRows.length} Students × {dateColumns.length} Dates
@@ -571,11 +575,11 @@ export default function UploadAttendancePage() {
                 <table className="min-w-full">
                   <thead className="bg-slate-100">
                     <tr>
-                      <th className="p-3 text-left">Roll No</th>
+                      <th className="px-2 py-2 text-xs sm:p-3 sm:text-sm text-left">Roll No</th>
                       {dateColumns.map((column) => (
                         <th
                           key={column.date}
-                          className="p-3 text-center whitespace-nowrap"
+                          className="px-2 py-2 text-xs sm:p-3 sm:text-sm text-center whitespace-nowrap"
                         >
                           {column.date}
                         </th>
@@ -586,11 +590,11 @@ export default function UploadAttendancePage() {
                   <tbody>
                     {parsedRows.slice(0, 5).map((row, index) => (
                       <tr key={index} className="border-t">
-                        <td className="p-3 font-semibold">{row.rollNo}</td>
+                        <td className="px-2 py-2 text-xs sm:p-3 sm:text-sm font-semibold">{row.rollNo}</td>
                         {dateColumns.map((column) => (
                           <td
                             key={column.date}
-                            className="p-3 text-center"
+                            className="px-2 py-2 text-xs sm:p-3 sm:text-sm text-center"
                           >
                             {row.statuses[column.date] === "P" && (
                               <span className="rounded-full bg-green-100 px-3 py-1 font-semibold text-green-700">
@@ -640,20 +644,20 @@ export default function UploadAttendancePage() {
           {/* ================= SUMMARY ================= */}
 
           {(successCount > 0 || failedRows.length > 0) && (
-            <div className="mt-10 rounded-2xl border bg-slate-50 p-6">
+            <div className="mt-8 rounded-2xl border bg-slate-50 p-4 sm:p-6">
               <h2 className="text-xl font-bold">Upload Summary</h2>
 
-              <div className="mt-5 flex gap-10">
+              <div className="mt-5 grid grid-cols-2 gap-4">
                 <div>
                   <p className="font-semibold text-green-600">
                     Records Saved
                   </p>
-                  <h3 className="text-4xl font-bold">{successCount}</h3>
+                  <h3 className="text-3xl font-bold">{successCount}</h3>
                 </div>
 
                 <div>
                   <p className="font-semibold text-red-600">Issues</p>
-                  <h3 className="text-4xl font-bold">{failedRows.length}</h3>
+                  <h3 className="text-3xl font-bold">{failedRows.length}</h3>
                 </div>
               </div>
 
@@ -671,7 +675,7 @@ export default function UploadAttendancePage() {
                 </div>
               )}
 
-              <div className="mt-6 flex gap-4">
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <button
                   type="button"
                   onClick={() => {

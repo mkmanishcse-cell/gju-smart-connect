@@ -237,11 +237,9 @@ export default function AttendanceRegisterPage() {
 
   }
 
-  function handlePrint() {
-
-    window.print();
-
-  }
+ function handlePrint() {
+  exportPDF();
+}
 
   function exportExcel() {
 
@@ -441,21 +439,20 @@ export default function AttendanceRegisterPage() {
 
         {/* Header */}
 
-        <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+      <div className="mb-4 flex flex-col gap-3 sm:mb-6 sm:flex-row sm:items-center sm:justify-between">
 
-          <div className="flex items-center gap-3">
+       <div className="flex w-full items-center justify-between gap-3">
 
             <button
               onClick={() => router.back()}
-              className="flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-3 font-semibold shadow hover:bg-slate-50"
-            >
+              className="flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-medium shadow hover:bg-slate-50 sm:rounded-xl sm:px-5 sm:py-3 sm:text-base sm:font-semibold">
               <ArrowLeft size={18} />
               Back
             </button>
 
             <div>
 
-              <h1 className="text-3xl font-bold text-slate-800">
+              <h1 className="text-xl font-bold text-slate-800 sm:text-3xl">
                 Attendance Register
               </h1>
 
@@ -467,28 +464,25 @@ export default function AttendanceRegisterPage() {
 
           </div>
 
-          <div className="flex flex-wrap gap-3">
+          <div className="flex w-full flex-wrap justify-end gap-2 sm:w-auto sm:gap-3">
 
             <button
               onClick={handlePrint}
-              className="flex items-center gap-2 rounded-xl bg-slate-800 px-5 py-3 font-semibold text-white hover:bg-slate-900"
-            >
+              className="rounded-lg px-3 py-2 text-xs font-medium sm:rounded-xl sm:px-5 sm:py-3 sm:text-base sm:font-semibold">
               <Printer size={18} />
               Print
             </button>
 
             <button
               onClick={exportPDF}
-              className="flex items-center gap-2 rounded-xl bg-red-600 px-5 py-3 font-semibold text-white hover:bg-red-700"
-            >
+              className="rounded-lg px-3 py-2 text-xs font-medium sm:rounded-xl sm:px-5 sm:py-3 sm:text-base sm:font-semibold">
               <FileText size={18} />
               Export PDF
             </button>
 
             <button
               onClick={exportExcel}
-              className="flex items-center gap-2 rounded-xl bg-green-600 px-5 py-3 font-semibold text-white hover:bg-green-700"
-            >
+              className="rounded-lg px-3 py-2 text-xs font-medium sm:rounded-xl sm:px-5 sm:py-3 sm:text-base sm:font-semibold">
               <FileSpreadsheet size={18} />
               Export Excel
             </button>
@@ -511,7 +505,7 @@ export default function AttendanceRegisterPage() {
 
           </div>
 
-          <div className="grid gap-6 p-6 md:grid-cols-4">
+          <div className="grid gap-4 p-4 md:grid-cols-4 md:p-6">
 
             <div>
 
@@ -587,19 +581,19 @@ export default function AttendanceRegisterPage() {
 
           <div className="overflow-x-auto">
 
-            <table className="min-w-max border-collapse">
+           <table className="min-w-[700px] border-collapse sm:min-w-max">
 
               <thead className="bg-slate-100">
 
                 <tr>
 
-                  <th className="sticky left-0 z-20 border bg-slate-100 px-5 py-3">
+                  <th className="sticky left-0 z-20 border bg-slate-100 px-2 py-2 text-xs sm:px-5 sm:py-3 sm:text-sm">
 
                     Roll No
 
                   </th>
 
-                  <th className="sticky left-[130px] z-20 border bg-slate-100 px-5 py-3">
+                  <th className="sticky left-[130px] z-20 border bg-slate-100 px-2 py-2 text-xs sm:px-5 sm:py-3 sm:text-sm">
 
                     Student Name
 
@@ -656,7 +650,7 @@ export default function AttendanceRegisterPage() {
         {student.roll_no}
       </td>
 
-      <td className="sticky left-[130px] z-10 border bg-white px-5 py-3 whitespace-nowrap">
+      <td className="sticky left-[130px] z-10 border bg-white px-5 py-3whitespace-nowrap">
         {student.student_name}
       </td>
 
@@ -673,13 +667,13 @@ export default function AttendanceRegisterPage() {
 
             {status === "P" ? (
 
-              <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-green-100 font-bold text-green-700">
+              <span className="inline-flex h-6 w-6 text-[10px] sm:h-8 sm:w-8 sm:text-base items-center justify-center rounded-full bg-green-100 font-bold text-green-700">
                 P
               </span>
 
             ) : status === "A" ? (
 
-              <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-red-100 font-bold text-red-700">
+              <span className="inline-flex h-6 w-6 text-[10px] sm:h-8 sm:w-8 sm:text-base items-center justify-center rounded-full bg-red-100 font-bold text-red-700">
                 A
               </span>
 
