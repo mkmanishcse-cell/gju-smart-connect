@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-
+import Footer from "@/components/common/Footer";
 import { supabase } from "@/lib/supabase";
 
 import {
@@ -359,7 +359,9 @@ export default function MySubjectsPage() {
 
         {/* Dashboard Summary */}
 
-        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Dashboard Summary */}
+
+<div className="hidden md:grid gap-4 mt-8 md:grid-cols-2 lg:grid-cols-3">
 
           <div className="rounded-3xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-5 lg:p-7 shadow-xl">
 
@@ -383,7 +385,7 @@ export default function MySubjectsPage() {
 
           </div>
 
-          <div className="rounded-3xl bg-gradient-to-r from-green-600 to-emerald-500 text-white p-5 lg:p-5 lg:p-7 shadow-xl">
+          <div className="rounded-3xl bg-gradient-to-r from-green-600 to-emerald-500 text-white p-5 lg:p-7 shadow-xl">
 
             <h3 className="text-lg font-semibold">
 
@@ -438,114 +440,8 @@ export default function MySubjectsPage() {
         </div>
                 {/* Footer */}
 
-        <footer className="mt-8 rounded-2xl bg-white p-5 shadow-lg lg:p-8">
-
-          <div className="flex flex-col lg:flex-row justify-between items-center gap-6">
-
-            <div>
-
-              <h2 className="text-2xl font-bold text-slate-800">
-
-                GJU Smart Connect
-
-              </h2>
-
-              <p className="text-gray-500 mt-2">
-
-                Teacher Subject Management Portal
-
-              </p>
-
-            </div>
-
-            <div className="grid w-full grid-cols-3 gap-3 text-center lg:flex lg:w-auto lg:gap-8">
-
-              <div>
-
-                <h3 className="text-3xl font-bold text-blue-600">
-
-                  {subjects.length}
-
-                </h3>
-
-                <p className="text-gray-500">
-
-                  Joined Subjects
-
-                </p>
-
-              </div>
-
-              <div>
-
-                <h3 className="text-3xl font-bold text-green-600">
-
-                  {
-                    subjects.filter(
-                      (s) => s.subject_type === "Theory"
-                    ).length
-                  }
-
-                </h3>
-
-                <p className="text-gray-500">
-
-                  Theory
-
-                </p>
-
-              </div>
-
-              <div>
-
-                <h3 className="text-3xl font-bold text-orange-500">
-
-                  {
-                    subjects.filter(
-                      (s) => s.subject_type === "Practical"
-                    ).length
-                  }
-
-                </h3>
-
-                <p className="text-gray-500">
-
-                  Practical
-
-                </p>
-
-              </div>
-
-            </div>
-
-            <div className="text-right">
-
-              <p className="text-gray-500">
-
-                © 2026 All Rights Reserved
-
-              </p>
-
-              <p className="mt-2">
-
-                Developed By
-
-                <span className="font-bold text-blue-600">
-
-                  {" "}Manish Kushwaha
-
-                </span>
-
-              </p>
-
-            </div>
-
-          </div>
-
-        </footer>
-
       </div>
-
+<Footer />
     </main>
 
   );

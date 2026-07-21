@@ -439,20 +439,20 @@ export default function AttendanceRegisterPage() {
 
         {/* Header */}
 
-      <div className="mb-4 flex flex-col gap-3 sm:mb-6 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mb-6 rounded-3xl bg-gradient-to-r from-cyan-400 to-sky-500 px-8 py-6 shadow-xl max-sm:mb-4 max-sm:px-4 max-sm:py-4">
 
-       <div className="flex w-full items-center justify-between gap-3">
+<div className="flex w-full items-center justify-between max-sm:flex-col max-sm:items-start max-sm:gap-3">
 
             <button
               onClick={() => router.back()}
-              className="flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-medium shadow hover:bg-slate-50 sm:rounded-xl sm:px-5 sm:py-3 sm:text-base sm:font-semibold">
-              <ArrowLeft size={18} />
+             className="flex items-center gap-2 rounded-2xl border border-slate-300 px-6 py-3 bg-cyan-300 font-semibold text-slate-800 shadow-lg transition hover:bg-cyan-200 max-sm:rounded-lg max-sm:px-3 max-sm:py-2 max-sm:text-xs">
+                 <ArrowLeft size={18} />
               Back
             </button>
 
             <div>
 
-              <h1 className="text-xl font-bold text-slate-800 sm:text-3xl">
+              <h1 className="text-3xl font-bold text-white max-sm:text-xl">
                 Attendance Register
               </h1>
 
@@ -493,9 +493,9 @@ export default function AttendanceRegisterPage() {
 
         {/* Subject Card */}
 
-        <div className="mb-6 rounded-3xl bg-white shadow">
+  <div className="mb-6 rounded-3xl border border-blue-200 bg-gradient-to-r from-blue-50 to-white shadow-lg">
 
-          <div className="border-b px-6 py-5">
+  <div className="border-b border-blue-100 bg-blue-50 px-6 py-5">
 
             <h2 className="text-2xl font-bold">
 
@@ -579,21 +579,24 @@ export default function AttendanceRegisterPage() {
 
         <div className="overflow-hidden rounded-3xl bg-white shadow">
 
-          <div className="overflow-x-auto">
+          <div className="max-h-[75vh] overflow-auto rounded-2xl">
+<h2 className="text-2xl font-bold mt-2 mb-2 ms-2">
 
+                Attendance Table
+
+            </h2>
            <table className="min-w-[700px] border-collapse sm:min-w-max">
 
-              <thead className="bg-slate-100">
+              <thead className="sticky top-0 z-30 bg-slate-100 shadow-sm">
 
                 <tr>
 
-                  <th className="sticky left-0 z-20 border bg-slate-100 px-2 py-2 text-xs sm:px-5 sm:py-3 sm:text-sm">
-
+                 <th className="sticky left-0 top-0 z-40 w-[110px] border bg-slate-100 px-3 py-3 text-sm font-semibold whitespace-nowrap">
                     Roll No
 
                   </th>
 
-                  <th className="sticky left-[130px] z-20 border bg-slate-100 px-2 py-2 text-xs sm:px-5 sm:py-3 sm:text-sm">
+                  <th className="border px-3 py-3 text-left whitespace-nowrap">
 
                     Student Name
 
@@ -645,12 +648,11 @@ export default function AttendanceRegisterPage() {
       key={student.id}
       className="hover:bg-slate-50"
     >
-
-      <td className="sticky left-0 z-10 border bg-white px-5 py-3 font-medium whitespace-nowrap">
+<td className="sticky left-0 z-20 w-[110px] border bg-white px-3 py-3 font-medium whitespace-nowrap">
         {student.roll_no}
       </td>
 
-      <td className="sticky left-[130px] z-10 border bg-white px-5 py-3whitespace-nowrap">
+  <td className="border px-3 py-3 whitespace-nowrap">
         {student.student_name}
       </td>
 
