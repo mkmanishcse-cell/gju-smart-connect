@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
-
+import Footer from "@/components/common/Footer";
 import {
   Search,
   ArrowLeft,
@@ -316,106 +316,8 @@ export default function JoinSubjectPage() {
         </div>
 
 
-        <footer className="mt-8 rounded-2xl bg-white p-4 shadow-lg sm:p-5 lg:p-6">
-
-          <div className="flex flex-col items-center justify-between gap-4 text-center lg:flex-row lg:text-left">
-
-            <div>
-
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-800">
-
-                GJU Smart Connect
-
-              </h2>
-
-              <p className="text-xs sm:text-sm text-gray-500 mt-1">
-
-                Teacher Subject Management Portal
-
-              </p>
-
-            </div>
-
-            <div className="grid w-full grid-cols-3 gap-3 text-center lg:flex lg:w-auto lg:gap-8">
-
-              <div>
-
-                <h3 className="text-xl sm:text-2xl font-bold text-blue-600">
-
-                  {subjects.length}
-
-                </h3>
-
-                <p className="text-xs sm:text-sm text-gray-500">
-
-                  Subjects
-
-                </p>
-
-              </div>
-
-              <div>
-
-                <h3 className="text-xl sm:text-2xl font-bold text-green-600">
-
-                  {joinedSubjects.length}
-
-                </h3>
-
-                <p className="text-xs sm:text-sm text-gray-500">
-
-                  Joined
-
-                </p>
-
-              </div>
-
-              <div>
-
-                <h3 className="text-xl sm:text-2xl font-bold text-orange-500">
-
-                  {subjects.length - joinedSubjects.length}
-
-                </h3>
-
-                <p className="text-xs sm:text-sm text-gray-500">
-
-                  Available
-
-                </p>
-
-              </div>
-
-            </div>
-
-            <div className="text-center lg:text-right">
-
-              <p className="text-xs sm:text-sm text-gray-500">
-
-                © 2026 All Rights Reserved
-
-              </p>
-
-              <p className="mt-1 text-sm">
-
-                Developed By
-
-                <span className="font-bold text-blue-600">
-
-                  {" "}Manish Kushwaha
-
-                </span>
-
-              </p>
-
-            </div>
-
-          </div>
-
-        </footer>
-
       </div>
-
+<Footer />
     </main>
 
   );
