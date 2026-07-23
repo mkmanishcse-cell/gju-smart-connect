@@ -2,7 +2,14 @@
 
 export default function Footer() {
   return (
-    <footer className="mt-10 border-t border-blue-200 bg-gradient-to-r from-blue-100 via-white to-indigo-100">
+    <footer className="relative mt-10 overflow-hidden border-t border-blue-200 bg-gradient-to-r from-blue-100 via-white to-indigo-100">
+      
+      {/* Left fade */}
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-blue-100 via-blue-100/70 to-transparent sm:hidden" />
+      
+      {/* Right fade */}
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-indigo-100 to-transparent sm:hidden" />
+
       <div className="mx-auto max-w-7xl px-0 py-5 text-center sm:px-6 sm:py-6">
         <p className="text-xs font-medium tracking-wide text-slate-600 whitespace-nowrap sm:text-sm">
           © 2026{" "}

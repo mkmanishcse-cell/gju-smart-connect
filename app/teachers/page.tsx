@@ -66,10 +66,10 @@ export default function TeacherDashboard() {
     }
   }
 
-  return (
-    <ProtectedRoute role="teacher">
-      <main className="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100">
-        <div className="mx-auto max-w-7xl px-3 py-4 sm:px-8 sm:py-8">
+return (
+  <ProtectedRoute role="teacher">
+    <main className="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100">
+      <div className="mx-auto max-w-7xl px-3 py-4 sm:px-8 sm:py-8">
           {/* ================= HERO ================= */}
           <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-700 via-indigo-600 to-cyan-500 p-4 text-white shadow-xl sm:rounded-3xl sm:p-8 sm:shadow-2xl">
             <div className="absolute -right-12 -top-12 hidden opacity-10 sm:block">
@@ -247,9 +247,9 @@ export default function TeacherDashboard() {
               )}
             </div>
           </div>
-
+</div>
           <Footer />
-        </div>
+        
       </main>
     </ProtectedRoute>
   );

@@ -106,7 +106,7 @@ export default function AppSidebar({
         aria-label={`${title} sidebar navigation`}
         className={`
           fixed inset-y-0 left-0 z-50
-          flex h-screen w-72 max-w-[85vw]
+          flex h-dvh w-72 max-w-[85vw]
           flex-col overflow-hidden
           bg-slate-800 shadow-2xl
           transition-transform duration-300
@@ -157,7 +157,9 @@ export default function AppSidebar({
         </div>
 
         {/* Footer */}
-        <SidebarFooter onLogout={logout} />
+        <div className="shrink-0">
+          <SidebarFooter onLogout={logout} />
+        </div>
       </aside>
     </>
   );

@@ -42,23 +42,23 @@ const features = [
 
 export default function Features() {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-12 sm:py-24 bg-white">
 
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
-        <div className="text-center mb-16">
+        <div className="text-center mb-8 sm:mb-16">
 
-          <h2 className="text-5xl font-bold text-slate-900">
+          <h2 className="text-2xl sm:text-5xl font-bold text-slate-900">
             Why GJU Smart Connect?
           </h2>
 
-          <p className="mt-4 text-gray-500 text-lg">
+          <p className="mt-2 sm:mt-4 text-gray-500 text-sm sm:text-lg">
             Everything you need in one modern academic platform.
           </p>
 
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
 
           {features.map((feature) => {
 
@@ -67,19 +67,19 @@ export default function Features() {
             return (
               <div
                 key={feature.title}
-                className="rounded-3xl border border-slate-200 bg-slate-50 p-8 hover:bg-white hover:shadow-xl transition-all duration-300"
+                className="rounded-2xl sm:rounded-3xl border border-slate-200 bg-slate-50 p-5 sm:p-8 hover:bg-white hover:shadow-xl transition-all duration-300"
               >
-                <div className="w-16 h-16 rounded-2xl bg-blue-100 flex items-center justify-center">
+                <div className="w-11 h-11 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-blue-100 flex items-center justify-center">
 
-                  <Icon className="w-8 h-8 text-blue-700" />
+                  <Icon className="w-5 h-5 sm:w-8 sm:h-8 text-blue-700" />
 
                 </div>
 
-                <h3 className="mt-6 text-2xl font-bold text-slate-800">
+                <h3 className="mt-3 sm:mt-6 text-base sm:text-2xl font-bold text-slate-800">
                   {feature.title}
                 </h3>
 
-                <p className="mt-4 text-gray-600 leading-7">
+                <p className="mt-2 sm:mt-4 text-sm sm:text-base text-gray-600 leading-5 sm:leading-7">
                   {feature.description}
                 </p>
 
