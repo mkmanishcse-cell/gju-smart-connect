@@ -260,7 +260,7 @@ export default function TeacherDashboard() {
               </div>
 
             </div>
-
+</div>
           </div>
 
         </div>
@@ -320,37 +320,39 @@ export default function TeacherDashboard() {
 
 
 {/* ================= RECENT ACTIVITY ================= */}
+{/* Header */}
+<div className="relative border-b border-slate-200 p-5 sm:p-8 mt-4">
 
-<div className="mt-8 sm:mt-10 rounded-2xl sm:rounded-3xl bg-white p-5 sm:p-8 shadow-xl">
+  {/* View All Button */}
+  <Link
+    href="/teachers/recent-activity"
+    className="absolute right-5 top-5 inline-flex h-8 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 px-3 text-xs font-semibold text-slate-700 shadow-sm transition-all duration-300 hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700 hover:shadow-md sm:right-8 sm:top-8"
+  >
+    View All
+  </Link>
 
-  <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+  {/* Left Content */}
+  <div className="flex items-start gap-3 pr-24">
+
+   
 
     <div>
-
-      <h2 className="text-xl sm:text-2xl font-bold text-slate-800">
-
+      <h2 className="text-xl font-bold text-slate-800 sm:text-2xl">
         Recent Activity
-
       </h2>
 
-      <p className="mt-1 sm:mt-2 text-sm sm:text-base text-slate-500">
-
+      <p className="mt-1 text-sm text-slate-500 sm:text-base">
         Latest activities from your teaching portal.
-
       </p>
-
     </div>
 
-    <Link
-      href="/teachers/recent-activity"
-      className="inline-block rounded-xl bg-slate-100 px-4 py-2 text-sm font-semibold hover:bg-slate-200 sm:px-5"
-    >
-
-      View All
-
-    </Link>
-
   </div>
+
+
+
+  {/* Content */}
+
+  <div className="p-5 sm:p-8">
 
   {loading ? (
 

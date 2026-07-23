@@ -72,7 +72,7 @@ export default function ViewMarksRegisterPage() {
 
       setSubjectCode(subject.subject_code);
 
-      const { data: studentData } = await supabase
+      const { data: studentData, error: studentsError } = await supabase
         .from("students")
         .select("*")
         .eq("department_id", subject.department_id)
@@ -80,17 +80,40 @@ export default function ViewMarksRegisterPage() {
         .eq("semester_id", subject.semester_id)
         .order("roll_no");
 
-      const list: Student[] = [];
+      if (studentsError || !studentData) {
+        console.log(studentsError);
+        return;
+      }
 
-      for (const student of studentData || []) {
-        const { data: mark } = await supabase
+      const studentIds = studentData.map((s) => s.id);
+
+      // Fetch ALL marks for these students + this subject in ONE query
+      // instead of one query per student (this was the main slowdown).
+      let marksData: any[] = [];
+
+      if (studentIds.length > 0) {
+        const { data: marksResult, error: marksError } = await supabase
           .from("marks")
           .select("*")
-          .eq("student_id", student.id)
           .eq("subject_id", subjectId)
-          .maybeSingle();
+          .in("student_id", studentIds);
 
-        list.push({
+        if (marksError) {
+          console.log(marksError);
+        } else {
+          marksData = marksResult || [];
+        }
+      }
+
+      const marksMap = new Map<string, any>();
+      for (const mark of marksData) {
+        marksMap.set(mark.student_id, mark);
+      }
+
+      const list: Student[] = studentData.map((student) => {
+        const mark = marksMap.get(student.id);
+
+        return {
           id: student.id,
           roll_no: student.roll_no,
           student_name: student.student_name,
@@ -101,8 +124,8 @@ export default function ViewMarksRegisterPage() {
           assignment_marks: mark?.assignment_marks || 0,
           attendance_marks: mark?.attendance_marks || 0,
           total_marks: mark?.total_marks || 0,
-        });
-      }
+        };
+      });
 
       setStudents(list);
     } finally {

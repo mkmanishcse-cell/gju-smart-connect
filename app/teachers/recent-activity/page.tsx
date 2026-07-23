@@ -72,7 +72,7 @@ export default function TeacherRecentActivityPage() {
         return (
           <Bell
             className="text-blue-600"
-            size={24}
+            size={22}
           />
         );
 
@@ -81,7 +81,7 @@ export default function TeacherRecentActivityPage() {
         return (
           <FileText
             className="text-pink-600"
-            size={24}
+            size={22}
           />
         );
 
@@ -90,7 +90,7 @@ export default function TeacherRecentActivityPage() {
         return (
           <ClipboardCheck
             className="text-green-600"
-            size={24}
+            size={22}
           />
         );
 
@@ -99,7 +99,7 @@ export default function TeacherRecentActivityPage() {
         return (
           <BarChart3
             className="text-purple-600"
-            size={24}
+            size={22}
           />
         );
 
@@ -108,7 +108,7 @@ export default function TeacherRecentActivityPage() {
         return (
           <BookOpen
             className="text-orange-500"
-            size={24}
+            size={22}
           />
         );
 
@@ -150,13 +150,13 @@ export default function TeacherRecentActivityPage() {
 
   return (
 
-    <div className="p-8">
+    <div className="p-4 sm:p-6 md:p-8">
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-3 sm:gap-4">
 
         <Link
           href="/teachers"
-          className="rounded-lg border p-2 hover:bg-slate-100"
+          className="rounded-lg border p-2 hover:bg-slate-100 shrink-0"
         >
 
           <ArrowLeft size={20} />
@@ -165,13 +165,13 @@ export default function TeacherRecentActivityPage() {
 
         <div>
 
-          <h1 className="text-4xl font-bold text-slate-800">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-800">
 
             Recent Activity
 
           </h1>
 
-          <p className="mt-2 text-slate-500">
+          <p className="mt-1 sm:mt-2 text-sm sm:text-base text-slate-500">
 
             Latest updates from your teaching portal.
 
@@ -181,10 +181,10 @@ export default function TeacherRecentActivityPage() {
 
       </div>
 
-      <div className="mt-10 rounded-2xl bg-white shadow-lg">
-                {loading ? (
+      <div className="mt-6 sm:mt-8 md:mt-10 rounded-xl sm:rounded-2xl bg-white shadow-lg overflow-hidden">
+        {loading ? (
 
-          <div className="p-10 text-center">
+          <div className="p-6 sm:p-10 text-center">
 
             Loading...
 
@@ -192,7 +192,7 @@ export default function TeacherRecentActivityPage() {
 
         ) : activities.length === 0 ? (
 
-          <div className="p-10 text-center text-slate-500">
+          <div className="p-6 sm:p-10 text-center text-slate-500">
 
             No recent activity found.
 
@@ -206,26 +206,26 @@ export default function TeacherRecentActivityPage() {
 
               <div
                 key={activity.id}
-                className="flex items-center justify-between border-b p-6 transition hover:bg-slate-50"
+                className="flex items-center justify-between gap-3 border-b p-3 sm:p-5 md:p-6 transition hover:bg-slate-50"
               >
 
-                <div className="flex items-center gap-5">
+                <div className="flex items-center gap-3 sm:gap-4 md:gap-5 min-w-0">
 
-                  <div className="rounded-xl bg-slate-100 p-3">
+                  <div className="rounded-xl bg-slate-100 p-2.5 sm:p-3 shrink-0">
 
                     {getIcon(activity.type)}
 
                   </div>
 
-                  <div>
+                  <div className="min-w-0">
 
-                    <h3 className="text-lg font-bold text-slate-800">
+                    <h3 className="text-base sm:text-lg font-bold text-slate-800 truncate">
 
                       {activity.title}
 
                     </h3>
 
-                    <p className="mt-1 text-sm text-slate-500">
+                    <p className="mt-0.5 sm:mt-1 text-xs sm:text-sm text-slate-500 truncate">
 
                       {activity.subtitle}
 
@@ -235,15 +235,15 @@ export default function TeacherRecentActivityPage() {
 
                 </div>
 
-                <div className="text-right">
+                <div className="text-right shrink-0">
 
-                  <p className="font-semibold text-slate-700">
+                  <p className="text-sm sm:text-base font-semibold text-slate-700 whitespace-nowrap">
 
                     {getBadge(activity.type)}
 
                   </p>
 
-                  <p className="mt-1 text-sm text-slate-500">
+                  <p className="mt-1 text-xs sm:text-sm text-slate-500 whitespace-nowrap">
 
                     {formatActivityTime(
                       activity.created_at

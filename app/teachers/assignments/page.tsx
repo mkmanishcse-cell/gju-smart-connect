@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 import Link from "next/link";
-
+import Footer from "@/components/common/Footer";
 import { supabase } from "@/lib/supabase";
 
 import {
@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 
 import SubjectCard from "@/components/teacher/SubjectCard";
+import LoadingScreen from "@/components/teacher/LoadingScreen";
 
 type Subject = {
   id: string;
@@ -31,6 +32,7 @@ type Subject = {
 };
 
 export default function AssignmentsPage() {
+  const [loading, setLoading] = useState(true);
 
   const [teacherId, setTeacherId] = useState("");
 
@@ -39,266 +41,172 @@ export default function AssignmentsPage() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-
     loadTeacher();
-
   }, []);
 
   async function loadTeacher() {
+    try {
+      setLoading(true);
 
-    const session = sessionStorage.getItem("user");
+      const session = sessionStorage.getItem("user");
 
-    if (!session) {
+      if (!session) {
+        window.location.href = "/login?role=teacher";
+        return;
+      }
 
-      window.location.href = "/login?role=teacher";
+      const teacher = JSON.parse(session);
 
-      return;
+      setTeacherId(teacher.id);
 
+      await loadSubjects(teacher.id);
+    } finally {
+      setLoading(false);
     }
-
-    const teacher = JSON.parse(session);
-
-    setTeacherId(teacher.id);
-
-    await loadSubjects(teacher.id);
-
   }
 
   async function loadSubjects(id: string) {
-
     const { data: joined } = await supabase
-
       .from("teacher_subjects")
-
       .select("subject_id")
-
       .eq("teacher_id", id);
 
     if (!joined || joined.length === 0) {
-
       setSubjects([]);
-
       return;
-
     }
 
     const ids = joined.map((item) => item.subject_id);
 
     const { data, error } = await supabase
-
       .from("subjects")
-
-      .select(`
+      .select(
+        `
         *,
         semesters(
           semester_no
         )
-      `)
-
+      `
+      )
       .in("id", ids)
-
       .order("subject_code");
 
     if (error) {
-
       console.log(error);
-
       return;
-
     }
 
     const list: Subject[] = (data || []).map((item: any) => ({
-
       id: item.id,
-
       subject_code: item.subject_code,
-
       subject_name: item.subject_name,
-
       subject_type: item.subject_type,
-
       credits: item.credits,
-
       semester_no: item.semesters?.semester_no || 0,
-
     }));
 
     setSubjects(list);
-
   }
 
- const filteredSubjects = subjects.filter((subject) => {
+  const filteredSubjects = subjects.filter((subject) => {
+    const keyword = search.toLowerCase();
 
-  const keyword = search.toLowerCase();
+    return (
+      subject.subject_type === "Theory" &&
+      (subject.subject_name.toLowerCase().includes(keyword) ||
+        subject.subject_code.toLowerCase().includes(keyword))
+    );
+  });
 
-  return (
-
-    subject.subject_type === "Theory" &&
-
-    (
-
-      subject.subject_name
-        .toLowerCase()
-        .includes(keyword) ||
-
-      subject.subject_code
-        .toLowerCase()
-        .includes(keyword)
-
-    )
-
-  );
-
-});
+  if (loading) {
+    return <LoadingScreen />;
+  }
 
   return (
-
     <main className="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100">
-
-      <div className="max-w-7xl mx-auto px-8 py-8">
-                {/* Hero */}
-
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-violet-700 via-indigo-600 to-purple-600 shadow-2xl p-8 text-white">
-
-          <div className="absolute -right-10 -top-10 opacity-10">
-
-            <ClipboardList size={220} />
-
+      <div className="mx-auto max-w-7xl px-3 py-4 sm:px-5 sm:py-6 lg:px-8 lg:py-8">
+        {/* Hero */}
+        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-violet-700 via-indigo-600 to-purple-600 p-4 text-white shadow-xl sm:rounded-3xl sm:p-6 sm:shadow-2xl lg:p-8">
+          <div className="absolute -right-6 -top-6 opacity-10 sm:-right-10 sm:-top-10">
+            <ClipboardList size={120} className="sm:hidden" />
+            <ClipboardList size={220} className="hidden sm:block" />
           </div>
 
-          <div className="relative flex justify-between items-start flex-wrap gap-6">
-
+          <div className="relative flex flex-col flex-wrap items-start justify-between gap-4 sm:flex-row sm:gap-6">
             <div>
-
-              <div className="flex items-center gap-3">
-
-                <GraduationCap size={26} />
-
-                <span className="uppercase tracking-[3px] text-sm font-semibold">
-
+              <div className="flex items-center gap-2 sm:gap-3">
+                <GraduationCap size={20} className="sm:hidden" />
+                <GraduationCap size={26} className="hidden sm:block" />
+                <span className="text-xs font-semibold uppercase tracking-[2px] sm:tracking-[3px] sm:text-sm">
                   Teacher Portal
-
                 </span>
-
               </div>
 
-              <h1 className="text-5xl font-extrabold mt-5">
-
+              <h1 className="mt-3 text-2xl font-extrabold sm:mt-5 sm:text-4xl lg:text-5xl">
                 Assignment Management
-
               </h1>
 
-              <p className="mt-4 text-lg text-violet-100 max-w-2xl">
-
+              <p className="mt-2 max-w-2xl text-sm text-violet-100 sm:mt-4 sm:text-lg">
                 Select a subject to create, update and manage assignments.
-
               </p>
-
             </div>
 
-            <div className="flex gap-4">
-
-              <Link href="/teachers">
-
-                <div className="bg-white/20 backdrop-blur-md hover:bg-white/30 transition-all duration-300 px-6 py-3 rounded-2xl flex items-center gap-3 cursor-pointer">
-
-                  <ArrowLeft size={20} />
-
+            <div className="flex w-full gap-2 sm:w-auto sm:gap-4">
+              <Link href="/teachers" className="flex-1 sm:flex-none">
+                <div className="flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-white/20 px-3 py-2.5 text-sm backdrop-blur-md transition-all duration-300 hover:bg-white/30 sm:justify-start sm:gap-3 sm:rounded-2xl sm:px-6 sm:py-3 sm:text-base">
+                  <ArrowLeft size={16} className="sm:hidden" />
+                  <ArrowLeft size={20} className="hidden sm:block" />
                   Dashboard
-
                 </div>
-
               </Link>
 
-              <Link href="/teachers/my-subjects">
-
-                <div className="bg-white text-violet-700 hover:bg-slate-100 transition-all duration-300 px-6 py-3 rounded-2xl flex items-center gap-3 shadow-lg cursor-pointer">
-
-                  <BookMarked size={20} />
-
+              <Link href="/teachers/my-subjects" className="flex-1 sm:flex-none">
+                <div className="flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-white px-3 py-2.5 text-sm font-semibold text-violet-700 shadow-lg transition-all duration-300 hover:bg-slate-100 sm:justify-start sm:gap-3 sm:rounded-2xl sm:px-6 sm:py-3 sm:text-base">
+                  <BookMarked size={16} className="sm:hidden" />
+                  <BookMarked size={20} className="hidden sm:block" />
                   My Subjects
-
                 </div>
-
               </Link>
-
             </div>
-
           </div>
 
           {/* Statistics */}
-
-          <div className="grid md:grid-cols-3 gap-6 mt-10">
-
-            <div className="bg-white/15 backdrop-blur-md rounded-2xl p-6">
-
-              <p className="text-sm opacity-80">
-
+          <div className="mt-6 grid grid-cols-3 gap-2 sm:mt-10 sm:gap-6">
+            <div className="rounded-xl bg-white/15 p-3 backdrop-blur-md sm:rounded-2xl sm:p-6">
+              <p className="text-[11px] opacity-80 sm:text-sm">
                 Joined Subjects
-
               </p>
-
-              <h2 className="text-5xl font-bold mt-3">
-
+              <h2 className="mt-1 text-xl font-bold sm:mt-3 sm:text-5xl">
                 {subjects.length}
-
               </h2>
-
             </div>
 
-            <div className="bg-white/15 backdrop-blur-md rounded-2xl p-6">
-
-              <p className="text-sm opacity-80">
-
+            <div className="rounded-xl bg-white/15 p-3 backdrop-blur-md sm:rounded-2xl sm:p-6">
+              <p className="text-[11px] opacity-80 sm:text-sm">
                 Theory Subjects
-
               </p>
-
-              <h2 className="text-5xl font-bold mt-3">
-
-                {
-                  subjects.filter(
-                    (s) => s.subject_type === "Theory"
-                  ).length
-                }
-
+              <h2 className="mt-1 text-xl font-bold sm:mt-3 sm:text-5xl">
+                {subjects.filter((s) => s.subject_type === "Theory").length}
               </h2>
-
             </div>
 
-            <div className="bg-white/15 backdrop-blur-md rounded-2xl p-6">
-
-              <p className="text-sm opacity-80">
-
+            <div className="rounded-xl bg-white/15 p-3 backdrop-blur-md sm:rounded-2xl sm:p-6">
+              <p className="text-[11px] opacity-80 sm:text-sm">
                 Practical Subjects
-
               </p>
-
-              <h2 className="text-5xl font-bold mt-3">
-
-                {
-                  subjects.filter(
-                    (s) => s.subject_type === "Practical"
-                  ).length
-                }
-
+              <h2 className="mt-1 text-xl font-bold sm:mt-3 sm:text-5xl">
+                {subjects.filter((s) => s.subject_type === "Practical").length}
               </h2>
-
             </div>
-
           </div>
-
         </div>
 
         {/* Search */}
-
-        <div className="bg-white rounded-3xl shadow-xl p-6 mt-8">
-
+        <div className="mt-5 rounded-2xl bg-white p-3 shadow sm:mt-8 sm:rounded-3xl sm:p-6 sm:shadow-xl">
           <div className="relative">
-
             <Search
-              size={22}
-              className="absolute left-5 top-4 text-gray-400"
+              size={18}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 sm:left-5 sm:top-4 sm:h-[22px] sm:w-[22px] sm:translate-y-0"
             />
 
             <input
@@ -306,43 +214,34 @@ export default function AssignmentsPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search Subject by Name or Subject Code..."
-              className="w-full rounded-2xl border border-slate-300 py-4 pl-14 pr-4 outline-none focus:border-violet-600 focus:ring-4 focus:ring-violet-100 transition"
+              className="w-full rounded-xl border border-slate-300 py-2.5 pl-9 pr-4 text-sm outline-none transition focus:border-violet-600 focus:ring-4 focus:ring-violet-100 sm:rounded-2xl sm:py-4 sm:pl-14 sm:text-base"
             />
-
           </div>
-
         </div>
 
         {/* Subject Cards */}
-
-        <div className="grid xl:grid-cols-3 lg:grid-cols-2 gap-6 mt-8">
-                      {filteredSubjects.length === 0 ? (
-
-            <div className="col-span-full bg-white rounded-3xl shadow-xl p-14 text-center">
-
+        <div className="mt-5 grid grid-cols-1 gap-4 sm:mt-8 sm:gap-6 lg:grid-cols-2 xl:grid-cols-3">
+          {filteredSubjects.length === 0 ? (
+            <div className="col-span-full rounded-2xl bg-white p-8 text-center shadow sm:rounded-3xl sm:p-14 sm:shadow-xl">
+              <ClipboardList
+                size={48}
+                className="mx-auto text-slate-400 sm:hidden"
+              />
               <ClipboardList
                 size={70}
-                className="mx-auto text-slate-400"
+                className="mx-auto hidden text-slate-400 sm:block"
               />
 
-              <h2 className="text-3xl font-bold mt-6 text-slate-800">
-
+              <h2 className="mt-4 text-xl font-bold text-slate-800 sm:mt-6 sm:text-3xl">
                 No Subjects Found
-
               </h2>
 
-              <p className="text-gray-500 mt-3">
-
+              <p className="mt-2 text-sm text-gray-500 sm:mt-3 sm:text-base">
                 No subject matches your search.
-
               </p>
-
             </div>
-
           ) : (
-
             filteredSubjects.map((subject) => (
-
               <SubjectCard
                 key={subject.id}
                 id={subject.id}
@@ -353,205 +252,59 @@ export default function AssignmentsPage() {
                 type={subject.subject_type}
                 mode="assignments"
               />
-
             ))
-
           )}
-
         </div>
 
         {/* Dashboard Summary */}
-
-        <div className="grid md:grid-cols-3 gap-6 mt-12">
-
-          <div className="rounded-3xl bg-gradient-to-r from-violet-700 to-indigo-600 text-white p-7 shadow-xl">
-
-            <h3 className="text-lg font-semibold">
-
+        <div className="hidden sm:mt-12 sm:grid sm:grid-cols-3 sm:gap-6">
+          <div className="rounded-2xl bg-gradient-to-r from-violet-700 to-indigo-600 p-4 text-white shadow sm:rounded-3xl sm:p-7 sm:shadow-xl">
+            <h3 className="text-sm font-semibold sm:text-lg">
               Total Subjects
-
             </h3>
 
-            <h2 className="text-5xl font-extrabold mt-5">
-
+            <h2 className="mt-3 text-3xl font-extrabold sm:mt-5 sm:text-5xl">
               {subjects.length}
-
             </h2>
 
-            <p className="mt-3 text-violet-100">
-
+            <p className="mt-2 text-xs text-violet-100 sm:mt-3 sm:text-base">
               Subjects available for assignments.
-
             </p>
-
           </div>
 
-          <div className="rounded-3xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white p-7 shadow-xl">
-
-            <h3 className="text-lg font-semibold">
-
+          <div className="rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 p-4 text-white shadow sm:rounded-3xl sm:p-7 sm:shadow-xl">
+            <h3 className="text-sm font-semibold sm:text-lg">
               Theory Subjects
-
             </h3>
 
-            <h2 className="text-5xl font-extrabold mt-5">
-
-              {
-                subjects.filter(
-                  (s) => s.subject_type === "Theory"
-                ).length
-              }
-
+            <h2 className="mt-3 text-3xl font-extrabold sm:mt-5 sm:text-5xl">
+              {subjects.filter((s) => s.subject_type === "Theory").length}
             </h2>
 
-            <p className="mt-3 text-blue-100">
-
+            <p className="mt-2 text-xs text-blue-100 sm:mt-3 sm:text-base">
               Assignment enabled.
-
             </p>
-
           </div>
 
-          <div className="rounded-3xl bg-gradient-to-r from-orange-500 to-red-500 text-white p-7 shadow-xl">
-
-            <h3 className="text-lg font-semibold">
-
+          <div className="rounded-2xl bg-gradient-to-r from-orange-500 to-red-500 p-4 text-white shadow sm:rounded-3xl sm:p-7 sm:shadow-xl">
+            <h3 className="text-sm font-semibold sm:text-lg">
               Practical Subjects
-
             </h3>
 
-            <h2 className="text-5xl font-extrabold mt-5">
-
-              {
-                subjects.filter(
-                  (s) => s.subject_type === "Practical"
-                ).length
-              }
-
+            <h2 className="mt-3 text-3xl font-extrabold sm:mt-5 sm:text-5xl">
+              {subjects.filter((s) => s.subject_type === "Practical").length}
             </h2>
 
-            <p className="mt-3 text-orange-100">
-
+            <p className="mt-2 text-xs text-orange-100 sm:mt-3 sm:text-base">
               Lab assignments supported.
-
             </p>
-
           </div>
-
         </div>
 
         {/* Footer */}
 
-        <footer className="mt-14 rounded-3xl bg-white shadow-xl p-8">
-
-          <div className="flex flex-col lg:flex-row justify-between items-center gap-6">
-
-            <div>
-
-              <h2 className="text-2xl font-bold text-slate-800">
-
-                GJU Smart Connect
-
-              </h2>
-
-              <p className="text-gray-500 mt-2">
-
-                Teacher Assignment Management
-
-              </p>
-
-            </div>
-
-            <div className="flex gap-8 text-center">
-
-              <div>
-
-                <h3 className="text-3xl font-bold text-violet-600">
-
-                  {subjects.length}
-
-                </h3>
-
-                <p className="text-gray-500">
-
-                  Subjects
-
-                </p>
-
-              </div>
-
-              <div>
-
-                <h3 className="text-3xl font-bold text-blue-600">
-
-                  {
-                    subjects.filter(
-                      (s) => s.subject_type === "Theory"
-                    ).length
-                  }
-
-                </h3>
-
-                <p className="text-gray-500">
-
-                  Theory
-
-                </p>
-
-              </div>
-
-              <div>
-
-                <h3 className="text-3xl font-bold text-orange-500">
-
-                  {
-                    subjects.filter(
-                      (s) => s.subject_type === "Practical"
-                    ).length
-                  }
-
-                </h3>
-
-                <p className="text-gray-500">
-
-                  Practical
-
-                </p>
-
-              </div>
-
-            </div>
-
-            <div className="text-right">
-
-              <p className="text-gray-500">
-
-                © 2026 All Rights Reserved
-
-              </p>
-
-              <p className="mt-2">
-
-                Developed By
-
-                <span className="font-bold text-violet-600">
-
-                  {" "}Manish Kushwaha
-
-                </span>
-
-              </p>
-
-            </div>
-
-          </div>
-
-        </footer>
-
       </div>
-
+      <Footer />
     </main>
-
   );
-
 }
