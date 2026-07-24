@@ -11,6 +11,9 @@ import {
   XCircle,
   TrendingUp,
   ChevronRight,
+  Building2,
+  BadgeCheck,
+  ArrowLeft,
 } from "lucide-react";
 
 import { supabase } from "@/lib/supabase";
@@ -260,405 +263,143 @@ export default function StudentAttendancePage() {
   return (
 
     <main className="space-y-8">
-        {/* ================= HEADER ================= */}
-        {/* ================= HEADER ================= */}
+      <div className="relative overflow-hidden rounded-2xl border border-indigo-100 bg-gradient-to-r from-indigo-500 via-sky-500 to-blue-500 p-5 shadow-lg sm:rounded-3xl sm:p-8 sm:shadow-xl">
+        {/* Background */}
+        <div className="absolute -top-16 -right-16 h-56 w-56 rounded-full bg-white/10 blur-3xl sm:-top-20 sm:-right-20 sm:h-72 sm:w-72" />
+        <div className="absolute -bottom-16 -left-16 h-56 w-56 rounded-full bg-sky-200/20 blur-3xl sm:-bottom-20 sm:-left-20 sm:h-72 sm:w-72" />
 
-<div className="relative overflow-hidden rounded-3xl border border-sky-100 bg-gradient-to-r from-sky-500 via-cyan-500 to-blue-500 p-8 shadow-xl">
+        <div className="relative">
+          {/* Back Button */}
+         <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between sm:gap-8">
 
-  {/* Background Blur */}
+  {/* Left */}
+  <div>
 
-  <div className="absolute -top-20 -right-20 h-72 w-72 rounded-full bg-white/10 blur-3xl"></div>
+    <div className="flex items-center gap-3 sm:gap-4">
 
-  <div className="absolute -bottom-20 -left-20 h-72 w-72 rounded-full bg-cyan-200/20 blur-3xl"></div>
+      <button
+        onClick={() => router.push("/students")}
+        aria-label="Back to Dashboard"
+        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/20 bg-white/15 text-white backdrop-blur transition-all duration-300 hover:bg-white/25 sm:h-11 sm:w-11 sm:rounded-xl"
+      >
+        <ArrowLeft size={16} className="sm:hidden" />
+        <ArrowLeft size={20} className="hidden sm:block" />
+      </button>
 
-  <div className="relative">
+      <h1 className="text-2xl font-bold sm:text-4xl">
+        Attendance Dashboard
+      </h1>
 
-    {/* Back Button */}
+    </div>
 
-    <button
-      onClick={() => router.push("/students")}
-      className="mb-8 inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/15 px-5 py-2.5 text-sm font-medium text-white backdrop-blur transition-all duration-300 hover:bg-white/25"
-    >
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-sky-50 sm:mt-4 sm:text-base sm:leading-7">
+                Welcome
+                <span className="font-semibold"> {student.student_name}</span>
+                . View your attendance across all enrolled subjects and track your academic attendance in one place.
+              </p>
 
-      ← Back
+              <div className="mt-4 flex flex-wrap gap-2 sm:mt-6 sm:gap-3">
+               <div className="flex items-center gap-2 rounded-full bg-white/15 px-3 py-1.5 text-xs backdrop-blur sm:px-4 sm:py-2 sm:text-sm">
+  <GraduationCap size={14} className="text-cyan-300 sm:h-4 sm:w-4" />
+  <span>Semester {semester}</span>
+</div>
 
-    </button>
+<div className="flex items-center gap-2 rounded-full bg-white/15 px-3 py-1.5 text-xs backdrop-blur sm:px-4 sm:py-2 sm:text-sm">
+  <BookOpen size={14} className="text-cyan-300 sm:h-4 sm:w-4" />
+  <span>{course}</span>
+</div>
 
-    <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+<div className="flex items-center gap-2 rounded-full bg-white/15 px-3 py-1.5 text-xs backdrop-blur sm:px-4 sm:py-2 sm:text-sm">
+  <Building2 size={14} className="text-cyan-300 sm:h-4 sm:w-4" />
+  <span>{department}</span>
+</div>
 
-      {/* Left */}
+<div className="flex items-center gap-2 rounded-full bg-white/15 px-3 py-1.5 text-xs backdrop-blur sm:px-4 sm:py-2 sm:text-sm">
+  <BadgeCheck size={14} className="text-cyan-300 sm:h-4 sm:w-4" />
+  <span>Roll No: {student.roll_no}</span>
+</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+{/* ================= PERFORMANCE OVERVIEW ================= */}
+
+<div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-md sm:rounded-3xl sm:p-7 sm:shadow-xl">
+
+  <div className="mb-4 sm:mb-6">
+
+    <h2 className="text-base font-bold text-slate-800 sm:text-2xl">
+      Performance Overview
+    </h2>
+
+    <p className="text-xs text-slate-500 sm:text-base">
+      Your attendance summary at a glance
+    </p>
+
+  </div>
+
+  <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
+
+    <StatTile
+      title="Subjects"
+      value={summary.totalSubjects}
+      icon={<BookOpen size={20} />}
+      tone="bg-indigo-50 text-indigo-600"
+    />
+
+    <StatTile
+      title="Present"
+      value={summary.totalPresent}
+      icon={<CheckCircle2 size={20} />}
+      tone="bg-emerald-50 text-emerald-600"
+    />
+
+    <StatTile
+      title="Absent"
+      value={summary.totalAbsent}
+      icon={<XCircle size={20} />}
+      tone="bg-red-50 text-red-600"
+    />
+
+    <StatTile
+      title="Overall"
+      value={`${summary.overall}%`}
+      icon={<TrendingUp size={20} />}
+      tone="bg-violet-50 text-violet-600"
+    />
+
+  </div>
+
+</div>
+{/* ================= SUBJECT ATTENDANCE ================= */}
+
+<div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-md sm:rounded-3xl sm:shadow-xl">
+
+  {/* Header */}
+
+  <div className="border-b border-slate-200 bg-slate-50 px-4 py-4 sm:px-7 sm:py-6">
+
+    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
 
       <div>
 
-        <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 backdrop-blur">
-
-          <ClipboardCheck size={18} />
-
-          <span className="text-sm font-medium">
-
-            Student Portal
-
-          </span>
-
-        </div>
-
-        <h1 className="mt-5 text-4xl font-bold tracking-tight">
-
-          Attendance Dashboard
-
-        </h1>
-
-        <p className="mt-4 max-w-2xl text-sky-100 leading-7">
-
-          Welcome,
-
-          <span className="font-semibold">
-
-            {" "}{student.student_name}
-
-          </span>
-
-          . Track your attendance across all enrolled subjects and
-          monitor your academic progress in one place.
-
-        </p>
-
-        <div className="mt-6 flex flex-wrap gap-3">
-
-          <div className="rounded-full bg-white/15 px-4 py-2 text-sm backdrop-blur">
-
-            🎓 Semester {semester}
-
-          </div>
-
-          <div className="rounded-full bg-white/15 px-4 py-2 text-sm backdrop-blur">
-
-            📚 {course}
-
-          </div>
-
-          <div className="rounded-full bg-white/15 px-4 py-2 text-sm backdrop-blur">
-
-            🏢 {department}
-
-          </div>
-
-        </div>
-
-      </div>
-
-      {/* Right Card */}
-
-      <div className="rounded-3xl border border-white/20 bg-white/15 p-8 text-center backdrop-blur">
-
-        <p className="text-sm uppercase tracking-[4px] text-sky-100">
-
-          Overall Attendance
-
-        </p>
-
-        <h2 className="mt-4 text-6xl font-extrabold">
-
-          {summary.overall}%
-
+        <h2 className="text-base font-bold text-slate-800 sm:text-2xl">
+          Subject Wise Attendance
         </h2>
 
-        <div className="mt-5 h-3 w-56 overflow-hidden rounded-full bg-white/20">
-
-          <div
-
-            className="h-full rounded-full bg-white transition-all duration-700"
-
-            style={{
-
-              width: `${summary.overall}%`,
-
-            }}
-
-          />
-
-        </div>
-
-        <p className="mt-3 text-sm text-sky-100">
-
-          Keep your attendance above 75%
-
+        <p className="mt-1 text-xs text-slate-500 sm:mt-2 sm:text-base">
+          View attendance details for every enrolled subject.
         </p>
 
       </div>
 
+      <div className="inline-flex items-center rounded-xl bg-indigo-50 px-4 py-2 sm:rounded-2xl sm:px-5 sm:py-3">
 
-    </div>
-
-   
-
-  </div>
-
-</div>
-
-{/* ================= STUDENT CARD ================= */}
-
-<div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-lg">
-
-  <div className="mb-6 flex items-center gap-4">
-
-    <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg">
-
-      <GraduationCap size={32} />
-
-    </div>
-
-    <div>
-
-      <h2 className="text-2xl font-bold text-slate-800">
-
-        Student Information
-
-      </h2>
-
-      <p className="text-slate-500">
-
-        Academic Details
-
-      </p>
-
-    </div>
-
-  </div>
-
-  <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-5">
-
-    <div>
-
-      <p className="text-sm text-slate-500">
-
-        Student Name
-
-      </p>
-
-      <h3 className="mt-2 text-lg font-semibold">
-
-        {student.student_name}
-
-      </h3>
-
-    </div>
-
-    <div>
-
-      <p className="text-sm text-slate-500">
-
-        Roll Number
-
-      </p>
-
-      <h3 className="mt-2 text-lg font-semibold">
-
-        {student.roll_no}
-
-      </h3>
-
-    </div>
-
-    <div>
-
-      <p className="text-sm text-slate-500">
-
-        Department
-
-      </p>
-
-      <h3 className="mt-2 text-lg font-semibold">
-
-        {department}
-
-      </h3>
-
-    </div>
-
-    <div>
-
-      <p className="text-sm text-slate-500">
-
-        Course
-
-      </p>
-
-      <h3 className="mt-2 text-lg font-semibold">
-
-        {course}
-
-      </h3>
-
-    </div>
-
-    <div>
-
-      <p className="text-sm text-slate-500">
-
-        Semester
-
-      </p>
-
-      <h3 className="mt-2 text-lg font-semibold">
-
-        {semester}
-
-      </h3>
-
-    </div>
-
-  </div>
-
-</div>
-{/* ================= SUMMARY CARDS ================= */}
-
-<div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-
-  {/* Subjects */}
-
-  <div className="group rounded-3xl bg-gradient-to-br from-blue-500 to-indigo-600 p-6 text-white shadow-lg transition duration-300 hover:-translate-y-2 hover:shadow-2xl">
-
-    <div className="flex items-center justify-between">
-
-      <BookOpen className="h-9 w-9 opacity-90" />
-
-      <span className="rounded-full bg-white/20 px-3 py-1 text-xs">
-        Total
-      </span>
-
-    </div>
-
-    <p className="mt-6 text-blue-100">
-
-      Subjects
-
-    </p>
-
-    <h2 className="mt-2 text-4xl font-bold">
-
-      {summary.totalSubjects}
-
-    </h2>
-
-  </div>
-
-  {/* Present */}
-
-  <div className="group rounded-3xl bg-gradient-to-br from-green-500 to-emerald-600 p-6 text-white shadow-lg transition duration-300 hover:-translate-y-2 hover:shadow-2xl">
-
-    <div className="flex items-center justify-between">
-
-      <CheckCircle2 className="h-9 w-9 opacity-90" />
-
-      <span className="rounded-full bg-white/20 px-3 py-1 text-xs">
-        Present
-      </span>
-
-    </div>
-
-    <p className="mt-6 text-green-100">
-
-      Classes
-
-    </p>
-
-    <h2 className="mt-2 text-4xl font-bold">
-
-      {summary.totalPresent}
-
-    </h2>
-
-  </div>
-
-  {/* Absent */}
-
-  <div className="group rounded-3xl bg-gradient-to-br from-red-400 to-rose-400 p-6 text-white shadow-lg transition duration-300 hover:-translate-y-2 hover:shadow-2xl">
-
-    <div className="flex items-center justify-between">
-
-      <XCircle className="h-9 w-9 opacity-90" />
-
-      <span className="rounded-full bg-white/20 px-3 py-1 text-xs">
-        Absent
-      </span>
-
-    </div>
-
-    <p className="mt-6 text-red-100">
-
-      Classes
-
-    </p>
-
-    <h2 className="mt-2 text-4xl font-bold">
-
-      {summary.totalAbsent}
-
-    </h2>
-
-  </div>
-
-  {/* Overall */}
-
-  <div className="group rounded-3xl bg-gradient-to-br from-purple-500 to-violet-700 p-6 text-white shadow-lg transition duration-300 hover:-translate-y-2 hover:shadow-2xl">
-
-    <div className="flex items-center justify-between">
-
-      <TrendingUp className="h-9 w-9 opacity-90" />
-
-      <span className="rounded-full bg-white/20 px-3 py-1 text-xs">
-        Overall
-      </span>
-
-    </div>
-
-    <p className="mt-6 text-purple-100">
-
-      Attendance
-
-    </p>
-
-    <h2 className="mt-2 text-4xl font-bold">
-
-      {summary.overall}%
-
-    </h2>
-
-  </div>
-
-</div>
-
-{/* ================= TABLE HEADER ================= */}
-
-<div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl">
-
-  <div className="border-b border-slate-200 bg-slate-50 px-7 py-6">
-
-    <div className="flex items-center justify-between">
-
-      <div>
-
-        <h2 className="text-2xl font-bold text-slate-800">
-
-          Subject Attendance
-
-        </h2>
-
-        <p className="mt-2 text-slate-500">
-
-          Click any subject to view complete attendance history.
-
-        </p>
-
-      </div>
-
-      <div className="rounded-2xl bg-blue-100 px-5 py-3">
-
-        <span className="font-semibold text-blue-700">
-
+        <span className="text-sm font-semibold text-indigo-600 sm:text-base">
           {attendance.length} Subjects
-
         </span>
 
       </div>
@@ -667,7 +408,9 @@ export default function StudentAttendancePage() {
 
   </div>
 
-  <div className="overflow-x-auto">
+  {/* Desktop */}
+
+  <div className="hidden overflow-x-auto md:block">
 
     <table className="min-w-full">
 
@@ -675,37 +418,25 @@ export default function StudentAttendancePage() {
 
         <tr>
 
-          <th className="px-6 py-4 text-left text-sm font-semibold text-slate-700">
-
+          <th className="px-6 py-4 text-left text-sm font-semibold text-slate-600">
             Subject
-
           </th>
 
-          <th className="text-center text-sm font-semibold">
-
+          <th className="text-center text-sm font-semibold text-slate-600">
             Classes
-
           </th>
 
-          <th className="text-center text-sm font-semibold">
-
+          <th className="text-center text-sm font-semibold text-slate-600">
             Present
-
           </th>
 
-          <th className="text-center text-sm font-semibold">
-
+          <th className="text-center text-sm font-semibold text-slate-600">
             Absent
-
           </th>
 
-          <th className="px-6 text-center text-sm font-semibold">
-
+          <th className="px-6 text-center text-sm font-semibold text-slate-600">
             Attendance
-
           </th>
-
-          <th></th>
 
         </tr>
 
@@ -714,89 +445,60 @@ export default function StudentAttendancePage() {
       <tbody>
         {attendance.map((item) => {
 
-  const style =
-    getAttendanceStyle(item.percentage);
+  const style = getAttendanceStyle(item.percentage);
 
   return (
 
     <tr
       key={item.subject_id}
       onClick={() =>
-        router.push(
-          `/students/attendance/${item.subject_id}`
-        )
+        router.push(`/students/attendance/${item.subject_id}`)
       }
-      className="group cursor-pointer border-b transition-all duration-300 hover:bg-blue-50"
+      className="cursor-pointer border-b transition hover:bg-indigo-50/50"
     >
 
       {/* Subject */}
 
       <td className="px-6 py-5">
 
-        <div>
+        <h3 className="font-semibold text-slate-800">
+          {item.subject_name}
+        </h3>
 
-          <h3 className="font-semibold text-slate-800 group-hover:text-blue-600">
-
-            {item.subject_name}
-
-          </h3>
-
-          <p className="mt-1 text-sm text-slate-500">
-
-            {item.subject_code}
-
-          </p>
-
-        </div>
+        <span className="mt-2 inline-block rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-600">
+          {item.subject_code}
+        </span>
 
       </td>
 
-      {/* Total Classes */}
+      {/* Total */}
 
-      <td className="text-center">
-
-        <span className="rounded-xl bg-slate-100 px-4 py-2 font-semibold text-slate-700">
-
-          {item.totalClasses}
-
-        </span>
-
+      <td className="text-center text-slate-700">
+        {item.totalClasses}
       </td>
 
       {/* Present */}
 
-      <td className="text-center">
-
-        <span className="rounded-xl bg-green-100 px-4 py-2 font-semibold text-green-700">
-
-          {item.present}
-
-        </span>
-
+      <td className="text-center font-semibold text-emerald-600">
+        {item.present}
       </td>
 
       {/* Absent */}
 
-      <td className="text-center">
-
-        <span className="rounded-xl bg-red-100 px-4 py-2 font-semibold text-red-700">
-
-          {item.absent}
-
-        </span>
-
+      <td className="text-center font-semibold text-red-500">
+        {item.absent}
       </td>
 
       {/* Progress */}
 
-      <td className="px-6 py-5">
+      <td className="px-6">
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
 
           <div className="h-3 flex-1 rounded-full bg-slate-200">
 
             <div
-              className={`h-3 rounded-full transition-all duration-700 ${style.progress}`}
+              className={`h-full rounded-full ${style.progress}`}
               style={{
                 width: `${item.percentage}%`,
               }}
@@ -805,24 +507,12 @@ export default function StudentAttendancePage() {
           </div>
 
           <span
-            className={`min-w-[70px] rounded-full px-3 py-1 text-center text-sm font-semibold ${style.badge}`}
+            className={`min-w-[60px] rounded-full px-3 py-1 text-center font-bold ${style.badge}`}
           >
-
             {item.percentage}%
-
           </span>
 
         </div>
-
-      </td>
-
-      {/* Arrow */}
-
-      <td className="pr-6">
-
-        <ChevronRight
-          className="text-slate-400 transition-transform duration-300 group-hover:translate-x-2"
-        />
 
       </td>
 
@@ -839,7 +529,7 @@ export default function StudentAttendancePage() {
   <tr>
 
     <td
-      colSpan={6}
+      colSpan={5}
       className="py-20 text-center"
     >
 
@@ -849,15 +539,11 @@ export default function StudentAttendancePage() {
       />
 
       <h3 className="mt-6 text-2xl font-bold text-slate-700">
-
         No Attendance Found
-
       </h3>
 
       <p className="mt-3 text-slate-500">
-
         Attendance records will appear here after your teacher marks attendance.
-
       </p>
 
     </td>
@@ -866,17 +552,181 @@ export default function StudentAttendancePage() {
 
 )}
 
-      </tbody>
+</tbody>
 
-    </table>
+</table>
 
-  </div>
+</div>
+{/* ================= MOBILE VIEW ================= */}
+
+<div className="divide-y divide-slate-100 md:hidden">
+
+  {attendance.map((item) => {
+
+    const style =
+      getAttendanceStyle(item.percentage);
+
+    return (
+
+      <div
+        key={item.subject_id}
+        onClick={() =>
+          router.push(
+            `/students/attendance/${item.subject_id}`
+          )
+        }
+        className="cursor-pointer p-4 transition hover:bg-slate-50"
+      >
+
+        <div className="flex items-center justify-between gap-3">
+
+          <div>
+
+            <h3 className="text-sm font-semibold text-slate-800">
+              {item.subject_name}
+            </h3>
+
+            <span className="mt-1 inline-block rounded-full bg-indigo-50 px-2.5 py-0.5 text-[11px] font-semibold text-indigo-600">
+              {item.subject_code}
+            </span>
+
+          </div>
+
+          <span
+            className={`rounded-full px-3 py-1 text-xs font-bold ${style.badge}`}
+          >
+            {item.percentage}%
+          </span>
+
+        </div>
+
+        <div className="mt-4 h-2 w-full rounded-full bg-slate-200">
+
+          <div
+            className={`h-full rounded-full ${style.progress}`}
+            style={{
+              width: `${item.percentage}%`,
+            }}
+          />
+
+        </div>
+
+        <div className="mt-4 grid grid-cols-3 gap-2">
+
+          <MiniStat
+            label="Classes"
+            value={item.totalClasses}
+          />
+
+          <MiniStat
+            label="Present"
+            value={item.present}
+          />
+
+          <MiniStat
+            label="Absent"
+            value={item.absent}
+          />
+
+        </div>
+
+      </div>
+
+    );
+
+  })}
+
+  {attendance.length === 0 && (
+
+    <div className="py-16 text-center">
+
+      <BookOpen
+        size={56}
+        className="mx-auto text-slate-300"
+      />
+
+      <h3 className="mt-4 text-lg font-bold text-slate-700">
+        No Attendance Found
+      </h3>
+
+      <p className="mt-2 px-4 text-sm text-slate-500">
+        Attendance records will appear here after your teacher marks attendance.
+      </p>
+
+    </div>
+
+  )}
 
 </div>
 
-<Footer />
+</div>
+
+<div className="-mx-2 mt-8 sm:-mx-4 md:-mx-6 lg:-mx-8">
+  <Footer />
+</div>
 
 </main>
 
 );
+}
+/* ---------------- STAT TILE ---------------- */
+
+function StatTile({
+  title,
+  value,
+  icon,
+  tone,
+}: {
+  title: string;
+  value: number | string;
+  icon: React.ReactNode;
+  tone: string;
+}) {
+  return (
+    <div className="flex items-center gap-3 rounded-xl border border-slate-100 bg-slate-50/60 p-3 transition hover:shadow-md sm:rounded-2xl sm:p-4">
+
+      <div
+        className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg sm:h-11 sm:w-11 sm:rounded-xl ${tone}`}
+      >
+        {icon}
+      </div>
+
+      <div>
+
+        <p className="text-[11px] text-slate-500 sm:text-sm">
+          {title}
+        </p>
+
+        <h3 className="text-lg font-bold text-slate-800 sm:text-2xl">
+          {value}
+        </h3>
+
+      </div>
+
+    </div>
+  );
+}
+
+/* ---------------- MINI STAT ---------------- */
+
+function MiniStat({
+  label,
+  value,
+}: {
+  label: string;
+  value: number;
+}) {
+  return (
+    <div className="rounded-lg bg-slate-50 py-2 text-center">
+
+      <p className="text-[10px] text-slate-500">
+        {label}
+      </p>
+
+      <p className="text-sm font-semibold text-slate-700">
+        {value}
+      </p>
+
+    </div>
+  );
 }

@@ -391,7 +391,7 @@ const router = useRouter();
 
   {assignments.length === 0 && (
 
-    <div className="rounded-3xl border border-dashed border-slate-300 bg-white py-20 text-center">
+    <div className="rounded-3xl border border-dashed border-slate-300 bg-white py-28 text-center">
 
       <h3 className="text-xl font-semibold text-slate-700">
 
@@ -408,10 +408,12 @@ const router = useRouter();
     </div>
 
   )}
-        <Footer />
+        
 
     </div>
-
+<div className="-mx-2 sm:-mx-4 md:-mx-6 lg:-mx-8 mt-8">
+        <Footer />
+      </div>
   </main>
 
   );

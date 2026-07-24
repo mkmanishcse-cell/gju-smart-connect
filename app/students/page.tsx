@@ -206,21 +206,18 @@ export default function StudentDashboard() {
 
       );
 
-      const theorySubjects =
+const { count: assignmentCount } = await supabase
+  .from("assignments")
+  .select("*", {
+    count: "exact",
+    head: true,
+  })
+  .in(
+    "subject_id",
+    subjectData?.map((item: any) => item.id) ?? []
+  );
 
-        subjectData?.filter(
-
-          (item: any) =>
-
-            item.subject_type === "Theory"
-
-        ) ?? [];
-
-      setAssignments(
-
-        theorySubjects.length * 2
-
-      );
+setAssignments(assignmentCount ?? 0);
 
       /* Attendance */
 
@@ -372,44 +369,49 @@ export default function StudentDashboard() {
 
   /* UI */
 
- return (
-  <ProtectedRoute role="student">
+  return (
+    <ProtectedRoute role="student">
 
-    <div className="space-y-8">
+      <div className="space-y-8">
 
-      <StudentInfoCard
+        <StudentInfoCard
 
-        studentName={student.student_name}
+          studentName={student.student_name}
 
-        rollNo={student.roll_no}
+          rollNo={student.roll_no}
 
-        department={department}
+          department={department}
 
-        course={course}
+          course={course}
 
-        semester={semester}
+          semester={semester}
 
-        attendance={attendance}
+          attendance={attendance}
 
-        averageMarks={averageMarks}
+          averageMarks={averageMarks}
 
-        totalSubjects={subjects}
+          totalSubjects={subjects}
 
-        totalAssignments={assignments}
+          totalAssignments={assignments}
 
-      />
+        />
 
-      <QuickActions />
+        <QuickActions />
 
-      <AnnouncementSection
+        <AnnouncementSection
 
-        announcements={announcements}
+          announcements={announcements}
 
-      />
-<Footer />
-       </div>
+        />
 
-  </ProtectedRoute>
-);
+      </div>
+
+      {/* Footer: cancels StudentLayout's main padding so it sits edge-to-edge on mobile + desktop */}
+      <div className="-mx-2 sm:-mx-4 md:-mx-6 lg:-mx-8 mt-8">
+        <Footer />
+      </div>
+
+    </ProtectedRoute>
+  );
 
 }

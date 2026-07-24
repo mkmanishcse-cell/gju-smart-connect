@@ -42,7 +42,7 @@ export default function StudentLayout({
           />
 
           {/* Page */}
-          <main className="flex-1 overflow-y-auto bg-slate-100 p-3 sm:p-4 md:p-6 lg:p-8">
+          <main className="flex-1 overflow-y-auto bg-slate-100 px-2 py-3 sm:px-4 sm:py-4 md:p-6 lg:p-8">
             <div className="w-full max-w-[1600px] mx-auto">{children}</div>
           </main>
         </div>

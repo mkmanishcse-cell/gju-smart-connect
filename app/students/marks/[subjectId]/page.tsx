@@ -408,7 +408,13 @@ const router = useRouter();
   </div>
 
 </div>
-      <Footer />
+      <div className="
+  fixed inset-x-0 bottom-2
+  sm:static sm:bottom-auto
+  -mx-2 sm:-mx-4 md:-mx-6 lg:-mx-8
+">
+  <Footer />
+</div>
 
     </main>
 

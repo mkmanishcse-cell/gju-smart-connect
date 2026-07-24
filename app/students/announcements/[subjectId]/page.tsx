@@ -322,7 +322,7 @@ export default function StudentAnnouncementsPage() {
 
   {announcements.length === 0 && (
 
-    <div className="rounded-3xl border border-dashed border-slate-300 bg-white py-20 text-center">
+    <div className="rounded-3xl border border-dashed border-slate-300 bg-white py-24 text-center">
 
       <h2 className="text-xl font-semibold text-slate-700">
 
@@ -339,10 +339,12 @@ export default function StudentAnnouncementsPage() {
     </div>
 
   )}
-        <Footer />
+        
 
     </div>
-
+<div className="-mx-2 sm:-mx-4 md:-mx-6 lg:-mx-8 mt-8">
+        <Footer />
+      </div>
   </main>
 
   );

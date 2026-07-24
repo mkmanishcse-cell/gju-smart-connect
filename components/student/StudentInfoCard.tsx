@@ -191,11 +191,7 @@ export default function StudentInfoCard({
 
                 <div>
 
-                  <p className="text-[11px] font-semibold uppercase tracking-[2px] text-slate-300">
-                    Academic Overview
-                  </p>
-
-                  <h2 className="mt-1 text-xl font-bold text-white">
+<h2 className="mt-0 text-xl font-bold text-white">
                     Current Performance
                   </h2>
 
@@ -233,13 +229,13 @@ export default function StudentInfoCard({
 
                     <div>
 
-                      <p className="text-xs text-slate-300">
-                        Attendance
-                      </p>
-
                       <h3 className="text-sm font-semibold text-white">
-                        Overall
+                        Attendance
                       </h3>
+
+                      <p className="text-xs text-slate-300">
+                        Overall
+                      </p>
 
                     </div>
 
@@ -268,13 +264,13 @@ export default function StudentInfoCard({
 
                     <div>
 
-                      <p className="text-xs text-slate-300">
-                        Average Marks
-                      </p>
-
                       <h3 className="text-sm font-semibold text-white">
-                        Internal
+                        Average Marks
                       </h3>
+
+                      <p className="text-xs text-slate-300">
+                        Internal
+                      </p>
 
                     </div>
 
@@ -303,13 +299,13 @@ export default function StudentInfoCard({
 
                     <div>
 
-                      <p className="text-xs text-slate-300">
-                        Subjects
-                      </p>
-
                       <h3 className="text-sm font-semibold text-white">
-                        Current Semester
+                        Subjects
                       </h3>
+
+                      <p className="text-xs text-slate-300">
+                        Current Semester
+                      </p>
 
                     </div>
 
@@ -337,14 +333,12 @@ export default function StudentInfoCard({
                     </div>
 
                     <div>
-
-                      <p className="text-xs text-slate-300">
+<h3 className="text-sm font-semibold text-white">
                         Assignments
-                      </p>
-
-                      <h3 className="text-sm font-semibold text-white">
-                        Total
                       </h3>
+                      <p className="text-xs text-slate-300">
+                        Total
+                      </p>
 
                     </div>
 

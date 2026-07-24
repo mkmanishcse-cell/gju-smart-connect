@@ -310,69 +310,69 @@ export default function StudentAttendancePage() {
 
   {/* Attendance Summary */}
 
-  <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+ <div className="overflow-hidden rounded-2xl sm:rounded-3xl border border-slate-200 bg-white shadow-sm">
 
-    <div className="border-b bg-gradient-to-r from-emerald-50 via-green-50 to-teal-50 px-6 py-5">
+  <div className="border-b bg-gradient-to-r from-emerald-50 via-green-50 to-teal-50 px-4 py-4 sm:px-6 sm:py-5">
 
-      <h2 className="text-2xl font-bold text-slate-800">
-        Attendance Summary
-      </h2>
+    <h2 className="text-lg font-bold text-slate-800 sm:text-2xl">
+      Attendance Summary
+    </h2>
+
+  </div>
+
+  <div className="grid grid-cols-2 gap-3 p-4 sm:gap-6 sm:p-6 md:grid-cols-4">
+
+    <div className="rounded-xl sm:rounded-2xl bg-slate-50 p-3 sm:p-5 text-center">
+
+      <p className="text-xs text-slate-500 sm:text-sm">
+        Total Classes
+      </p>
+
+      <h3 className="mt-1 sm:mt-2 text-xl font-bold text-slate-800 sm:text-3xl">
+        {totalClasses}
+      </h3>
 
     </div>
 
-    <div className="grid gap-6 p-6 md:grid-cols-4">
+    <div className="rounded-xl sm:rounded-2xl bg-green-50 p-3 sm:p-5 text-center">
 
-      <div className="rounded-2xl bg-slate-50 p-5 text-center">
+      <p className="text-xs text-green-600 sm:text-sm">
+        Present
+      </p>
 
-        <p className="text-sm text-slate-500">
-          Total Classes
-        </p>
+      <h3 className="mt-1 sm:mt-2 text-xl font-bold text-green-700 sm:text-3xl">
+        {presentClasses}
+      </h3>
 
-        <h3 className="mt-2 text-3xl font-bold text-slate-800">
-          {totalClasses}
-        </h3>
+    </div>
 
-      </div>
+    <div className="rounded-xl sm:rounded-2xl bg-red-50 p-3 sm:p-5 text-center">
 
-      <div className="rounded-2xl bg-green-50 p-5 text-center">
+      <p className="text-xs text-red-600 sm:text-sm">
+        Absent
+      </p>
 
-        <p className="text-sm text-green-600">
-          Present
-        </p>
+      <h3 className="mt-1 sm:mt-2 text-xl font-bold text-red-700 sm:text-3xl">
+        {absentClasses}
+      </h3>
 
-        <h3 className="mt-2 text-3xl font-bold text-green-700">
-          {presentClasses}
-        </h3>
+    </div>
 
-      </div>
+    <div className="rounded-xl sm:rounded-2xl bg-blue-50 p-3 sm:p-5 text-center">
 
-      <div className="rounded-2xl bg-red-50 p-5 text-center">
+      <p className="text-xs text-blue-600 sm:text-sm">
+        Attendance %
+      </p>
 
-        <p className="text-sm text-red-600">
-          Absent
-        </p>
-
-        <h3 className="mt-2 text-3xl font-bold text-red-700">
-          {absentClasses}
-        </h3>
-
-      </div>
-
-      <div className="rounded-2xl bg-blue-50 p-5 text-center">
-
-        <p className="text-sm text-blue-600">
-          Attendance %
-        </p>
-
-        <h3 className="mt-2 text-3xl font-bold text-blue-700">
-          {attendancePercentage}%
-        </h3>
-
-      </div>
+      <h3 className="mt-1 sm:mt-2 text-xl font-bold text-blue-700 sm:text-3xl">
+        {attendancePercentage}%
+      </h3>
 
     </div>
 
   </div>
+
+</div>
 
   {/* Attendance History */}
 
@@ -475,7 +475,9 @@ export default function StudentAttendancePage() {
   </div>
 
 </div>
-            <Footer />
+            <div className="-mx-2 sm:-mx-4 md:-mx-6 lg:-mx-8 mt-8">
+                    <Footer />
+                  </div>
 
     </main>
 
