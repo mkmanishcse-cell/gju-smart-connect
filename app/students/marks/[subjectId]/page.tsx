@@ -239,7 +239,7 @@ const router = useRouter();
 
   return (
 
-    <main className="space-y-8">
+    <main className="space-y-8 pb-24 sm:pb-8">
         <div className="mb-6">
 
   <button
@@ -408,11 +408,13 @@ const router = useRouter();
   </div>
 
 </div>
-      <div className="
-  fixed inset-x-0 bottom-2
-  sm:static sm:bottom-auto
-  -mx-2 sm:-mx-4 md:-mx-6 lg:-mx-8
-">
+  <div
+  className="
+    fixed inset-x-0 bottom-4 z-50
+    sm:static sm:bottom-auto
+    -mx-2 sm:-mx-4 md:-mx-6 lg:-mx-8
+  "
+>
   <Footer />
 </div>
 
