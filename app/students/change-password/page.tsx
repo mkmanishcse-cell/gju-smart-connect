@@ -177,133 +177,144 @@ export default function ChangePasswordPage() {
 
   return (
 
-    <main className="mx-auto max-w-2xl space-y-8 p-6">
-        <div className="space-y-8">
+    <main className="space-y-6 sm:space-y-8">
 
-  {/* Change Password Card */}
+      <div className="mx-auto max-w-2xl space-y-6 sm:space-y-8 px-3 py-4 sm:p-6">
 
-  <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+        {/* Change Password Card */}
 
-    <div className="border-b bg-gradient-to-r from-blue-50 via-sky-50 to-indigo-50 px-6 py-5">
+        <div className="overflow-hidden rounded-2xl sm:rounded-3xl border border-sky-100 bg-white shadow-sm">
 
-      <h2 className="text-2xl font-bold text-slate-800">
-        Change Password
-      </h2>
+          <div className="border-b border-sky-100 bg-gradient-to-r from-sky-50 via-blue-50 to-indigo-50 px-4 py-4 sm:px-6 sm:py-5">
 
-      <p className="mt-1 text-sm text-slate-500">
-        Update your account password securely.
-      </p>
+            <h2 className="text-lg sm:text-2xl font-bold text-slate-800">
+              Change Password
+            </h2>
 
-    </div>
+            <p className="mt-0.5 sm:mt-1 text-xs sm:text-sm text-slate-500">
+              Update your account password securely.
+            </p>
 
-    <div className="space-y-6 p-6">
+          </div>
 
-      {/* Current Password */}
+          <div className="space-y-4 sm:space-y-6 p-4 sm:p-6">
 
-      <div>
+            {/* Current Password */}
 
-        <label className="mb-2 block text-sm font-medium text-slate-700">
-          Current Password
-        </label>
+            <div>
 
-        <input
-          type="password"
-          value={currentPassword}
-          onChange={(e) =>
-            setCurrentPassword(e.target.value)
-          }
-          className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
-          placeholder="Enter current password"
-        />
+              <label className="mb-1.5 sm:mb-2 block text-xs sm:text-sm font-medium text-slate-700">
+                Current Password
+              </label>
 
-      </div>
+              <input
+                type="password"
+                value={currentPassword}
+                onChange={(e) =>
+                  setCurrentPassword(e.target.value)
+                }
+                className="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 sm:px-4 sm:py-3 text-sm sm:text-base outline-none transition focus:border-sky-500 focus:ring-2 focus:ring-sky-200"
+                placeholder="Enter current password"
+              />
 
-      {/* New Password */}
+            </div>
 
-      <div>
+            {/* New Password */}
 
-        <label className="mb-2 block text-sm font-medium text-slate-700">
-          New Password
-        </label>
+            <div>
 
-        <input
-          type="password"
-          value={newPassword}
-          onChange={(e) =>
-            setNewPassword(e.target.value)
-          }
-          className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
-          placeholder="Enter new password"
-        />
+              <label className="mb-1.5 sm:mb-2 block text-xs sm:text-sm font-medium text-slate-700">
+                New Password
+              </label>
 
-      </div>
+              <input
+                type="password"
+                value={newPassword}
+                onChange={(e) =>
+                  setNewPassword(e.target.value)
+                }
+                className="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 sm:px-4 sm:py-3 text-sm sm:text-base outline-none transition focus:border-sky-500 focus:ring-2 focus:ring-sky-200"
+                placeholder="Enter new password"
+              />
 
-      {/* Confirm Password */}
+            </div>
 
-      <div>
+            {/* Confirm Password */}
 
-        <label className="mb-2 block text-sm font-medium text-slate-700">
-          Confirm Password
-        </label>
+            <div>
 
-        <input
-          type="password"
-          value={confirmPassword}
-          onChange={(e) =>
-            setConfirmPassword(e.target.value)
-          }
-          className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
-          placeholder="Confirm new password"
-        />
+              <label className="mb-1.5 sm:mb-2 block text-xs sm:text-sm font-medium text-slate-700">
+                Confirm Password
+              </label>
 
-      </div>
+              <input
+                type="password"
+                value={confirmPassword}
+                onChange={(e) =>
+                  setConfirmPassword(e.target.value)
+                }
+                className="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 sm:px-4 sm:py-3 text-sm sm:text-base outline-none transition focus:border-sky-500 focus:ring-2 focus:ring-sky-200"
+                placeholder="Confirm new password"
+              />
 
-      {/* Error */}
+            </div>
 
-      {error && (
+            {/* Error */}
 
-        <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600">
+            {error && (
 
-          {error}
+              <div className="rounded-xl border border-red-200 bg-red-50 px-3.5 py-2.5 sm:px-4 sm:py-3 text-xs sm:text-sm font-medium text-red-600">
+
+                {error}
+
+              </div>
+
+            )}
+
+            {/* Success */}
+
+            {message && (
+
+              <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-3.5 py-2.5 sm:px-4 sm:py-3 text-xs sm:text-sm font-medium text-emerald-700">
+
+                {message}
+
+              </div>
+
+            )}
+
+            {/* Button */}
+
+            <button
+              onClick={changePassword}
+              disabled={loading}
+              className="w-full rounded-xl bg-gradient-to-r from-sky-600 to-indigo-600 px-5 py-2.5 sm:py-3 text-sm sm:text-base font-semibold text-white shadow-sm transition hover:from-sky-700 hover:to-indigo-700 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+
+              {loading
+                ? "Updating..."
+                : "Change Password"}
+
+            </button>
+
+          </div>
 
         </div>
 
-      )}
+      </div>
 
-      {/* Success */}
-
-      {message && (
-
-        <div className="rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-sm font-medium text-green-700">
-
-          {message}
-
-        </div>
-
-      )}
-
-      {/* Button */}
-
-      <button
-        onClick={changePassword}
-        disabled={loading}
-        className="w-full rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+      {/* Footer: outside the padded/max-w container so it's edge-to-edge on both mobile + desktop */}
+       <div
+        className="
+          fixed inset-x-0 bottom-4 z-50
+          sm:static sm:bottom-auto
+          -mx-2 sm:-mx-4 md:-mx-6 lg:-mx-8
+        "
       >
-
-        {loading
-          ? "Updating..."
-          : "Change Password"}
-
-      </button>
-
-    </div>
-
-  </div>
         <Footer />
+      </div>
 
-    </div>
-
-  </main>
+    </main>
 
   );
 
