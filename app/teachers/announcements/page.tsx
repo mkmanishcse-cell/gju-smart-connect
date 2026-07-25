@@ -117,8 +117,8 @@ export default function AnnouncementsPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100">
-      <div className="mx-auto max-w-7xl px-3 py-4 sm:px-5 sm:py-6 lg:px-8 lg:py-8">
+    <main className="flex min-h-screen flex-col bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100">
+      <div className="mx-auto w-full max-w-7xl flex-1 px-3 py-4 sm:px-5 sm:py-6 lg:px-8 lg:py-8">
 
         {/* Hero */}
 
@@ -371,7 +371,9 @@ export default function AnnouncementsPage() {
       </div>
 
       {/* Footer */}
-      <Footer />
+      <div className="-mx-3 mt-6 mb-0 shrink-0 sm:-mx-5 sm:mt-10 lg:-mx-8 lg:mt-[9.5rem]">
+        <Footer />
+      </div>
 
     </main>
 

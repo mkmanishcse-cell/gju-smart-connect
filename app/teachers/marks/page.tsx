@@ -98,43 +98,47 @@ export default function MarksPage() {
   });
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100">
-      <div className="mx-auto w-full max-w-7xl px-3 py-3 sm:px-5 sm:py-5 lg:px-8 lg:py-8">
+    <main className="flex min-h-screen flex-col bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100">
+      <div className="mx-auto w-full max-w-7xl flex-1 px-3 py-4 sm:px-5 sm:py-6 lg:px-8 lg:py-8">
         {/* Hero */}
-        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-700 via-indigo-600 to-cyan-500 shadow-xl p-4 sm:p-6 lg:p-8 text-white">
-          <div className="absolute -right-10 -top-10 opacity-10">
-            <BarChart3 size={220} />
+        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-700 via-indigo-600 to-cyan-500 p-4 text-white shadow-xl sm:rounded-3xl sm:p-6 sm:shadow-2xl lg:p-8">
+          <div className="absolute -right-6 -top-6 opacity-10 sm:-right-10 sm:-top-10">
+            <BarChart3 size={120} className="sm:hidden" />
+            <BarChart3 size={220} className="hidden sm:block" />
           </div>
 
-          <div className="relative flex justify-between items-start flex-wrap gap-6">
+          <div className="relative flex flex-col flex-wrap items-start justify-between gap-4 sm:flex-row sm:gap-6">
             <div>
-              <div className="flex items-center gap-3">
-                <GraduationCap size={26} />
-                <span className="uppercase tracking-[3px] text-sm font-semibold">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <GraduationCap size={20} className="sm:hidden" />
+                <GraduationCap size={26} className="hidden sm:block" />
+                <span className="text-xs font-semibold uppercase tracking-[2px] sm:tracking-[3px] sm:text-sm">
                   Teacher Portal
                 </span>
               </div>
 
-              <h1 className="mt-3 text-2xl font-extrabold sm:text-3xl lg:text-5xl">
+              <h1 className="mt-3 text-2xl font-extrabold sm:mt-5 sm:text-4xl lg:text-5xl">
                 Marks Management
               </h1>
 
-              <p className="mt-2 max-w-2xl text-sm text-blue-100 sm:text-base lg:text-lg">
+              <p className="mt-2 max-w-2xl text-sm text-blue-100 sm:mt-4 sm:text-lg">
                 Select a subject to manage students' internal marks.
               </p>
             </div>
 
-            <div className="flex w-full gap-2 sm:w-auto sm:flex-row">
+            <div className="flex w-full gap-2 sm:w-auto sm:gap-4">
               <Link href="/teachers" className="flex-1 sm:flex-none">
-                <div className="w-full bg-white/20 backdrop-blur-md hover:bg-white/30 transition-all duration-300 px-3 py-2 sm:px-6 sm:py-3 rounded-xl sm:rounded-2xl flex items-center justify-center gap-2 sm:gap-3 cursor-pointer text-sm sm:text-base">
-                  <ArrowLeft size={18} className="sm:w-5 sm:h-5" />
+                <div className="flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-white/20 px-3 py-2.5 text-sm backdrop-blur-md transition-all duration-300 hover:bg-white/30 sm:justify-start sm:gap-3 sm:rounded-2xl sm:px-6 sm:py-3 sm:text-base">
+                  <ArrowLeft size={16} className="sm:hidden" />
+                  <ArrowLeft size={20} className="hidden sm:block" />
                   Dashboard
                 </div>
               </Link>
 
               <Link href="/teachers/my-subjects" className="flex-1 sm:flex-none">
-                <div className="w-full bg-white text-blue-700 hover:bg-slate-100 transition-all duration-300 px-3 py-2 sm:px-6 sm:py-3 rounded-xl sm:rounded-2xl flex items-center justify-center gap-2 sm:gap-3 shadow-lg cursor-pointer text-sm sm:text-base">
-                  <BookMarked size={18} className="sm:w-5 sm:h-5" />
+                <div className="flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-white px-3 py-2.5 text-sm font-semibold text-blue-700 shadow-lg transition-all duration-300 hover:bg-slate-100 sm:justify-start sm:gap-3 sm:rounded-2xl sm:px-6 sm:py-3 sm:text-base">
+                  <BookMarked size={16} className="sm:hidden" />
+                  <BookMarked size={20} className="hidden sm:block" />
                   My Subjects
                 </div>
               </Link>
@@ -142,24 +146,30 @@ export default function MarksPage() {
           </div>
 
           {/* Statistics */}
-          <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-            <div className="rounded-2xl bg-white/15 p-4 backdrop-blur-md sm:p-5 lg:p-6">
-              <p className="text-sm opacity-80">Joined Subjects</p>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-3">
+          <div className="mt-6 grid grid-cols-3 gap-2 sm:mt-10 sm:gap-6">
+            <div className="rounded-xl bg-white/15 p-3 backdrop-blur-md sm:rounded-2xl sm:p-6">
+              <p className="text-[11px] opacity-80 sm:text-sm">
+                Joined Subjects
+              </p>
+              <h2 className="mt-1 text-xl font-bold sm:mt-3 sm:text-5xl">
                 {subjects.length}
               </h2>
             </div>
 
-            <div className="rounded-2xl bg-white/15 p-4 backdrop-blur-md sm:p-5 lg:p-6">
-              <p className="text-sm opacity-80">Theory Subjects</p>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-3">
+            <div className="rounded-xl bg-white/15 p-3 backdrop-blur-md sm:rounded-2xl sm:p-6">
+              <p className="text-[11px] opacity-80 sm:text-sm">
+                Theory Subjects
+              </p>
+              <h2 className="mt-1 text-xl font-bold sm:mt-3 sm:text-5xl">
                 {subjects.filter((s) => s.subject_type === "Theory").length}
               </h2>
             </div>
 
-            <div className="rounded-2xl bg-white/15 p-4 backdrop-blur-md sm:p-5 lg:p-6">
-              <p className="text-sm opacity-80">Practical Subjects</p>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-3">
+            <div className="rounded-xl bg-white/15 p-3 backdrop-blur-md sm:rounded-2xl sm:p-6">
+              <p className="text-[11px] opacity-80 sm:text-sm">
+                Practical Subjects
+              </p>
+              <h2 className="mt-1 text-xl font-bold sm:mt-3 sm:text-5xl">
                 {subjects.filter((s) => s.subject_type === "Practical").length}
               </h2>
             </div>
@@ -167,28 +177,38 @@ export default function MarksPage() {
         </div>
 
         {/* Search */}
-        <div className="mt-5 rounded-2xl bg-white p-3 shadow-lg sm:p-5 lg:p-6">
+        <div className="mt-5 rounded-2xl bg-white p-3 shadow sm:mt-8 sm:rounded-3xl sm:p-6 sm:shadow-xl">
           <div className="relative">
-            <Search size={22} className="absolute left-5 top-4 text-gray-400" />
+            <Search
+              size={18}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 sm:left-5 sm:top-4 sm:h-[22px] sm:w-[22px] sm:translate-y-0"
+            />
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search Subject by Name or Code..."
-              className="w-full rounded-2xl border border-slate-300 py-3 pl-11 sm:pl-14 pr-4 outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-100 transition"
+              className="w-full rounded-xl border border-slate-300 py-2.5 pl-9 pr-4 text-sm outline-none transition focus:border-blue-600 focus:ring-4 focus:ring-blue-100 sm:rounded-2xl sm:py-4 sm:pl-14 sm:text-base"
             />
           </div>
         </div>
 
         {/* Subject Cards */}
-        <div className="mt-5 grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-5 grid grid-cols-1 gap-4 sm:mt-8 sm:gap-6 lg:grid-cols-2 xl:grid-cols-3">
           {filteredSubjects.length === 0 ? (
-            <div className="col-span-full bg-white rounded-3xl shadow-xl p-6 sm:p-10 lg:p-14 text-center">
-              <BarChart3 size={70} className="mx-auto text-slate-400" />
-              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold mt-6 text-slate-800">
+            <div className="col-span-full rounded-2xl bg-white p-8 text-center shadow sm:rounded-3xl sm:p-14 sm:shadow-xl">
+              <BarChart3
+                size={48}
+                className="mx-auto text-slate-400 sm:hidden"
+              />
+              <BarChart3
+                size={70}
+                className="mx-auto hidden text-slate-400 sm:block"
+              />
+              <h2 className="mt-4 text-xl font-bold text-slate-800 sm:mt-6 sm:text-3xl">
                 No Subjects Found
               </h2>
-              <p className="text-gray-500 mt-3">
+              <p className="mt-2 text-sm text-gray-500 sm:mt-3 sm:text-base">
                 No subject matches your search.
               </p>
             </div>
@@ -209,40 +229,49 @@ export default function MarksPage() {
         </div>
 
         {/* Summary */}
-        <div className="hidden md:grid gap-4 mt-8 md:grid-cols-2 lg:grid-cols-3">
-          <div className="rounded-3xl bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-5 lg:p-7 shadow-xl">
-            <h3 className="text-lg font-semibold">Total Subjects</h3>
-            <h2 className="text-5xl font-extrabold mt-5">{subjects.length}</h2>
-            <p className="mt-3 text-blue-100">
+        <div className="hidden sm:mt-12 sm:grid sm:grid-cols-3 sm:gap-6">
+          <div className="rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-700 p-4 text-white shadow sm:rounded-3xl sm:p-7 sm:shadow-xl">
+            <h3 className="text-sm font-semibold sm:text-lg">
+              Total Subjects
+            </h3>
+            <h2 className="mt-3 text-3xl font-extrabold sm:mt-5 sm:text-5xl">
+              {subjects.length}
+            </h2>
+            <p className="mt-2 text-xs text-blue-100 sm:mt-3 sm:text-base">
               Subjects available for marks entry.
             </p>
           </div>
 
-          <div className="rounded-3xl bg-gradient-to-r from-emerald-600 to-teal-500 text-white p-5 lg:p-7 shadow-xl">
-            <h3 className="text-lg font-semibold">Theory Subjects</h3>
-            <h2 className="text-5xl font-extrabold mt-5">
+          <div className="rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-500 p-4 text-white shadow sm:rounded-3xl sm:p-7 sm:shadow-xl">
+            <h3 className="text-sm font-semibold sm:text-lg">
+              Theory Subjects
+            </h3>
+            <h2 className="mt-3 text-3xl font-extrabold sm:mt-5 sm:text-5xl">
               {subjects.filter((s) => s.subject_type === "Theory").length}
             </h2>
-            <p className="mt-3 text-emerald-100">
+            <p className="mt-2 text-xs text-emerald-100 sm:mt-3 sm:text-base">
               Internal assessment enabled.
             </p>
           </div>
 
-          <div className="rounded-3xl bg-gradient-to-r from-orange-500 to-rose-500 text-white p-5 lg:p-7 shadow-xl">
-            <h3 className="text-lg font-semibold">Practical Subjects</h3>
-            <h2 className="text-5xl font-extrabold mt-5">
+          <div className="rounded-2xl bg-gradient-to-r from-orange-500 to-rose-500 p-4 text-white shadow sm:rounded-3xl sm:p-7 sm:shadow-xl">
+            <h3 className="text-sm font-semibold sm:text-lg">
+              Practical Subjects
+            </h3>
+            <h2 className="mt-3 text-3xl font-extrabold sm:mt-5 sm:text-5xl">
               {subjects.filter((s) => s.subject_type === "Practical").length}
             </h2>
-            <p className="mt-3 text-orange-100">
+            <p className="mt-2 text-xs text-orange-100 sm:mt-3 sm:text-base">
               Practical evaluation subjects.
             </p>
           </div>
         </div>
 
         {/* Footer */}
-      
       </div>
-      <Footer />
+      <div className="shrink-0">
+        <Footer />
+      </div>
     </main>
   );
 }

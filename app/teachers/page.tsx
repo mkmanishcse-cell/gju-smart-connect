@@ -99,37 +99,8 @@ return (
                 </p>
               </div>
 
-              <div className="grid grid-cols-2 gap-2 sm:gap-4">
-                <div className="min-w-0 rounded-xl bg-white/15 p-3 backdrop-blur sm:rounded-2xl sm:p-5">
-                  <p className="text-xs opacity-80 sm:text-sm">Status</p>
-                  <h3 className="mt-1 text-base font-bold sm:mt-2 sm:text-2xl">
-                    Active
-                  </h3>
-                </div>
-
-                <div className="min-w-0 rounded-xl bg-white/15 p-3 backdrop-blur sm:rounded-2xl sm:p-5">
-                  <p className="text-xs opacity-80 sm:text-sm">Portal</p>
-                  <h3 className="mt-1 text-base font-bold sm:mt-2 sm:text-2xl">
-                    Teacher
-                  </h3>
-                </div>
-
-                <div className="min-w-0 rounded-xl bg-white/15 p-3 backdrop-blur sm:rounded-2xl sm:p-5">
-                  <p className="text-xs opacity-80 sm:text-sm">
-                    Academic Year
-                  </p>
-                  <h3 className="mt-1 text-base font-bold sm:mt-2 sm:text-2xl">
-                    2026
-                  </h3>
-                </div>
-
-                <div className="min-w-0 rounded-xl bg-white/15 p-3 backdrop-blur sm:rounded-2xl sm:p-5">
-                  <p className="text-xs opacity-80 sm:text-sm">Role</p>
-                  <h3 className="mt-1 text-base font-bold sm:mt-2 sm:text-2xl">
-                    Faculty
-                  </h3>
-                </div>
-              </div>
+             
+             
             </div>
           </div>
 
