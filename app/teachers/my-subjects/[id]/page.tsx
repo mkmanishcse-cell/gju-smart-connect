@@ -230,22 +230,40 @@ export default function SubjectDashboard() {
             <BookOpen size={260} />
 
           </div>
-
-          <div className="relative flex justify-between items-start flex-wrap gap-6">
+<div className="relative flex items-start justify-center flex-wrap gap-6 pt-10">
 
             <div>
 
-              <div className="flex items-center gap-3">
+<div className="flex items-center gap-3">
 
-                <Sparkles size={24} />
+  <button
+    onClick={() => router.back()}
+    aria-label="Go Back"
+    className="
+      flex
+      h-10
+      w-10
+      items-center
+      justify-center
+      rounded-xl
+      bg-white/20
+      backdrop-blur-md
+      transition-all
+      duration-300
+      hover:bg-white/30
+      active:scale-95
+    "
+  >
+    <ArrowLeft size={20} />
+  </button>
 
-                <span className="uppercase tracking-widest text-sm font-semibold">
+  <Sparkles size={24} />
 
-                  Teacher Dashboard
+  <span className="uppercase tracking-widest text-sm font-semibold">
+    Teacher Dashboard
+  </span>
 
-                </span>
-
-              </div>
+</div>
 
               <h1 className="text-2xl sm:text-3xl lg:text-5xl font-extrabold mt-5">
 
@@ -269,16 +287,7 @@ export default function SubjectDashboard() {
 
             </div>
 
-            <Link
-              href="/teachers/my-subjects"
-              className="bg-white/20 backdrop-blur-md hover:bg-white/30 transition-all duration-300 px-6 py-3 rounded-2xl flex items-center gap-2 font-semibold"
-            >
-
-              <ArrowLeft size={20} />
-
-              My Subjects
-
-            </Link>
+           
 
           </div>
 
@@ -484,332 +493,7 @@ export default function SubjectDashboard() {
           </div>
 
         </div>
-                {/* Quick Overview */}
-
-        <div
-          className={`mt-8 grid gap-4 ${
-  subject.subject_type === "Theory"
-    ? "grid-cols-2 lg:grid-cols-4"
-    : "grid-cols-2 lg:grid-cols-3"
-}`}
-        >
-
-          {/* Students */}
-
-          <div className="bg-white rounded-3xl shadow-xl p-4 sm:p-5 lg:p-6">
-
-            <div className="flex justify-between items-center">
-
-              <div>
-
-                <p className="text-gray-500">
-
-                  Students
-
-                </p>
-
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-600 mt-3">
-
-                  {studentCount}
-
-                </h2>
-
-              </div>
-
-              <Users
-                size={42}
-                className="text-blue-600"
-              />
-
-            </div>
-
-          </div>
-
-          {/* Attendance */}
-
-          <div className="bg-white rounded-3xl shadow-xl p-4 sm:p-5 lg:p-6">
-
-            <div className="flex justify-between items-center">
-
-              <div>
-
-                <p className="text-gray-500">
-
-                  Attendance
-
-                </p>
-
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-green-600 mt-3">
-
-                  {attendancePercent}%
-
-                </h2>
-
-              </div>
-
-              <ClipboardCheck
-                size={42}
-                className="text-green-600"
-              />
-
-            </div>
-
-          </div>
-
-          {/* Assignments (Theory Only) */}
-
-          {subject.subject_type === "Theory" && (
-
-            <div className="bg-white rounded-3xl shadow-xl p-4 sm:p-5 lg:p-6">
-
-              <div className="flex justify-between items-center">
-
-                <div>
-
-                  <p className="text-gray-500">
-
-                    Assignments
-
-                  </p>
-
-                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-orange-500 mt-3">
-
-                    {assignmentCount}
-
-                  </h2>
-
-                </div>
-
-                <FileText
-                  size={42}
-                  className="text-orange-500"
-                />
-
-              </div>
-
-            </div>
-
-          )}
-
-          {/* Announcements */}
-
-          <div className="bg-white rounded-3xl shadow-xl p-4 sm:p-5 lg:p-6">
-
-            <div className="flex justify-between items-center">
-
-              <div>
-
-                <p className="text-gray-500">
-
-                  Announcements
-
-                </p>
-
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-purple-600 mt-3">
-
-                  {announcementCount}
-
-                </h2>
-
-              </div>
-
-              <Award
-                size={42}
-                className="text-purple-600"
-              />
-
-            </div>
-
-          </div>
-
-        </div>
-                {/* Subject Information */}
-
-        <div className="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-2">
-
-          <div className="bg-white rounded-3xl shadow-xl p-4 sm:p-5 lg:p-7">
-
-            <h2 className="text-xl lg:text-2xl font-bold text-slate-800">
-
-              Subject Information
-
-            </h2>
-
-            <div className="space-y-4 mt-6">
-
-              <div className="flex justify-between">
-
-                <span className="text-gray-500">
-
-                  Subject Code
-
-                </span>
-
-                <span className="font-semibold">
-
-                  {subject.subject_code}
-
-                </span>
-
-              </div>
-
-              <div className="flex justify-between">
-
-                <span className="text-gray-500">
-
-                  Subject Name
-
-                </span>
-
-                <span className="font-semibold">
-
-                  {subject.subject_name}
-
-                </span>
-
-              </div>
-
-              <div className="flex justify-between">
-
-                <span className="text-gray-500">
-
-                  Department
-
-                </span>
-
-                <span className="font-semibold">
-
-                  {subject.departments?.department_name}
-
-                </span>
-
-              </div>
-
-              <div className="flex justify-between">
-
-                <span className="text-gray-500">
-
-                  Course
-
-                </span>
-
-                <span className="font-semibold">
-
-                  {subject.courses?.course_name}
-
-                </span>
-
-              </div>
-
-              <div className="flex justify-between">
-
-                <span className="text-gray-500">
-
-                  Semester
-
-                </span>
-
-                <span className="font-semibold">
-
-                  Semester {subject.semesters?.semester_no}
-
-                </span>
-
-              </div>
-
-              <div className="flex justify-between">
-
-                <span className="text-gray-500">
-
-                  Credits
-
-                </span>
-
-                <span className="font-semibold">
-
-                  {subject.credits}
-
-                </span>
-
-              </div>
-
-            </div>
-
-          </div>
-
-          {/* Teacher Tips */}
-
-          <div className="bg-gradient-to-br from-indigo-600 via-blue-600 to-cyan-500 rounded-3xl shadow-xl text-white p-4 sm:p-5 lg:p-7">
-
-            <h2 className="text-2xl font-bold">
-
-              Teacher Tips
-
-            </h2>
-
-            <div className="space-y-4 mt-6">
-
-              <div className="flex gap-3">
-
-                <ClipboardCheck />
-
-                <p>
-
-                  Update attendance regularly.
-
-                </p>
-
-              </div>
-
-              {subject.subject_type === "Theory" && (
-
-                <div className="flex gap-3">
-
-                  <BarChart3 />
-
-                  <p>
-
-                    Complete internal marks before final submission.
-
-                  </p>
-
-                </div>
-
-              )}
-
-              {subject.subject_type === "Theory" && (
-
-                <div className="flex gap-3">
-
-                  <FileText />
-
-                  <p>
-
-                    Upload assignments before the deadline.
-
-                  </p>
-
-                </div>
-
-              )}
-
-              <div className="flex gap-3">
-
-                <Bell />
-
-                <p>
-
-                  Use announcements to notify students.
-
-                </p>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
+              
                 {/* Footer */}
 </div>
 

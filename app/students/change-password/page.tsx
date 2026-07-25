@@ -304,14 +304,8 @@ export default function ChangePasswordPage() {
       </div>
 
       {/* Footer: outside the padded/max-w container so it's edge-to-edge on both mobile + desktop */}
-       <div
-        className="
-          fixed inset-x-0 bottom-4 z-50
-          sm:static sm:bottom-auto
-          -mx-2 sm:-mx-4 md:-mx-6 lg:-mx-8
-        "
-      >
-        <Footer />
+        <div className="-mx-2 sm:-mx-4 md:-mx-6 lg:-mx-8 mt-78">
+                     <Footer />
       </div>
 
     </main>

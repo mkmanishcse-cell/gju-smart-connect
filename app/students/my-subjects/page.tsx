@@ -489,7 +489,7 @@ export default function MySubjectsPage() {
       )}
 
       {/* Footer: cancels StudentLayout's main padding so it sits edge-to-edge on mobile + desktop */}
-      <div className="-mx-2 sm:-mx-4 md:-mx-6 lg:-mx-8 mt-8">
+      <div className="-mx-2 sm:-mx-4 md:-mx-6 lg:-mx-8 mt-20">
         <Footer />
       </div>
 

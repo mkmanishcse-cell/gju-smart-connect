@@ -1,7 +1,10 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { Bell, Menu } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
+
+import { supabase } from "@/lib/supabase";
 
 import { getPageTitle } from "./PageTitle";
 import { TopBarProps } from "./types";
@@ -15,6 +18,8 @@ export default function TopBar({
   const router = useRouter();
 
   const pageTitle = getPageTitle(pathname, portal);
+  const [showNotificationDot, setShowNotificationDot] = useState(false);
+const [latestAnnouncementTime, setLatestAnnouncementTime] = useState("");
 
   const currentDate = new Intl.DateTimeFormat("en-IN", {
     weekday: "long",
@@ -22,19 +27,75 @@ export default function TopBar({
     month: "long",
   }).format(new Date());
 
-  function openNotifications() {
-    if (portal === "admin") {
-      router.push("/admin/recent-activity");
-      return;
-    }
+useEffect(() => {
+  loadLatestAnnouncement();
 
-    if (portal === "teacher") {
-      router.push("/teachers/recent-activity");
-      return;
-    }
+  const channel = supabase
+    .channel("announcement_updates")
+    .on(
+      "postgres_changes",
+      {
+        event: "INSERT",
+        schema: "public",
+        table: "announcements",
+      },
+      () => {
+        loadLatestAnnouncement();
+      }
+    )
+    .subscribe();
 
-    router.push("/students/announcements");
+  return () => {
+    supabase.removeChannel(channel);
+  };
+}, []);
+
+async function loadLatestAnnouncement() {
+  const { data, error } = await supabase
+    .from("announcements")
+    .select("created_at")
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .single();
+
+  if (error || !data) {
+    setShowNotificationDot(false);
+    return;
   }
+
+  const latest = data.created_at;
+
+  setLatestAnnouncementTime(latest);
+
+  const lastSeen = localStorage.getItem("lastSeenAnnouncement");
+
+  setShowNotificationDot(lastSeen !== latest);
+}
+
+function openNotifications() {
+  // Latest announcement ko read mark kar do
+  if (latestAnnouncementTime) {
+    localStorage.setItem(
+      "lastSeenAnnouncement",
+      latestAnnouncementTime
+    );
+  }
+
+  // Red dot hata do
+  setShowNotificationDot(false);
+
+  if (portal === "admin") {
+    router.push("/admin/recent-activity");
+    return;
+  }
+
+  if (portal === "teacher") {
+    router.push("/teachers/recent-activity");
+    return;
+  }
+
+  router.push("/students/announcements");
+}
 
   return (
     <header
@@ -93,10 +154,24 @@ export default function TopBar({
           <Bell size={18} className="sm:hidden" />
           <Bell size={20} className="hidden sm:block" />
 
-          <span
-            aria-hidden="true"
-            className="absolute right-2 top-2 h-2 w-2 rounded-full bg-red-500 sm:right-3 sm:top-3 sm:h-2.5 sm:w-2.5"
-          />
+         {showNotificationDot && (
+  <span
+    aria-hidden="true"
+    className="
+      absolute
+      right-2
+      top-2
+      h-2
+      w-2
+      rounded-full
+      bg-red-500
+      sm:right-3
+      sm:top-3
+      sm:h-2.5
+      sm:w-2.5
+    "
+  />
+)}
         </button>
 
         {/* User */}

@@ -1,7 +1,6 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-
 import {
   BookOpen,
   FlaskConical,
@@ -30,18 +29,14 @@ export default function StudentSubjectCard({
   type,
   teacherName = "Not Assigned",
 }: Props) {
-
   const router = useRouter();
 
-  const theory =
-    type.toLowerCase() === "theory";
+  const theory = type.toLowerCase() === "theory";
 
   return (
-
     <div className="group relative overflow-hidden rounded-[28px] border border-blue-200 bg-gradient-to-br from-blue-100 via-white to-indigo-100 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
 
       {/* Top Accent */}
-
       <div
         className={`h-1.5 ${
           theory
@@ -51,36 +46,35 @@ export default function StudentSubjectCard({
       />
 
       {/* Background Icon */}
-
-      <div className="absolute -right-8 -top-8 opacity-5 transition-all duration-300 group-hover:opacity-10">
-
+      <div className="absolute -right-5 -top-5 opacity-5 transition-all duration-300 group-hover:opacity-10">
         {theory ? (
-
-          <BookOpen size={120} />
-
+          <BookOpen
+            size={80}
+            className="sm:h-[120px] sm:w-[120px]"
+          />
         ) : (
-
-          <FlaskConical size={120} />
-
+          <FlaskConical
+            size={80}
+            className="sm:h-[120px] sm:w-[120px]"
+          />
         )}
-
       </div>
 
-      <div className="relative p-5">
+      {/* Card Body */}
+      <div className="relative p-3 sm:p-5">
+                {/* Header */}
 
-        {/* Header */}
+        <div className="flex items-start justify-between gap-3">
 
-        <div className="flex items-start justify-between gap-4">
+          <div className="min-w-0 flex-1">
 
-          <div className="flex-1">
-
-            <p className="text-[11px] font-semibold uppercase tracking-[3px] text-slate-500">
+            <p className="truncate text-[10px] font-semibold uppercase tracking-[2px] text-slate-500 sm:text-[11px] sm:tracking-[3px]">
 
               {code}
 
             </p>
 
-            <h2 className="mt-2 text-2xl font-bold leading-snug text-slate-800">
+            <h2 className="mt-1 text-lg font-bold leading-snug text-slate-800 sm:mt-2 sm:text-2xl">
 
               {name}
 
@@ -89,33 +83,33 @@ export default function StudentSubjectCard({
           </div>
 
           <div
-            className={`flex h-12 w-12 items-center justify-center rounded-2xl ${
+            className={`flex h-9 w-9 items-center justify-center rounded-xl sm:h-12 sm:w-12 sm:rounded-2xl ${
               theory
                 ? "bg-blue-100 text-blue-700"
                 : "bg-orange-100 text-orange-700"
             }`}
           >
-
             {theory ? (
-
-              <BookOpen size={24} />
-
+              <BookOpen
+                size={18}
+                className="sm:h-6 sm:w-6"
+              />
             ) : (
-
-              <FlaskConical size={24} />
-
+              <FlaskConical
+                size={18}
+                className="sm:h-6 sm:w-6"
+              />
             )}
-
           </div>
 
         </div>
 
         {/* Badges */}
 
-        <div className="mt-5 flex flex-wrap gap-2">
+        <div className="mt-3 flex flex-wrap gap-1.5 sm:mt-5 sm:gap-2">
 
           <span
-            className={`rounded-full px-3 py-1 text-xs font-semibold ${
+            className={`rounded-full px-2.5 py-1 text-[11px] font-semibold sm:px-3 sm:text-xs ${
               theory
                 ? "bg-blue-100 text-blue-700"
                 : "bg-orange-100 text-orange-700"
@@ -124,47 +118,48 @@ export default function StudentSubjectCard({
             {type}
           </span>
 
-          <span className="flex items-center gap-1 rounded-full bg-violet-100 px-3 py-1 text-xs font-semibold text-violet-700">
+          <span className="flex items-center gap-1 rounded-full bg-violet-100 px-2.5 py-1 text-[11px] font-semibold text-violet-700 sm:px-3 sm:text-xs">
 
-            <GraduationCap size={13} />
+            <GraduationCap size={12} />
 
             Semester {semester}
 
           </span>
 
-          <span className="flex items-center gap-1 rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">
+          <span className="flex items-center gap-1 rounded-full bg-emerald-100 px-2.5 py-1 text-[11px] font-semibold text-emerald-700 sm:px-3 sm:text-xs">
 
-            <Award size={13} />
+            <Award size={12} />
 
             {credits} Credits
 
           </span>
 
         </div>
-                {/* Teacher Information */}
 
-        <div className="mt-5 rounded-2xl border border-slate-200 bg-white/80 p-4 backdrop-blur-sm">
+        {/* Teacher Information */}
+
+        <div className="mt-3 rounded-xl border border-slate-200 bg-white/80 p-3 backdrop-blur-sm sm:mt-5 sm:rounded-2xl sm:p-4">
 
           <div className="flex items-center gap-3">
 
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500 via-blue-600 to-indigo-600">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-500 via-blue-600 to-indigo-600 sm:h-11 sm:w-11 sm:rounded-xl">
 
               <UserRound
-                size={20}
-                className="text-white"
+                size={18}
+                className="text-white sm:h-5 sm:w-5"
               />
 
             </div>
 
-            <div>
+            <div className="min-w-0">
 
-              <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
+              <p className="text-[10px] font-medium uppercase tracking-wide text-slate-500 sm:text-xs">
 
                 Faculty
 
               </p>
 
-              <h3 className="text-base font-semibold text-slate-800">
+              <h3 className="truncate text-sm font-semibold text-slate-800 sm:text-base">
 
                 {teacherName}
 
@@ -176,77 +171,56 @@ export default function StudentSubjectCard({
 
         </div>
 
-        
-        {/* Divider */}
+        <div className="mt-3 border-t border-slate-200 pt-3 sm:mt-5 sm:pt-5">
+                  {/* Open Button */}
 
-        <div className="mt-5 border-t border-slate-200 pt-5">
-                    <button
-
-            onClick={() =>
-              router.push(`/students/my-subjects/${id}`)
+        <button
+          onClick={() =>
+            router.push(`/students/my-subjects/${id}`)
+          }
+          className={`
+            group
+            flex
+            w-full
+            items-center
+            justify-center
+            gap-2
+            rounded-xl
+            py-2
+            text-sm
+            font-semibold
+            text-white
+            shadow-lg
+            transition-all
+            duration-300
+            hover:scale-[1.02]
+            hover:shadow-xl
+            sm:gap-3
+            sm:rounded-2xl
+            sm:py-3.5
+            sm:text-base
+            ${
+              theory
+                ? "bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600"
+                : "bg-gradient-to-r from-orange-500 via-red-500 to-pink-500"
             }
+          `}
+        >
+          <ExternalLink
+            size={16}
+            className="transition group-hover:translate-x-1 sm:h-[18px] sm:w-[18px]"
+          />
 
-            className={`
+          Open Subject
 
-group
-
-flex
-
-w-full
-
-items-center
-
-justify-center
-
-gap-3
-
-rounded-2xl
-
-py-3.5
-
-font-semibold
-
-text-white
-
-shadow-lg
-
-transition-all
-
-duration-300
-
-hover:scale-[1.02]
-
-hover:shadow-xl
-
-${
-
-theory
-
-? "bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600"
-
-: "bg-gradient-to-r from-orange-500 via-red-500 to-pink-500"
-
-}
-
-`}
-
-          >
-
-            <ExternalLink
-
-              size={18}
-
-              className="transition group-hover:translate-x-1"
-
-            />
-
-            Open Subject
-
-          </button>
-
-        </div>
+        </button>
 
       </div>
+            {/* End Card Body */}
+
+      </div>
+
+      {/* End Card */}
 
     </div>
 

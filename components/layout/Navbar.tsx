@@ -1,16 +1,23 @@
 "use client";
-
+import {
+  House,
+  LayoutDashboard,
+  Sparkles,
+  ChartColumn,
+  Info,
+  Phone,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
 
 const menus = [
-  { title: "🏠 Home", href: "#home" },
-  { title: "🎓 Portals", href: "#portals" },
-  { title: "✨ Features", href: "#features" },
-  { title: "📊 Statistics", href: "#statistics" },
-  { title: "ℹ️ About", href: "#about" },
-  { title: "📞 Contact", href: "#contact" },
+  { title: "Home", href: "#home", icon: House },
+  { title: "Portals", href: "#portals", icon: LayoutDashboard },
+  { title: "Features", href: "#features", icon: Sparkles },
+  { title: "Statistics", href: "#statistics", icon: ChartColumn, hideOnMobile: true },
+  { title: "About", href: "#about", icon: Info, hideOnMobile: true },
+  { title: "Contact", href: "#contact", icon: Phone },
 ];
 
 export default function Navbar() {
@@ -109,16 +116,18 @@ export default function Navbar() {
       >
         <nav className="flex flex-col p-3">
 
-          {menus.map((menu) => (
-            <a
-              key={menu.title}
-              href={menu.href}
-              onClick={() => setMenuOpen(false)}
-              className="rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 transition-all hover:bg-blue-600 hover:text-white"
-            >
-              {menu.title}
-            </a>
-          ))}
+          {menus
+            .filter((menu) => !menu.hideOnMobile)
+            .map((menu) => (
+              <a
+                key={menu.title}
+                href={menu.href}
+                onClick={() => setMenuOpen(false)}
+                className="rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 transition-all hover:bg-blue-600 hover:text-white"
+              >
+                {menu.title}
+              </a>
+            ))}
 
         </nav>
       </div>
