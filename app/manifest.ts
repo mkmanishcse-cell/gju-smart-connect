@@ -5,8 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "GJU Smart Connect",
     short_name: "GJU",
     description:
-      "Student & Teacher Academic Portal for Guru Jambheshwar University.",
-
+  "GJU Smart Connect is a modern academic platform connecting students, teachers and administration through one secure system.",
     start_url: "/",
 
     display: "standalone",
