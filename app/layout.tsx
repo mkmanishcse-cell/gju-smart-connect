@@ -15,6 +15,8 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://gjusmartconnect.online"),
+
   title: {
     default: "GJU Smart Connect - Student & Teacher Portal",
     template: "%s | GJU Smart Connect",
@@ -25,6 +27,8 @@ export const metadata: Metadata = {
 
   applicationName: "GJU Smart Connect",
 
+  manifest: "/manifest.webmanifest",
+
   keywords: [
     "GJU Smart Connect",
     "Guru Jambheshwar University",
@@ -33,18 +37,15 @@ export const metadata: Metadata = {
     "GJU",
     "GJU Hisar",
     "GJUST Hisar",
-
     "GJU Student Portal",
     "GJU Teacher Portal",
     "GJU Login",
     "GJU Online",
-
     "GJU Admission",
     "GJU Registration",
     "GJU Re Registration",
     "GJU Re Form",
     "GJU Exam Form",
-
     "GJU Results",
     "GJU Result",
     "GJU Time Table",
@@ -52,7 +53,6 @@ export const metadata: Metadata = {
     "GJU Academic Calendar",
     "GJU Syllabus",
     "GJU Notifications",
-
     "Attendance Management",
     "Assignment Portal",
     "University Management System",
@@ -62,22 +62,45 @@ export const metadata: Metadata = {
     "Education Platform",
   ],
 
+  authors: [
+    {
+      name: "Manish Kushwaha",
+    },
+  ],
+
+  creator: "Manish Kushwaha",
+
+  publisher: "GJU Smart Connect",
+
+  category: "Education",
+
   icons: {
     icon: "/icon.png",
     shortcut: "/icon.png",
     apple: "/apple-icon.png",
   },
 
-  metadataBase: new URL("https://gjusmartconnect.online"),
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
 
   openGraph: {
-    title: "GJU Smart Connect",
-    description:
-      "A modern digital academic platform connecting Students, Teachers and Administration.",
+    type: "website",
+    locale: "en_IN",
     url: "https://gjusmartconnect.online",
     siteName: "GJU Smart Connect",
-    locale: "en_IN",
-    type: "website",
+    title: "GJU Smart Connect",
+    description:
+      "Student & Teacher Academic Portal for Guru Jambheshwar University.",
+
     images: [
       {
         url: "/icon.png",
@@ -94,15 +117,12 @@ export const metadata: Metadata = {
     description:
       "Student & Teacher Academic Portal for Guru Jambheshwar University.",
     images: ["/icon.png"],
+    creator: "@gjusmartconnect",
   },
 
-  robots: {
-    index: true,
-    follow: true,
+  alternates: {
+    canonical: "https://gjusmartconnect.online",
   },
-
-  creator: "Manish Kushwaha",
-  publisher: "GJU Smart Connect",
 };
 
 export default function RootLayout({
