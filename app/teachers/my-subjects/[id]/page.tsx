@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import Link from "next/link";
 import Footer from "@/components/common/Footer";
 import { supabase } from "@/lib/supabase";
 
@@ -14,8 +13,6 @@ import {
   BarChart3,
   BookOpen,
   Sparkles,
-  Users,
-  Award,
 } from "lucide-react";
 
 type Subject = {
@@ -24,7 +21,6 @@ type Subject = {
   subject_name: string;
   subject_type: string;
   credits: number;
-
   department_id: string;
   course_id: string;
   semester_id: string;
@@ -43,48 +39,28 @@ type Subject = {
 };
 
 export default function SubjectDashboard() {
-
   const router = useRouter();
-
   const params = useParams();
 
-  const [subject, setSubject] =
-    useState<Subject | null>(null);
-
-  const [studentCount, setStudentCount] =
-    useState(0);
-
-  const [announcementCount, setAnnouncementCount] =
-    useState(0);
-
-  const [assignmentCount, setAssignmentCount] =
-    useState(0);
-
-  const [attendancePercent, setAttendancePercent] =
-    useState(0);
+  const [subject, setSubject] = useState<Subject | null>(null);
+  const [studentCount, setStudentCount] = useState(0);
+  const [announcementCount, setAnnouncementCount] = useState(0);
+  const [assignmentCount, setAssignmentCount] = useState(0);
+  const [attendancePercent, setAttendancePercent] = useState(0);
 
   useEffect(() => {
-
     loadSubject();
-
   }, []);
 
   useEffect(() => {
-
     if (subject) {
-
       loadDashboard();
-
     }
-
   }, [subject]);
 
   async function loadSubject() {
-
     const { data, error } = await supabase
-
       .from("subjects")
-
       .select(`
         *,
         departments(
@@ -97,125 +73,90 @@ export default function SubjectDashboard() {
           semester_no
         )
       `)
-
       .eq("id", params.id)
-
       .single();
 
     if (error) {
-
       console.log(error);
-
       return;
-
     }
 
     setSubject(data);
-
   }
 
   async function loadDashboard() {
-
     if (!subject) return;
 
-    // Total Students
+    /* ================= TOTAL STUDENTS ================= */
 
     const { count: students } = await supabase
-
       .from("students")
-
       .select("*", {
         count: "exact",
         head: true,
       })
-
       .eq("department_id", subject.department_id)
-
       .eq("course_id", subject.course_id)
-
       .eq("semester_id", subject.semester_id);
 
     setStudentCount(students || 0);
 
-    // Assignments
+    /* ================= ASSIGNMENTS ================= */
 
     const { count: assignments } = await supabase
-
       .from("assignments")
-
       .select("*", {
         count: "exact",
         head: true,
       })
-
       .eq("subject_id", subject.id);
 
     setAssignmentCount(assignments || 0);
 
-    // Announcements
+    /* ================= ANNOUNCEMENTS ================= */
 
     const { count: announcements } = await supabase
-
       .from("announcements")
-
       .select("*", {
         count: "exact",
         head: true,
       })
-
       .eq("subject_id", subject.id);
 
     setAnnouncementCount(announcements || 0);
 
-    // Attendance
+    /* ================= ATTENDANCE ================= */
 
     const { data: attendance } = await supabase
-
       .from("attendance")
-
       .select("status")
-
       .eq("subject_id", subject.id);
 
     if (attendance && attendance.length > 0) {
-
       const present = attendance.filter(
         (a: any) => a.status === "P"
       ).length;
 
       setAttendancePercent(
-
-        Math.round(
-          (present / attendance.length) * 100
-        )
-
+        Math.round((present / attendance.length) * 100)
       );
-
     }
-
   }
 
   if (!subject) {
-
     return (
-
       <div className="min-h-screen flex items-center justify-center text-xl font-semibold">
-
         Loading Subject...
-
       </div>
-
     );
-
   }
 
   return (
-
     <main className="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100">
 
-      <div className="mx-auto w-full max-w-7xl px-3 py-3 sm:px-5 sm:py-5 lg:px-8 lg:py-8"
->
-                {/* Hero Banner */}
+      <div className="mx-auto w-full max-w-7xl px-3 py-3 sm:px-5 sm:py-5 lg:px-8 lg:py-8">
+
+        {/* ================= HERO BANNER ================= */}
 
         <div
           className={`relative overflow-hidden rounded-2xl shadow-xl p-4 sm:p-6 lg:p-8 text-white ${
@@ -225,136 +166,131 @@ export default function SubjectDashboard() {
           }`}
         >
 
+          {/* Background Icon */}
+
           <div className="absolute -right-12 -top-12 opacity-10">
-
             <BookOpen size={260} />
-
           </div>
-<div className="relative flex items-start justify-center flex-wrap gap-6 pt-10">
+
+          {/* ================= HERO CONTENT ================= */}
+
+          <div className="relative flex items-start justify-start flex-wrap gap-6 pt-10">
 
             <div>
 
-<div className="flex items-center gap-3">
+              {/* Back + Teacher Dashboard */}
 
-  <button
-    onClick={() => router.back()}
-    aria-label="Go Back"
-    className="
-      flex
-      h-10
-      w-10
-      items-center
-      justify-center
-      rounded-xl
-      bg-white/20
-      backdrop-blur-md
-      transition-all
-      duration-300
-      hover:bg-white/30
-      active:scale-95
-    "
-  >
-    <ArrowLeft size={20} />
-  </button>
+              <div className="flex items-center gap-3">
 
-  <Sparkles size={24} />
+                <button
+                  onClick={() => router.back()}
+                  aria-label="Go Back"
+                  className="
+                    flex
+                    h-10
+                    w-10
+                    items-center
+                    justify-center
+                    rounded-xl
+                    bg-white/20
+                    backdrop-blur-md
+                    transition-all
+                    duration-300
+                    hover:bg-white/30
+                    active:scale-95
+                  "
+                >
+                  <ArrowLeft size={20} />
+                </button>
 
-  <span className="uppercase tracking-widest text-sm font-semibold">
-    Teacher Dashboard
-  </span>
+                <Sparkles size={24} />
 
-</div>
+                <span className="uppercase tracking-widest text-sm font-semibold">
+                  Teacher Dashboard
+                </span>
+
+              </div>
+
+              {/* Subject Name */}
 
               <h1 className="text-2xl sm:text-3xl lg:text-5xl font-extrabold mt-5">
-
                 {subject.subject_name}
-
               </h1>
 
-              <p className="mt-4 text-sm sm:text-base lg:text-lg opacity-90">
+              {/* Subject Details */}
 
+              <p className="mt-4 text-sm sm:text-base lg:text-lg opacity-90">
                 {subject.subject_code} •{" "}
                 {subject.departments?.department_name} •{" "}
                 {subject.courses?.course_name}
-
               </p>
 
+              {/* Semester */}
+
               <p className="mt-2 text-base opacity-80">
-
                 Semester {subject.semesters?.semester_no}
-
               </p>
 
             </div>
 
-           
-
           </div>
 
-          {/* Subject Details */}
+          {/* ================= SUBJECT DETAILS ================= */}
 
           <div className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-5">
+
+            {/* Subject Type */}
 
             <div className="bg-white/15 backdrop-blur-md rounded-2xl p-3 sm:p-4 lg:p-5">
 
               <p className="text-sm opacity-80">
-
                 Subject Type
-
               </p>
 
               <h3 className="text-lg sm:text-xl lg:text-2xl font-bold mt-2">
-
                 {subject.subject_type}
-
               </h3>
 
             </div>
 
-            <div className="bg-white/15 backdrop-blur-md rounded-2xl p-5">
+            {/* Credits */}
+
+            <div className="bg-white/15 backdrop-blur-md rounded-2xl p-3 sm:p-4 lg:p-5">
 
               <p className="text-sm opacity-80">
-
                 Credits
-
               </p>
 
               <h3 className="text-lg sm:text-xl lg:text-2xl font-bold mt-2">
-
                 {subject.credits}
-
               </h3>
 
             </div>
 
-            <div className="bg-white/15 backdrop-blur-md rounded-2xl p-5">
+            {/* Students */}
+
+            <div className="bg-white/15 backdrop-blur-md rounded-2xl p-3 sm:p-4 lg:p-5">
 
               <p className="text-sm opacity-80">
-
                 Students
-
               </p>
 
               <h3 className="text-lg sm:text-xl lg:text-2xl font-bold mt-2">
-
                 {studentCount}
-
               </h3>
 
             </div>
 
-            <div className="bg-white/15 backdrop-blur-md rounded-2xl p-5">
+            {/* Attendance */}
+
+            <div className="bg-white/15 backdrop-blur-md rounded-2xl p-3 sm:p-4 lg:p-5">
 
               <p className="text-sm opacity-80">
-
                 Attendance
-
               </p>
 
               <h3 className="text-lg sm:text-xl lg:text-2xl font-bold mt-2">
-
                 {attendancePercent}%
-
               </h3>
 
             </div>
@@ -362,15 +298,16 @@ export default function SubjectDashboard() {
           </div>
 
         </div>
-                {/* Feature Cards */}
+
+        {/* ================= FEATURE CARDS ================= */}
 
         <div
-  className={`mt-6 grid gap-4 ${
-  subject.subject_type === "Theory"
-    ? "grid-cols-1 sm:grid-cols-2 xl:grid-cols-4"
-    : "grid-cols-1 sm:grid-cols-2 xl:grid-cols-2"
-}`}
->
+          className={`mt-6 grid gap-4 ${
+            subject.subject_type === "Theory"
+              ? "grid-cols-1 sm:grid-cols-2 xl:grid-cols-4"
+              : "grid-cols-1 sm:grid-cols-2 xl:grid-cols-2"
+          }`}
+        >
 
           {/* Attendance */}
 
@@ -387,23 +324,18 @@ export default function SubjectDashboard() {
             />
 
             <h2 className="text-xl lg:text-2xl font-bold mt-6">
-
               Attendance
-
             </h2>
 
             <p className="mt-3 text-blue-100">
-
               Mark and manage attendance.
-
             </p>
 
           </div>
 
-          {/* Marks (Theory Only) */}
+          {/* Marks */}
 
           {subject.subject_type === "Theory" && (
-
             <div
               onClick={() =>
                 router.push(`/teachers/marks/${subject.id}`)
@@ -417,25 +349,19 @@ export default function SubjectDashboard() {
               />
 
               <h2 className="text-xl lg:text-2xl font-bold mt-6">
-
                 Marks
-
               </h2>
 
               <p className="mt-3 text-green-100">
-
                 Manage internal marks.
-
               </p>
 
             </div>
-
           )}
 
-          {/* Assignments (Theory Only) */}
+          {/* Assignments */}
 
           {subject.subject_type === "Theory" && (
-
             <div
               onClick={() =>
                 router.push(`/teachers/assignments/${subject.id}`)
@@ -449,19 +375,14 @@ export default function SubjectDashboard() {
               />
 
               <h2 className="text-xl lg:text-2xl font-bold mt-6">
-
                 Assignments
-
               </h2>
 
               <p className="mt-3 text-orange-100">
-
                 Create and manage assignments.
-
               </p>
 
             </div>
-
           )}
 
           {/* Announcements */}
@@ -479,27 +400,23 @@ export default function SubjectDashboard() {
             />
 
             <h2 className="text-xl lg:text-2xl font-bold mt-6">
-
               Announcements
-
             </h2>
 
             <p className="mt-3 text-purple-100">
-
               Notify all enrolled students.
-
             </p>
 
           </div>
 
         </div>
-              
-                {/* Footer */}
-</div>
 
-  <Footer />
+      </div>
+
+      {/* ================= FOOTER ================= */}
+
+      <Footer />
+
     </main>
-
   );
-
 }
