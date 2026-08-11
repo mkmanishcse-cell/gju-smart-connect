@@ -15,7 +15,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://gjusmartconnect.online"),
+   metadataBase: new URL("https://gjusmartconnect.online"),
 
   title: {
     default: "GJU Smart Connect - Student & Teacher Portal",
